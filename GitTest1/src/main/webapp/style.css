@@ -10,7 +10,7 @@
   font-family: "Poppins", sans-serif;
 }
 body{
-  background: #dfe9f5;
+  background: #2F2F2F;
 }
 .container{
   display: flex;
@@ -134,7 +134,7 @@ a:hover{
   height: 300px;
   padding: 10px 10px 30px 10px;
   margin-top: 10px;
-  background: #fff;
+  background: #006400;
   border-radius: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
@@ -190,4 +190,8 @@ a:hover{
 }
 .js{
   color: rgb(28, 98, 179);
+}
+h1 {
+	color: #D0D0D0;
+>>>>>>> branch 'master' of https://github.com/SMHRD-2021-KDT-AI-16/Intgram_Repo
 }
