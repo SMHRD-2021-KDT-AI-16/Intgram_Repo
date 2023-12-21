@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href='css/style.css' />
+  
+  <title>Dashboard</title>
+  <!-- fontawesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+  <!-- pretendard font-->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+     <!-- 팀로고-->
+     <a class="logo-expand" href="#">{ Intgram }</a>
+     <div class="side-wrapper">
+      <div class="side-menu">
+       <a class="sidebar-link discover" href="index.html">
+        <i class="fa-solid fa-house"></i>
+        Home
+       </a>
+       <a class="sidebar-link" href="carbon.html">
+        <i class="fa-solid fa-clipboard"></i>
+        탄소중립현황
+       </a>
+       <a class="sidebar-link is-active" href="dashboard.html">
+        <i class="fa-solid fa-table"></i>
+        대시보드
+       </a>
+       <a class="sidebar-link" href="input.html">
+        <i class="fa-solid fa-calculator"></i>
+        배출량입력
+       </a>
+       <a class="sidebar-link trending" href="news.html">
+        <i class="fa-regular fa-newspaper"></i>
+        News
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- header -->
+    <div class="wrapper">
+     <div class="header">
+      <div class="user-settings">
+       <i class="fa-solid fa-circle-user"></i>
+       <div class="user-name">Thomas</div>
+       <svg viewBox="0 0 492 492" fill="currentColor">
+        <path d="M484.13 124.99l-16.11-16.23a26.72 26.72 0 00-19.04-7.86c-7.2 0-13.96 2.79-19.03 7.86L246.1 292.6 62.06 108.55c-5.07-5.06-11.82-7.85-19.03-7.85s-13.97 2.79-19.04 7.85L7.87 124.68a26.94 26.94 0 000 38.06l219.14 219.93c5.06 5.06 11.81 8.63 19.08 8.63h.09c7.2 0 13.96-3.57 19.02-8.63l218.93-219.33A27.18 27.18 0 00492 144.1c0-7.2-2.8-14.06-7.87-19.12z"></path>
+       </svg>
+      </div>
+     </div>
+
+     <!-- 컨텐츠 영역(그래프, 인풋..) -->
+     <div class="main-container">
+      <div class="main-header anim" style="--delay: 0s">Dashboard</div>
+      <div class="small-header anim" style="--delay: .3s">Most Watched</div>     
+     </div>
+    </div>
+  </div>
+    <script>
+      const counter = document.querySelector(".counter");
+      let count = 0;
+      setInterval(() => {
+        if (count == 92) {
+          clearInterval(count);
+        } else {
+          count += 1;
+          counter.textContent = count + "%";
+        }
+      }, 42);
+    </script>
+</body>
+
+</html>
