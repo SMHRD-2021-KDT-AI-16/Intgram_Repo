@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--CSS-->
+  <link rel="stylesheet" type="text/css" href='css/style.css' />
+  <!-- pretendard font-->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+  
+  <title>Home</title>
+  <!--Script Files-->
+  <script src="./js/script.js" defer></script>
+  <!-- fontawesome -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="sidebar">
+     <!-- 팀로고-->
+     <a class="logo-expand" href="#">{ Intgram }</a>
+     <div class="side-wrapper">
+      <div class="side-menu">
+       <a class="sidebar-link discover" href="index.html">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+       </a>
+       <a class="sidebar-link" href="carbon.html">
+        <i class="fa-solid fa-clipboard"></i>
+        <span>탄소중립현황</span>
+       </a>
+       <a class="sidebar-link is-active" href="dashboard.html">
+        <i class="fa-solid fa-table"></i>
+        <span>대시보드</span>
+       </a>
+       <a class="sidebar-link" href="input.html">
+        <i class="fa-solid fa-calculator"></i>
+        <span>배출량입력</span>
+       </a>
+       <a class="sidebar-link trending" href="news.html">
+        <i class="fa-regular fa-newspaper"></i>
+        <span>뉴스</span> 
+       </a>
+      </div>
+     </div>
+    </div>
+    <!-- header -->
+    <div class="wrapper">
+     <div class="header">
+      <div class="user-settings">
+       <i class="fa-solid fa-circle-user"></i>
+       <div class="user-name">Thomas</div>
+       <i class="fa-solid fa-angle-down"></i>
+      </div>
+     </div>
+
+     <!-- 컨텐츠 영역(그래프, 인풋..) -->
+     <div class="main-container">
+      <div class="main-header anim" style="--delay: 0s">Home</div>
+
+      <div class="small-header anim" style="--delay: .3s">Most Watched</div>     
+     </div>
+    </div>
+  </div>
+
+  <!--jquery, chart.js -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+
+</html>
