@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+/**
+ * 
+ */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <!-- <input> -->
-    
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <canvas id="myChart" width="400" height="400"></canvas>
-
-    <script>
         // 차트를 그럴 영역을 dom요소로 가져온다.
         let data_nonIron = []
         //let page = document.querySelector('input')
@@ -35,7 +18,17 @@
                 success: function (result) {
                     //alert("통신 성공!!!")
                     console.log(result)
-                    
+                    /*
+                        0 - 총배출량
+                        1 - 순배출량
+                        2 - 에너지
+                        3 - A 연료연소
+                        32 - B 탈루
+                        37 - 산업공정
+                        65 - 농업
+                        102 - LULUCF
+                        129 - 폐기물
+                    */
                     data_nonIron = Object.keys(result.data[0])
                     //console.log(data_nonIron)
                     var myChart = new Chart(chartArea, {
@@ -52,9 +45,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[2]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                                backgroundColor: ['rgba(255, 0, 0, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderColor: 'rgba(255, 0, 0, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 5
                             }, {
@@ -62,9 +55,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[37]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+                                backgroundColor: ['rgba(255, 255, 0, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderColor: 'rgba(255, 255, 0, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 5
                             }, {
@@ -72,9 +65,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[65]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                                backgroundColor: ['rgba(0, 0, 139, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderColor: 'rgba(0, 0, 139, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 5
                             }, {
@@ -82,9 +75,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[102]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(255, 205, 86, 0.2)'],
+                                backgroundColor: ['rgba(0, 128, 0, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(255, 205, 86, 1)',
+                                borderColor: 'rgba(0, 128, 0, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 5
                             }, {
@@ -92,9 +85,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[129]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+                                backgroundColor: ['rgba(128, 0, 128, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderColor: 'rgba(128, 0, 128, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 5
                             }, {
@@ -103,9 +96,9 @@
                                 // ⑥dataset값(Array)
                                 data: Object.values(result.data[0]),
                                 // ⑦dataset의 배경색(rgba값을 String으로 표현)
-                                backgroundColor: ['rgba(75, 192, 192, 0.2)'],
+                                backgroundColor: ['rgba(255, 20, 147, 0.2)'],
                                 // ⑧dataset의 선 색(rgba값을 String으로 표현)
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderColor: 'rgba(255, 20, 147, 1)',
                                 // ⑨dataset의 선 두께(Number)
                                 borderWidth: 1
                             }
@@ -114,38 +107,35 @@
 
                         },
                         // ⑩차트의 설정(Object)
-                        options: {
-                            //grouped: false,
-                            responsive: false,
-                            // ⑪축에 관한 설정(Object)
-                            scales: {
-                                // ⑫y축에 대한 설정(Object)
-                                x: {
-                                    stacked : true
-                                },
-                                y: {
-                                    stacked : true,
-                                    // ⑬시작을 0부터 하게끔 설정(최소값이 0보다 크더라도)(boolean)
-                                    beginAtZero: true
-                                }
-                            },
-                            legend: {
-                                display : false
+                      options: {
+                        scales: {
+                          x: {
+                            ticks: {
+                              color: 'white' // X축 라벨(숫자 값)의 색상을 흰색으로 설정
+                            }, grid: {
+                              color: 'white' // X축 격자 색상을 흰색으로 설정
                             }
+                          },
+                          y: {
+                            beginAtZero: true,
+                            ticks: {
+                              color: 'white' // X축 라벨(숫자 값)의 색상을 흰색으로 설정
+                            }, grid: {
+                              color: 'white' // X축 격자 색상을 흰색으로 설정
+                            }
+                          }
+                        },
+                        plugins: {
+                          legend: {
+                            labels: {
+                              color: 'white' // 항목을 나타내는 라벨 색상을 흰색으로 설정
+                            }
+                          }
                         }
+                      }
                     });
-
-                },
-                // 3. 통신 실패할 경우 로직
-                error: function () {
-                    alert("통신 실패...")
-                }
-            })
-
-            console.log(all)
-        
-
-    </script>
-</body>
-
-</html>
+                  },
+                  error: function () {
+                    console.log("통신실패")
+                  }
+                });
