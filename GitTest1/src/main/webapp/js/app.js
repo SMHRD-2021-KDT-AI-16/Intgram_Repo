@@ -1,8 +1,4 @@
-
-/**
- * 
- */
-
+import './script.js';
         // 차트를 그럴 영역을 dom요소로 가져온다.
         let data_nonIron = []
         //let page = document.querySelector('input')
