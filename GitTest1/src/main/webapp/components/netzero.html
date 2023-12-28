@@ -43,18 +43,7 @@
       </aside>
     </div>
     <main class="contents-container">
-      <section id="login-area" class="contents-header__login">
-        <nav class="top-menu">
-          <a class="top-menu-link" href="../components/login.html">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Login</span>
-          </a>
-          <a class="top-menu-link" href="../components/join.html">
-            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-            <span>Register</span>
-          </a>
-        </nav>
-      </section>
+      
       <!-- 비동기 방식으로 로그인 화면 이동 -->
       <section id="login-screen" style="display: none"></section>
 
@@ -90,9 +79,9 @@
                 <p>총계</p>
               </div>
               <div class="txt" id="total">
-                <p id = 'total_Emission'>총 배출량 : <br />314,173,770 tonCO2eq</p>
-                <p id = 'total_Absorption'>산림흡수량 : <br />164,452,476 tonCO2eq</p>
-                <p id = 'total_NetEmission'>순 배출량 : <br />164,452,476 tonCO2eq</p>
+                <p id = 'total_Emission'>총 배출량 : 314,173,770 tonCO2eq</p>
+                <p id = 'total_Absorption'>산림흡수량 : 164,452,476 tonCO2eq</p>
+                <p id = 'total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
               </div>
             </div>
             <div class="emit-list-item">
@@ -106,14 +95,9 @@
               </div>
             </div>
             <div class="emit-list-item">
-              <div class="img">
-                <img src="../img/tot.png" alt="총계이미지" />
-                <p>총계</p>
-              </div>
-              <div class="txt" id="total">
-                <p>배출량 : <br />314,173,770 tonCO2eq</p>
-                <p>흡수량 : <br />164,452,476 tonCO2eq</p>
-              </div>
+				<div>
+              		<canvas id="gasPieChart" width = '250' height="250"></canvas>
+              	</div>
             </div>
           </div>
         </article>
@@ -122,7 +106,7 @@
         <div class="emitChart-area">
           <div class="emitChart-area__title">탄소배출량 현황</div>
           <div class="emitChart-area__canvas">
-            <canvas id="myChart" width="20" height="10"></canvas>            
+            <canvas id="myChart"></canvas>            
           </div>
         </div>
         <div class="emitChart-map-area">
@@ -139,12 +123,15 @@
 			  total_Emission += emitYear2021[0].analysisList[i].sumtco
 			  total_Absorption += emitYear2021[0].analysisList[i].treeTco2 
 		  }
-		  document.getElementById('total_Emission').innerHTML = "<p id = 'total_Emission'>총 배출량 : <br />"
+		  document.getElementById('total_Emission').innerHTML = "<p id = 'total_Emission'>총 배출량 : "
 		   + parseInt(total_Emission).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " tonCO2eq</p>"
-		  document.getElementById('total_Absorption').innerHTML = "<p id = 'total_Absorption'>흡수량 : <br />"
+		  document.getElementById('total_Absorption').innerHTML = "<p id = 'total_Absorption'>흡수량 : "
 		   + parseInt(total_Absorption).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " tonCO2eq</p>"
-		  document.getElementById('total_NetEmission').innerHTML = "<p id = 'total_NetEmission'>순 배출량 : <br />"
+		  document.getElementById('total_NetEmission').innerHTML = "<p id = 'total_NetEmission'>순 배출량 : "
 		   + parseInt(total_Emission - total_Absorption).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " tonCO2eq</p>"
+	  	
+	  	 
+	  
 	  </script>
     </main>
   </body>

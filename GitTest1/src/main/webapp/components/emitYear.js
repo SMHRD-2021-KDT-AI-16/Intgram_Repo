@@ -4778,8 +4778,3 @@ const emitYear2013 = [
   },
 ];
 
-// 데이터 불러오는 방법
-console.log(emitYear2020);
-console.log(emitYear2020[0].analysisList);
-console.log(emitYear2020[0].analysisList[0]);
-console.log(emitYear2020[0].analysisList[0].eleTco2);

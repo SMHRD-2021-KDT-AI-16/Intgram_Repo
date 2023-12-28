@@ -4,15 +4,48 @@ import 'https://code.jquery.com/jquery-3.7.1.min.js';
 // import 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js';
 // import 'https://cdn.jsdelivr.net/npm/chart.js';
 
-
+//import '../json/gas.json'
 // 차트를 그럴 영역을 dom요소로 가져온다.
 let data_nonIron = [];
 //let page = document.querySelector('input')
 var chartArea = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('gasPieChart').getContext('2d');
 let all = [];
 let totalEmissions = [];
 let netEmissions = [];
 
+fetch("../json/gas.json")
+	.then((res) => {
+		return res.json()
+	})
+	.then((obj) => {
+		let gasPieChart = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels : ['CO₂','CH₄','N₂O','HFCs','SF6','PFCs'],
+				datasets : [{
+					data: [obj[0]['CO₂'], obj[0]['CH₄'], obj[0]['N₂O'],
+							obj[0]['HFCs'], obj[0]['SF6'], obj[0]['PFCs']],
+					backgroundColor: [
+						'rgba(116, 102, 241, 1)',
+						'rgba(158, 139, 244, 1)',
+						'rgba(193, 178, 246, 1)',
+						'rgba(225, 217, 247, 1)',
+						'rgba(255, 20, 147, 1)',
+						'rgba(0, 128, 0, 1)']						
+				}]
+			},
+			options: {
+				plugins: {
+					legend: {
+						position: 'right'
+					}
+				}
+			}
+		})
+	})
+	  
+	  
 // 차트를 생성한다.
 
 $.ajax({
@@ -21,7 +54,7 @@ $.ajax({
 	// 2. 통신 성공할 경우 로직
 	success: function (result) {
 		//alert("통신 성공!!!")
-		console.log(result);
+		//console.log(result);
 		/*
                         0 - 총배출량
                         1 - 순배출량

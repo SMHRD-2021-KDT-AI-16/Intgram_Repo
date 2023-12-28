@@ -159,7 +159,6 @@
 		  for(let i = 0; i < (emitYear2019[0].analysisList).length; i++) {			
 			if(emitYear2019[0].analysisList[i].sdNm === e.target.id) {
 				//console.log('success!')
-				console.log(i)
 				document.getElementById('c_emission').innerHTML = "총 배출량 : " 
 				+ parseInt(emitYear2019[0].analysisList[i].finsum/ 1000)  + " tonCO2eq"
 				break;
@@ -173,7 +172,7 @@
 		div.addEventListener('mouseout',function(e){		 
 		  document.getElementById('popup').style.display = 'none'
 		})
-		console.log(emitYear2020);
+		//console.log(emitYear2020);
 	</script>
 </body>
 </html>
