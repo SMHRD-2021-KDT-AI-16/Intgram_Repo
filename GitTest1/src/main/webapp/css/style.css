@@ -1,100 +1,130 @@
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
-
-@import url("./main-container.css");
-@import url("./main-header.css");
-@import url("./resize.css");
-@import url("./sidebar.css");
-
-* {
-  outline: none;
-  box-sizing: border-box;
-}
-
-html {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
-
-img {
-  max-width: 100%;
-}
-
-:root {
-  --body-font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;;
-  --theme-bg: #1f1d2b;
-  --body-color: #808191;
-  --button-bg: #353340;
-  --border-color: rgb(128 129 145 / 24%);
-  --video-bg: #252936;
-  --delay: 0s;
-}
-
-
-@keyframes bottom {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    transform: none;
-  }
-}
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('/css/reset.css');
+@import url('/css/contents-container.css');
+@import url('/css/login-join.css');
+@import url('/css/user-info.css');
+@import url('/css/mediaquery.css');
 
 body {
-  font-family: var(--body-font);
-  color: var(--body-color);
-  background-image: url("../imgs/earth2.jpg"); 
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: color-dodge;
-  background-color: rgba(18, 21, 39, 0.2);
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
-  padding: 1em 2em;
-  width: 100%;
+  margin: auto;
   height: 100vh;
   overflow: hidden;
 }
-body:before {
-  position: absolute;
-  left: 0;
-  top: 0;
+
+.contents {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  font-size: 24px;
+}
+
+aside {
+  width: 360px;
+  height: 100%;
+  background: #ffffff;
+  /* border-radius: 40px; */
+  /* box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff; */
+}
+
+aside.menu {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+aside > span.logo {
+  margin-top: 34px;
+}
+
+.menu-wrapper {
+  margin-top: 100px;
+}
+
+nav.side-menu > a {
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+}
+
+nav.side-menu > a > i {
+  margin-right: 10px;
+}
+
+/* 콘텐츠 보이는 영역 */
+main.contents-container {
   width: 100%;
   height: 100%;
-  background: linear-gradient(163deg, rgb(31, 29, 43) 21%, rgba(31, 29, 43, 0.3113620448) 64%);
-  opacity: 0.4;
-  content: "";
+  background-color: #f6f8fc;
+  display: block;
+  align-items: center;
+  overflow-y: scroll;
+
+  /* border-radius: 40px; */
+  /* box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff; */
 }
 
-canvas#myChart {
-   width: 800px ;
-   height: 400px;
-   margin: auto;
+main.contents-container::-webkit-scrollbar {
+  display: none;
 }
 
-/* 배경 투명*/
-/* .container {
-   background-color: rgba( 255, 255, 255, 0.0 );
-} */
-
-::-webkit-scrollbar {
-  width: 6px;
-  border-radius: 10px;
+.contents-header__login {
+  /* background-color: yellow; */
+  height: 100px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 30px;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: rgba(21, 20, 26, 0.63);
-  border-radius: 10px;
+nav.top-menu > a {
+  display: inline;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
 }
 
-/*# sourceMappingURL=style.css.map */
+nav.top-menu > a > i {
+  margin-right: 5px;
+}
 
+#login-area,
+#netZero-area,
+.contents-area,
+.emitChart-area {
+  background-color: #ffffff;
+}
+#netZero-area,
+.contents-area,
+.emitChart-area {
+  margin-left: 20px;
+}
+.netZero-area {
+  display: flex;
+}
 
+.contents-area {
+  /* height: 95%; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
 
+.netZero-item__title,
+.content-area {
+  margin-left: 50px;
+}
 
+.netZero-item__title,
+.content-area__title,
+.emitChart-area__title {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
 
+.content-area__select {
+  margin-bottom: 20px;
+}
