@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <title>TEAM Intgram</title>
 </head>
 <body>
@@ -35,11 +36,19 @@
 	<main class="contents-container">
 		<section id="login-area" class="contents-header__login">
 			<nav class="top-menu">
-				<a class="top-menu-link" href="login.jsp"> <i
-					class="fa-regular fa-circle-user"></i> <span>Login</span>
-				</a> <a class="top-menu-link" href="join.jsp"> <i
-					class="fa-solid fa-arrow-right-to-bracket"></i> <span>Register</span>
-				</a>
+				<c:if test="${member==null}">
+					<a class="top-menu-link" href="login.jsp"> <i
+						class="fa-regular fa-circle-user"></i> <span>Login</span>
+					</a>
+					<a class="top-menu-link" href="join.jsp"> <i
+						class="fa-solid fa-arrow-right-to-bracket"></i> <span>Register</span>
+					</a>
+				</c:if>
+				<c:if test="${member!=null}">
+				<a class="top-menu-link" href="LogoutService"> <i
+						class="fa-solid fa-arrow-right-to-bracket"></i> <span>Logout</span>
+					</a>
+				</c:if>
 			</nav>
 		</section>
 		<!-- 비동기 방식으로 로그인 화면 이동 -->
