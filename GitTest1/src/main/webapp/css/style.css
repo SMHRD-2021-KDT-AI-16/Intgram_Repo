@@ -1,9 +1,9 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
-@import url('/css/reset.css');
-@import url('/css/contents-container.css');
-@import url('/css/login-join.css');
-@import url('/css/user-info.css');
-@import url('/css/mediaquery.css');
+@import url('reset.css');
+@import url('contents-container.css');
+@import url('login-join.css');
+@import url('user-info.css');
+@import url('mediaquery.css');
 
 body {
   display: flex;
