@@ -151,3 +151,48 @@ div.txt > p {
 .calc-fuel-item > span {
   text-align: center;
 }
+
+.emitChart-Container {
+	display: flex;
+	width: 100%;
+	height: 600px;
+}
+.emitChart-area {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+    /*box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;*/
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+}
+.emitChart-map-area {
+	width: 48%;
+	display: flex;
+	flex-direction: column;
+	background-color: white;    
+	border-radius: 10px;
+	border-width: 1px;
+    border-style: solid;
+}
+#myChart {
+	width: 100%;
+	height: 100%;
+}
+#korea_map {
+	width: 100%;
+	height: 100%
+}
+.emitChart-map-area__canvas {
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
+.emitChart-area__canvas {
+	width: 100%;
+	height: 100%;
+	display: flex;
+}
+
