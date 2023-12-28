@@ -45,6 +45,10 @@
 					</a>
 				</c:if>
 				<c:if test="${member!=null}">
+				<a class="top-menu-link" href="#"> <i
+						class="fa-regular fa-circle-user"></i> <span>${member.mem_name}</span>
+					</a>
+				
 				<a class="top-menu-link" href="LogoutService"> <i
 						class="fa-solid fa-arrow-right-to-bracket"></i> <span>Logout</span>
 					</a>
