@@ -15,44 +15,54 @@
     <title>TEAM Intgram</title>
   </head>
   <body>
-    <div class="contents">
-      <aside class="menu">
-        <span class="logo">{ Intgram }</span>
-        <section class="menu-wrapper">
-          <nav class="side-menu">
-            <a class="menu-link" href="#">
-              <i class="fa-solid fa-house"></i>
-              <span>Home</span>
-            </a>
-            <a class="menu-link" href="../components/netzero.html">
-              <i class="fa-solid fa-seedling"></i>
-              <span>Dashboard</span>
-            </a>
-            <a class="menu-link" href="../components/archive.html">
-              <i class="fa-solid fa-file-zipper"></i>
-              <span>Newsfeed</span>
-            </a>
-            <a class="menu-link" href="../components/calculation.html">
-              <i class="fa-solid fa-calculator"></i>
-              <span>Calculation</span>
-            </a>
-          </nav>
-        </section>
-      </aside>
-    </div>
+		<div class="contents">
+			<header class="menu">
+				<div class="logo"><div>{ Intgram }</div></div>
+
+				<section class="menu-wrapper">
+					<nav class="side-menu">
+						<a class="menu-link" href="#">
+							<i class="fa-solid fa-house"></i>
+							<span>Home</span>
+						</a>
+						<a class="menu-link" href="../components/netzero.html">
+							<i class="fa-solid fa-seedling"></i>
+							<span>Dashboard</span>
+						</a>
+						<a class="menu-link" href="../components/archive.html">
+							<i class="fa-solid fa-file-zipper"></i>
+							<span>Newsfeed</span>
+						</a>
+						<a class="menu-link" href="../components/calculation.html">
+							<i class="fa-solid fa-calculator"></i>
+							<span>Calculation</span>
+						</a>
+					</nav>
+				</section>
+
+				<section id="login-area" class="contents-header__login">
+					<nav class="login-menu">
+						<a class="login-menu-link" href="../components/login.html">
+							<i class="fa-regular fa-circle-user"></i>
+							<span>Login</span>
+						</a>
+						<a class="login-menu-link" href="../components/join.html">
+							<i class="fa-solid fa-arrow-right-to-bracket"></i>
+							<span>Register</span>
+						</a>
+					</nav>
+				</section>
+
+				<!-- 비동기 방식으로 로그인 화면 이동 -->
+				<section id="login-screen" style="display: none"></section>
+
+				<!-- 비동기 방식으로 회원가입 화면 이동 -->
+				<section id="join-screen" style="display: none"></section>
+
+			</header>
+		</div>
+    
     <main class="contents-container">
-      <section id="login-area" class="contents-header__login">
-        <nav class="top-menu">
-          <a class="top-menu-link" href="./user-info.html">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Welcome User</span>
-          </a>
-          <a class="top-menu-link" href="#">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-            <span>Logout</span>
-          </a>
-        </nav>
-      </section>
       <!--  -->
       <section class="user-profile">
         <article class="user-profile-img">
@@ -115,5 +125,6 @@
       </section>
       <!--  -->
     </main>
+    <script src="/js/script.js" type="module" defer></script>
   </body>
 </html>
