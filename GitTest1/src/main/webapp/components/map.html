@@ -11,60 +11,8 @@
 		path {
 			stroke: black;
 		}
-		g#ctprvn_test > path:hover {
-			fill: #46beff;
+		g#ctprvn_test > path:hover {			
 			stroke-width: 2px;	
-		}
-		#서울특별시 {
-			fill: #dfa3a1;
-		}		
-		#인천광역시 {
-			fill: #f77f79;
-		}
-		#부산광역시 {
-			fill: #f7b9b5;
-		}
-		#울산광역시 {
-			fill: #fca2a1;
-		}
-		#대전광역시 {
-			fill: #FFFFBF;
-		}
-		#대구광역시 {
-			fill: #f9d4bb;
-		}
-		#제주특별자치도 {
-			fill: #FFFFBF;
-		}
-		#광주광역시 {
-			fill: #FFFFBF;
-		}
-		#세종특별자치시 {
-			fill: #FFFFBF;
-		}
-		#강원도 {
-			fill: #e99189;
-		}
-		#경기도 {
-			fill: #fa6460;
-		}
-		#전라북도 {
-			fill: #fbdedc;
-		}
-		#전라남도 {
-			fill: #F94746;
-		}
-		#충청북도 {
-			fill: #fa6463;
-		}
-		#충청남도 {
-			fill: #fc4847;
-		}
-		#경상북도 {
-			fill: #f8807b;
-		}
-		#경상남도 {
-			fill: #fb6563;
 		}
 		#ctprvn_test:hover popup {
 			display: block;
@@ -72,7 +20,8 @@
 		.ol-popup {
 		    display: none;
 		    position: absolute;
-		    background-color: #fff;
+		    background-color: #000; opacity: 80%;
+		    color: #fff;
 		    box-shadow: 0 0 10px rgba(0,0,0,.2);
 		    padding: 15px;
 		    border-radius: 10px;
@@ -89,12 +38,16 @@
 	
 	<script src = 'http://d3js.org/d3.v3.js'></script>
 	<script src = 'emitYear.js'></script>
+	<script src = '../json/C_emission.json'></script>
 	<?xml version="1.0"?>
 	<div>
 		<select name="year">
-			<option value="2022">2022</option>
-			<option value="2021">2021</option>
 			<option value="2020">2020</option>
+			<option value="2019">2019</option>
+			<option value="2018">2018</option>
+			<option value="2017">2017</option>
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
 		</select>
 	</div>
 	<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="700" height="450" viewBox="0 0 800 606" stroke-linecap="round" stroke-linejoin="round">
@@ -129,49 +82,120 @@
 				<div></div>
 			</div>
 		</div>
-	</div>
+	</div>	
+    <script src="../js/jquery-3.7.1.min.js"></script>
 	<script>
+		let select_year = '2020'
+		drawMap(select_year)
+		$("select[name=year]").change(function(){
+		  console.log($(this).val()); //value값 가져오기
+		  select_year = $(this).val()
+		  drawMap(select_year)
+		});
+		let background_Color = ['rgb(230, 0, 0, 0.6)',
+								'rgb(255, 26, 26, 0.6)',
+								'rgb(255, 77, 77, 0.6)',
+								'rgb(255, 128, 128, 0.6)',
+								'rgb(255, 179, 179, 0.6)',
+								'rgb(255, 229, 229, 0.6)']
 		//let city = ['서울', '부산', '대구', '인천', '광주', '대전', '울산', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주', '세종'];
-		var div = document.getElementById('ctprvn_test');
-		for(let i = 0; i < (emitYear2019[0].analysisList).length; i++) {	
-			let temp = emitYear2019[0].analysisList[i].finsum / 1000
-			if(temp > 59184) {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FF2A2A';		
-			} else if(temp > 53558) {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FF5555';		
-			} else if(temp > 27978) {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FF8080';		
-			} else if(temp > 13891) {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FFAAAA';			
-			} else if(temp > 5880) {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FFD5D5';			
-			} else  {
-				document.getElementById(emitYear2019[0].analysisList[i].sdNm).style.fill= '#FFFFBF';
-			}
+		function drawMap(select_year) {
+			fetch("../json/C_emission.json")
+			.then((res) => {
+				return res.json()
+			})
+			.then((obj) => {
+				let total_Emission = 0
+				let total_Net = 0
+				for(let i = 0; i < 17; i++) {
+					let temp = obj[i * 7][select_year]
+					total_Emission += obj[i * 7][select_year]
+					total_Net += obj[i * 7 + 1][select_year]
+					if (temp > 59184) {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[0];
+					} else if (temp > 53558) {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[1];
+					} else if (temp > 27978) {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[2];
+					} else if (temp > 13891) {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[3];
+					} else if (temp > 5880) {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[4];
+					} else {
+						document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[5];
+					}
+					$('path').on({
+						'mouseover':function(e) {
+							//console.log("targetId = " + e.target.id)
+							//$('this').css('fill','#46beff');
+							document.getElementById(e.target.id).style.fill = '#46beff'
+							//$('this').css('fill','#46beff');
+							console.log('test')
+						},
+						'mouseout':function(e){
+							//div.addEventListener('mouseover',function(e){												
+								if (temp > 59184) {
+									$('this').css('fill',background_Color[0]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[0];
+								} else if (temp > 53558) {
+									$('this').css('fill',background_Color[1]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[1];
+								} else if (temp > 27978) {
+									$('this').css('fill',background_Color[2]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[2];
+								} else if (temp > 13891) {
+									$('this').css('fill',background_Color[3]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[3];
+								} else if (temp > 5880) {
+									$('this').css('fill',background_Color[4]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[4];
+								} else {
+									$('this').css('fill',background_Color[5]);
+									document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[5];
+								}
+							//})
+						}
+					})								
+				}
+				
+				div.addEventListener('mousemove',function(e){
+				  document.getElementById('container').style.left = e.clientX + 'px';
+				  document.getElementById('container').style.top = e.clientY + 'px';
+				  document.getElementById('popup').style.display = 'block'
+				  //console.log(document.getElementById('부산').id)
+				  
+				  document.getElementById('city').innerHTML = "시도 : " + e.target.id
+				  for(let i = 0; i < 17; i++) {			
+					if(obj[i * 7]['도시'] === e.target.id) {
+						//console.log('success!')
+						document.getElementById('c_emission').innerHTML = "총 배출량 : " 
+						+ parseInt(obj[i * 7][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+						+ " tonCO2eq"
+						break;
+					}			
+				  }
+				  
+				  //console.log(emitYear2020[0].analysisList[i].sdNm)
+				  //console.log(document.getElementById('city').id)
+				  //console.log(emitYear2020[0].analysisList[0].sdNm)
+				})
+				div.addEventListener('mouseout',function(e){		 
+					document.getElementById('popup').style.display = 'none'
+				})
+			})
+			
 		}
-		div.addEventListener('mousemove',function(e){
-		  document.getElementById('container').style.left = e.clientX + 'px';
-		  document.getElementById('container').style.top = e.clientY + 'px';
-		  document.getElementById('popup').style.display = 'block'
-		  //console.log(document.getElementById('부산').id)
-		  
-		  document.getElementById('city').innerHTML = "시도 : " + e.target.id
-		  for(let i = 0; i < (emitYear2019[0].analysisList).length; i++) {			
-			if(emitYear2019[0].analysisList[i].sdNm === e.target.id) {
-				//console.log('success!')
-				document.getElementById('c_emission').innerHTML = "총 배출량 : " 
-				+ parseInt(emitYear2019[0].analysisList[i].finsum/ 1000)  + " tonCO2eq"
-				break;
-			}			
-		  }
-		  
-		  //console.log(emitYear2020[0].analysisList[i].sdNm)
-		  //console.log(document.getElementById('city').id)
-		  //console.log(emitYear2020[0].analysisList[0].sdNm)
+
+		var div = document.getElementById('ctprvn_test');
+
+		$('path').on('mouseover', function (e) {
+				//console.log("targetId = " + e.target.id)
+				//document.getElementById(e.target.id).style.fill = '#46beff'
+			//$('this').css('fill','#46beff');
+			//console.log('test')
 		})
-		div.addEventListener('mouseout',function(e){		 
-		  document.getElementById('popup').style.display = 'none'
-		})
+
+				
 		//console.log(emitYear2020);
 	</script>
 </body>

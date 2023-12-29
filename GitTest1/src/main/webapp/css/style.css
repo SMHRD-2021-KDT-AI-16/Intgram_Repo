@@ -66,6 +66,25 @@ header.menu {
   margin: 30px;
 }
 
+.menu-link {
+	font-size: 1.9rem;
+}
+
+*::after {
+    box-sizing: inherit;
+}
+nav.side-menu > a::after {
+    position: absolute;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 0;
+    height: 0.4rem;
+    background-color: #18A46A;
+    content: "";
+    transition: all 0.2s;
+}
 #login-area > nav.login-menu > a {
   display: inline;
   align-items: center;
@@ -181,7 +200,9 @@ main.contents-container::-webkit-scrollbar {
 
 .netZero-item__title,
 .content-area__title,
-.emitChart-area__title {
+.emitChart-area__title,
+.emitChart-map-area__title,
+.emitChart-pie-area__title {
   font-size: 32px;
   margin-bottom: 30px;
 }

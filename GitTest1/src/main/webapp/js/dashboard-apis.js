@@ -10,10 +10,17 @@ let data_nonIron = [];
 //let page = document.querySelector('input')
 var chartArea = document.getElementById('myChart').getContext('2d');
 var ctx = document.getElementById('gasPieChart').getContext('2d');
+var chartPieArea = document.getElementById('myChartPie').getContext('2d');
 let all = [];
 let totalEmissions = [];
 let netEmissions = [];
+let background_Color = ['rgb(79, 132, 254, 1)',
+						'rgb(118, 159, 254, 1)',
+						'rgb(157, 186, 255, 1)',
+						'rgb(196, 214, 255, 1)',
+						'rgb(235, 241, 255, 1)']
 
+	
 fetch("../json/gas.json")
 	.then((res) => {
 		return res.json()
@@ -27,11 +34,11 @@ fetch("../json/gas.json")
 					data: [obj[0]['CO₂'], obj[0]['CH₄'], obj[0]['N₂O'],
 							obj[0]['HFCs'], obj[0]['SF6'], obj[0]['PFCs']],
 					backgroundColor: [
-						'rgba(116, 102, 241, 1)',
-						'rgba(158, 139, 244, 1)',
-						'rgba(193, 178, 246, 1)',
-						'rgba(225, 217, 247, 1)',
-						'rgba(255, 20, 147, 1)',
+						background_Color[0],
+						background_Color[1],
+						background_Color[2],
+						background_Color[3],
+						background_Color[4],
 						'rgba(0, 128, 0, 1)']						
 				}]
 			},
@@ -54,7 +61,8 @@ $.ajax({
 	// 2. 통신 성공할 경우 로직
 	success: function (result) {
 		//alert("통신 성공!!!")
-		//console.log(result);
+		console.log("result");
+		console.log(result);
 		/*
                         0 - 총배출량
                         1 - 순배출량
@@ -76,65 +84,60 @@ $.ajax({
 				// ③x축에 들어갈 이름들(Array)
 				labels: Object.keys(result.data[0]),
 				// ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
-				datasets: [
+				datasets: [		
 					{
+					   type: 'line',
+					   label: result.data[1]['분야 및 연도'],
+					   // ⑥dataset값(Array)
+					   data: Object.values(result.data[0]),
+					   // ⑦dataset의 배경색(rgba값을 String으로 표현)
+					   backgroundColor: ['rgba(0, 0, 0, 1)'],
+					   // ⑧dataset의 선 색(rgba값을 String으로 표현)
+					   borderColor: 'rgba(0, 0, 0, 1)',
+					   // ⑨dataset의 선 두께(Number)
+					   borderWidth: 1,
+					}, { // 에너지
 						// ⑤dataset의 이름(String)
 						label: result.data[2]['분야 및 연도'],
 						// ⑥dataset값(Array)
 						data: Object.values(result.data[2]),
-						backgroundColor: 'rgba(116, 102, 241, 1)',
-						borderColor: 'rgba(116, 102, 241, 1)',
+						backgroundColor: background_Color[0],
+						borderColor: background_Color[0],
 						// borderWidth: 1,
-					},
-					{
+					}, { // 산업공정
 						label: result.data[37]['분야 및 연도'],
 						// ⑥dataset값(Array)
 						data: Object.values(result.data[37]),
-						backgroundColor: 'rgba(158, 139, 244, 1)',
-						borderColor: 'rgba(158, 139, 244, 1)',
+						backgroundColor: background_Color[1],
+						borderColor: background_Color[1],
 						// borderWidth: 1,
-					},
-					{
+					}, { // 농업
 						label: result.data[65]['분야 및 연도'],
 						// ⑥dataset값(Array)
 						data: Object.values(result.data[65]),
-						backgroundColor: 'rgba(193, 178, 246, 1)',
-						borderColor: 'rgba(193, 178, 246, 1)',
+						backgroundColor: background_Color[2],
+						borderColor: background_Color[2],
 
 						// borderWidth: 1,
-					},
-					{
+					}, { // 폐기물
+						label: result.data[129]['분야 및 연도'],
+						// ⑥dataset값(Array)
+						data: Object.values(result.data[129]),
+						backgroundColor: background_Color[3], // Lime
+						borderColor: background_Color[3],
+
+						// borderWidth: 1,
+					}, { // LULUCF
 					   label: result.data[102]['분야 및 연도'],
 					   // ⑥dataset값(Array)
 					   data: Object.values(result.data[102]),
 					   // ⑦dataset의 배경색(rgba값을 String으로 표현)
-					   backgroundColor: ['rgba(0, 128, 0, 1)'],
+					   backgroundColor: '#00d27a',
 					   // ⑧dataset의 선 색(rgba값을 String으로 표현)
-					   borderColor: 'rgba(0, 128, 0, 1)',
+					   borderColor: '#00d27a',
 					   // ⑨dataset의 선 두께(Number)
 					   borderWidth: 1,
-					 },
-					{
-						label: result.data[129]['분야 및 연도'],
-						// ⑥dataset값(Array)
-						data: Object.values(result.data[129]),
-						backgroundColor: 'rgba(225, 217, 247, 1)', // Lime
-						borderColor: 'rgba(225, 217, 247, 1)',
-
-						// borderWidth: 1,
-					},
-					// {
-					//   type: 'line',
-					//   label: result.data[1]['분야 및 연도'],
-					//   // ⑥dataset값(Array)
-					//   data: Object.values(result.data[0]),
-					//   // ⑦dataset의 배경색(rgba값을 String으로 표현)
-					//   backgroundColor: ['rgba(255, 20, 147, 0.2)'],
-					//   // ⑧dataset의 선 색(rgba값을 String으로 표현)
-					//   borderColor: 'rgba(255, 20, 147, 1)',
-					//   // ⑨dataset의 선 두께(Number)
-					//   borderWidth: 1,
-					// },
+					 }
 				],
 			},
 			// ⑩차트의 설정(Object)
@@ -171,6 +174,34 @@ $.ajax({
 					},
 				},
 			},
+		});
+		var myPieChart = new Chart(chartPieArea, {
+			// ①차트의 종류(String)
+			type: 'pie',
+			data: {
+				labels : ['에너지','산업공정','농업', '폐기물'],
+				datasets : [{ // 2, 37, 65, 102,129
+					data: [result.data[2]['2020'], 
+							result.data[37]['2020'],
+							result.data[65]['2020'],
+							result.data[129]['2020']],
+					backgroundColor: [
+						background_Color[0],
+						background_Color[1],
+						background_Color[2],
+						background_Color[3]]						
+				}]
+			},
+			options: {
+				plugins: {					
+					legend: {
+						position: 'bottom'
+					},
+					showValue: {
+						fontSize : 20	
+					}
+				}
+			}
 		});
 	},
 	error: function () {
