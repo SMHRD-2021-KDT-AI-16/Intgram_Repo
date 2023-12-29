@@ -55,8 +55,7 @@
       <!--  -->
       <section class="contents-area">
         <article class="content-area">
-          <div class="content-area__title">전국 배출, 흡수 통계</div>
-          <div class="content-area__select">
+          <!--<div class="content-area__select">
             <select id="emitYear" name="eYear">
               <option>2013</option>
               <option>2014</option>
@@ -69,37 +68,44 @@
               <option selected>2021</option>
             </select>
             <span>년 전국 기준</span>
-          </div>
+          </div>-->
         </article>
         <article class="emit-list-area">
-          <div class="emit-list">
-            <div class="emit-list-item">
-              <div class="img">
-                <img src="../img/tot.png" alt="총계이미지" />
-                <p>총계</p>
-              </div>
-              <div class="txt" id="total">
-                <p id = 'total_Emission'>총 배출량 : 314,173,770 tonCO2eq</p>
-                <p id = 'total_Absorption'>산림흡수량 : 164,452,476 tonCO2eq</p>
-                <p id = 'total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
-              </div>
-            </div>
-            <div class="emit-list-item">
-              <div class="img">
-                <img src="../img/tot.png" alt="총계이미지" />
-                <p>총계</p>
-              </div>
-              <div class="txt" id="total">
-                <p>배출량 : <br />314,173,770 tonCO2eq</p>
-                <p>흡수량 : <br />164,452,476 tonCO2eq</p>
-              </div>
-            </div>
-            <div class="emit-list-item">
-				<div>
-              		<canvas id="gasPieChart" width = '250' height="250"></canvas>
-              	</div>
-            </div>
-          </div>
+			<div class="emit-list">
+				<div class="emit-list-title">
+					<p>탄소배출 총합</p>
+				</div>
+				<div class="emit-list-item">
+					<div class="img">
+						<img src="../img/tot.png" alt="총계이미지" />
+						<p>총계</p>
+					</div>
+					<div class="txt" id="total">
+						<p id='total_Emission'>총 배출량 : 314,173,770 tonCO2eq</p>
+						<p id='total_Absorption'>산림흡수량 : 164,452,476 tonCO2eq</p>
+						<p id='total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
+					</div>
+				</div>
+			</div>
+            <div class="emit-list">
+	            <div class="emit-list-item">
+					<div class="img">
+	                	<img src="../img/tot.png" alt="총계이미지" />
+	                	<p>총계</p>
+	              	</div>
+		            <div class="txt" id="total">
+						<p>배출량 : <br />314,173,770 tonCO2eq</p>
+		                <p>흡수량 : <br />164,452,476 tonCO2eq</p>
+		            </div>
+		        </div>
+	        </div>
+	        <div class="emit-list">
+	            <div class="emit-list-item">
+				   <div>
+	                 <canvas id="gasPieChart" width = '250' height="250"></canvas>
+	               </div>
+	            </div>
+	      	</div>
         </article>
       </section>
       <section class="emitChart-Container">
