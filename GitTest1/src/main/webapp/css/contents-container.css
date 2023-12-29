@@ -41,8 +41,8 @@
 
 .emit-list-item {
   /* border: 1px solid #000; */
-  width: 33;
-  height: 200px;
+  width: 28%;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
