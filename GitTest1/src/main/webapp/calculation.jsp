@@ -175,7 +175,7 @@
 						<i class="fa-solid fa-face-smile"></i> 현재 탄소 배출량
 					</p>
 					<p class="calc-emit__amount">					
-						<span id='totalE'></span><span>CO<sub>2</sub>eq
+						<span id='totalE'></span><span>tonCO<sub>2</sub>eq
 						</span>
 					</p>
 				</div>
@@ -196,13 +196,15 @@
 					<p class="output-title">
 						<i class="fa-solid fa-user"></i> 개인의 탄소 배출량
 					</p>
-					<canvas></canvas>
+					<canvas id="userCarbonChart">
+					</canvas>
 				</div>
 				<div class="calc-outputChart2">
 					<p class="output-title">
 						<i class="fa-solid fa-building"></i> 기업의 탄소 배출량
 					</p>
-					<canvas></canvas>
+					<canvas>
+					</canvas>
 				</div>
 			</article>
 		</section>
@@ -212,6 +214,7 @@
 
 	<script src="../js/script.js" type="module" defer></script>
 	<script src="js/jquery-3.7.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 	<script>
 	//
@@ -227,18 +230,22 @@
 	</script>	
 	<script>
 	<%
-		/* float total = 0;
-		List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
-		for(int i = 0; i < l_co2.size(); i++) {
-			total += l_co2.get(i).getCo2_emission();
-		} */
-//System.out.println(l_co2);
-		
+		float total = 0;
+		if(session.getAttribute("member") != null) {
+			List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
+			for(int i = 0; i < l_co2.size(); i++) {
+				
+				total += (l_co2.get(i)).getTotal_emission();
+			}
+		}
+		//System.out.println(l_co2);
 
 	%>
-	/*
-	document.querySelector('#totalE').innerHTML = temp */
-	//console.log(temp)
+		var temp = 	'<%= total %>'
+		var temp2 = parseInt(temp)
+		
+		document.querySelector('#totalE').innerHTML = temp
+		console.log(temp)
 		$('.transport-option').on('click', (e) => {
 		  console.log(e.target.value);
 		})
@@ -287,7 +294,35 @@
 			});
 
 			///////////////////////////////////////
-
-		</script>
+	 var userChart = document.getElementById('userCarbonChart').getContext('2d');
+			
+	var userCarbonChart = new Chart(userChart, {
+        type: 'line',
+        data: {
+          labels: ['1월', '2월', '3월', '4월', '5월', '6월',
+        	  '7월', '8월', '9월', '10월', '11월', '12월'],
+          datasets: [
+            {
+              type: 'line',
+              data: [temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2],              
+              borderWidth: 1,
+            }
+          ],
+        },
+        options: {
+            elements: {
+              point: {
+                radius: 2
+              }
+            },
+            responsive: false,
+            plugins: {
+              legend: {
+                position: 'top'
+              }
+            }
+          }
+      });	 
+	</script>
 </body>
 </html>

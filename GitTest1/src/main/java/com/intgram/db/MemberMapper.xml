@@ -37,7 +37,7 @@
 		where MEM_ID = #{mem_id}
   </select>
   
-  <insert id="inserC" parameterType="com.intgram.model.Co2VO">
+  <insert id="insertC" parameterType="com.intgram.model.Co2VO">
 		insert into TBL_MEMBER_CO2(MEM_ID, TRANSPORTATION, MEM_FUEL_NAME, FUEL_AMOUNT)
 		values(#{mem_id}, #{transportation}, #{mem_fuel_name}, #{fuel_amount})
 	</insert>
