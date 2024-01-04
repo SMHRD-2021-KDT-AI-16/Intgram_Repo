@@ -28,9 +28,18 @@
   	 	  resultType="com.intgram.model.MemberVO"
   		  >
   	SELECT * FROM TBL_MEMBER
-  	WHERE MEM_ID= #{id} 
-  	AND MEM_PW= #{pw}
+  	WHERE MEM_ID= #{mem_id} 
+  	AND MEM_PW= #{mem_pw}
   </select>
   
+  <select id="getdata" parameterType="com.intgram.model.MemberVO" resultType="com.intgram.model.Co2VO" >
+  		select * from TBL_MEMBER_CO2
+		where MEM_ID = #{mem_id}
+  </select>
+  
+  <insert id="inserC" parameterType="com.intgram.model.Co2VO">
+		insert into TBL_MEMBER_CO2(MEM_ID, TRANSPORTATION, MEM_FUEL_NAME, FUEL_AMOUNT)
+		values(#{mem_id}, #{transportation}, #{mem_fuel_name}, #{fuel_amount})
+	</insert>
   
 </mapper>

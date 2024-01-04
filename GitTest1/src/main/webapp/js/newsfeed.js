@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('newsfeed.js');
+
 // JSON 파일 경로
 var jsonFilePath = '../json/news.json';
 var itemsPerPage = 5;
@@ -83,44 +85,5 @@ fetch(jsonFilePath)
   })
   .catch((error) => console.error('데이터를 불러오지 못했습니다:', error));
 
-// 비디오피드
-// 새로운 비디오 플레이어를 생성하는 함수
-function createYouTubePlayer(containerId, videoId) {
-  var container = document.getElementById(containerId);
-  var newVideoItem = document.createElement('li');
-  newVideoItem.className = 'video-list-item';
 
-  var newPlayerDiv = document.createElement('div');
-  newPlayerDiv.id = 'player-' + videoId; // 각 플레이어에 고유한 ID 지정
-  newVideoItem.appendChild(newPlayerDiv);
-
-  container.appendChild(newVideoItem);
-
-  // 새로운 div에 대한 YouTube 플레이어 생성
-  new YT.Player(newPlayerDiv, {
-    videoId: videoId,
-    playerVars: {
-      autoplay: false,
-      loop: false,
-      playlist: videoId,
-    },
-    events: {
-      onReady: function (event) {
-        event.target.mute();
-      },
-    },
-  });
-}
-
-// YouTube API 스크립트를 동적으로 로드
-var tag = document.createElement('script');
-tag.src = 'https://www.youtube.com/iframe_api';
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// YouTube API 스크립트가 로드된 후에 호출되는 콜백 함수
-function onYouTubeIframeAPIReady() {
-  // 초기 비디오를 생성합니다.
-  createYouTubePlayer('videoContainer', 'An6LvWQuj_8');
-  createYouTubePlayer('videoContainer', 'An6LvWQuj_8');
-}
+////////////// 비디오 리스트

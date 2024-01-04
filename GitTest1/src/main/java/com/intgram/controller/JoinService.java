@@ -36,11 +36,11 @@ public class JoinService extends HttpServlet {
 				MemberVO vo = new MemberVO();
 				
 				// setter메서드 사용해서 데이터 보관
-				vo.setCom_num(com_num);
-				vo.setId(id);
-				vo.setPw(pw);
+				vo.setCom_id(com_num);
+				vo.setMem_id(id);
+				vo.setMem_pw(pw);
 				vo.setMem_name(mem_name);
-				vo.setPosition(position);
+				vo.setMem_position(position);
 				
 				// DAO 생성하기
 				DAO dao = new DAO();

@@ -1,6 +1,8 @@
 package com.intgram.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.intgram.db.DAO;
+import com.intgram.model.Co2VO;
 import com.intgram.model.MemberVO;
 
 /**
@@ -17,8 +20,6 @@ import com.intgram.model.MemberVO;
 @WebServlet("/LoginService")
 public class LoginService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -33,26 +34,40 @@ public class LoginService extends HttpServlet {
 		// MemberVO 라는 객체 생성
 		MemberVO vo = new MemberVO();
 		
+		
 		// setter메서드 사용해서 데이터 보관
-		vo.setId(id);
-		vo.setPw(pw);
+		vo.setMem_id(id);
+		vo.setMem_pw(pw);
 		
 		// DAO 생성하기
 		DAO dao = new DAO();
 		
 		// DAO 사용하기
-		MemberVO result = dao.login(vo);
+		MemberVO result = null;
+		result = dao.login(vo);
 		
+		System.out.println("이번엔 여기니");
+		List<Co2VO> co2vo = dao.getdata(result);
+		System.out.println("이번엔 여기니222");
+		
+		System.out.println("result = " + result.getMem_id());
 		// 6. 로그인 성공했다면
 		if (result != null) {
 			// 6-1) 세션영역을 꺼내와서
 			HttpSession session = request.getSession();
 			// 6-2) 세션영역에 로그인 정보(사용자 모든 정보)를 담아주기
 			session.setAttribute("member", result);
-
+			session.setAttribute("member_data", co2vo);			
+			//System.out.println((List<Co2VO>)session.getAttribute("member_data"));
+			List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
+			for(int i = 0; i < l_co2.size(); i++) {
+				System.out.println(l_co2.get(i).getCh4_emission());
+				System.out.println(l_co2.get(i).getTotal_emission());
+			}
 		}
+		
 		// 7. main.jsp로 redirect 방식 이동
-		response.sendRedirect("netzero.jsp");
+		response.sendRedirect("calculation.jsp");
 	}
 
 }

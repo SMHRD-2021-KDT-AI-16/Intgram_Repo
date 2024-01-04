@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../css/style.css" />
+				<!-- <link rel="stylesheet" href="../css/style.css" /> -->
+		<link rel="stylesheet" href="../css/main.css" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -13,22 +14,33 @@
 		/>
 
 		<title>TEAM Intgram</title>
+		<script type="module" src="../js/script.js" defer></script>
+		<script src="../js/menu_min510.js" defer></script>
+        <script src="../js/mouseover.js" defer></script>
 	</head>
 	<body>
-		<div class="contents">
+		<div class="contents off">
 			<header class="menu">
-				<div class="logo"><div>{ Intgram }</div></div>
+				<div class="logo">
+					<img src="../img/logo.png" class="logo_img">
+				</div>
 
 				<section class="menu-wrapper">
 					<nav class="side-menu">
-						<a class="menu-link" href="#">
+            <div id="horizontal-underline"></div>
+						<a class="menu-link" href="../components/home.html">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
-						<a class="menu-link" href="../components/netzero.html">
+
+						<a
+							class="menu-link dropdown-toggle"
+							href="../components/netzero_carbon.html"
+						>
 							<i class="fa-solid fa-seedling"></i>
 							<span>Dashboard</span>
 						</a>
+
 						<a class="menu-link" href="../components/archive.html">
 							<i class="fa-solid fa-file-zipper"></i>
 							<span>Newsfeed</span>
@@ -42,7 +54,7 @@
 
 				<section id="login-area" class="contents-header__login">
 					<nav class="login-menu">
-						<a class="login-menu-link" href="../components/login.html">
+						<a class="login-menu-link" href="../login.jsp">
 							<i class="fa-regular fa-circle-user"></i>
 							<span>Login</span>
 						</a>
@@ -53,123 +65,243 @@
 					</nav>
 				</section>
 
+				<a href="#" class="navbar__toggleBtn">
+					<i class="fa-solid fa-bars"></i>
+				</a>
+
 				<!-- 비동기 방식으로 로그인 화면 이동 -->
 				<section id="login-screen" style="display: none"></section>
 
 				<!-- 비동기 방식으로 회원가입 화면 이동 -->
 				<section id="join-screen" style="display: none"></section>
-
 			</header>
 		</div>
-    
-		<main class="contents-container">
+
+		<main class="calc-container off">
 			<!--  -->
-			<div id="calc-area">
-				<section class="calc-header">
-					<div class="calc-header-title">
-						<p>스마트인재개발원 <sup>2023년 12월 탄소배출 현황</sup></p>
+
+			<section class="calc-header">
+				<article>
+					<form action="CalculateService" method="post">
+						<div class="input-list">
+							<h1>운행일자</h1>
+							<input type="text" placeholder="20240105" />
+						</div>
+
+						<h1>운송수단을 선택해주세요</h1>
+						<div class="inputdown inputdown-transport">
+							<button type="button" class="inputdown-toggle transport-toggle">
+								운송수단 선택하기
+							</button>
+
+							<ul class="inputdown-menu transport-menu">
+								<li class="inputdown-item transport-item">
+									<button
+										type="button"
+										class="inputdown-option transport-option"
+										data-value="차량"
+									>
+										차량
+									</button>
+								</li>
+								<li class="inputdown-item transport-item">
+									<button
+										type="button"
+										class="inputdown-option transport-option"
+										data-value="철도"
+									>
+										철도
+									</button>
+								</li>
+								<li class="inputdown-item transport-item">
+									<button
+										type="button"
+										class="inputdown-option transport-option"
+										data-value="선박"
+									>
+										선박
+									</button>
+								</li>
+								<li class="inputdown-item transport-item">
+									<button
+										type="button"
+										class="inputdown-option transport-option"
+										data-value="항공기"
+									>
+										항공기
+									</button>
+								</li>
+							</ul>
+						</div>
+
+						<h1>사용연료를 선택해주세요</h1>
+						<div class="inputdown inputdown-fuel">
+							<button type="button" class="inputdown-toggle fuel-toggle">
+								사용연료 선택하기
+							</button>
+
+							<ul class="inputdown-menu fuel-menu">
+								<li class="inputdown-item fuel-item">
+									<button
+										type="button"
+										class="inputdown-option fuel-option"
+										data-value="경유"
+									>
+										경유
+									</button>
+								</li>
+								<li class="inputdown-item fuel-item">
+									<button
+										type="button"
+										class="inputdown-option fuel-option"
+										data-value="중유"
+									>
+										중유
+									</button>
+								</li>
+								<li class="inputdown-item fuel-item">
+									<button
+										type="button"
+										class="inputdown-option fuel-option"
+										data-value="휘발유"
+									>
+										휘발유
+									</button>
+								</li>
+								<li class="inputdown-item fuel-item">
+									<button
+										type="button"
+										class="inputdown-option fuel-option"
+										data-value="LPG"
+									>
+										LPG
+									</button>
+								</li>
+							</ul>
+						</div>
+
+						<div class="input-list">
+							<h1>연료량</h1>
+							<input type="text" />
+						</div>
+						<div class="inputSave" align="center">
+							<input
+								type="submit"
+								value="저장"
+								class="inputSave-btn next-btn"
+							/>
+						</div>
+					</form>
+				</article>
+				<div class="calc-line"></div>
+			</section>
+
+			<section class="calc-outputArea">
+				<div class="calc-header-title">
+					<p>
+						<span>스마트인재개발원</span>
+						<span>님의</span>
+						<span>2023년 12월 탄소배출 현황</span>
+					</p>
+				</div>
+				<div class="calc-header-board">
+					<div class="calc-nowEmit">
+						<p class="calc-emit__text">
+							<i class="fa-solid fa-face-smile"></i> 현재 탄소 배출량
+						</p>
+						<p class="calc-emit__amount">
+							1,000,000<span>CO<sub>2</sub>eq</span>
+						</p>
 					</div>
-					<div class="calc-header-board">
-						<div class="calc-nowEmit">
-							<p class="calc-emit__text">현재 탄소 배출량</p>
-							<p class="calc-emit__amount">
-								1,000,000<span>CO<sub>2</sub>eq</span>
-							</p>
-						</div>
-						<div class="calc-goalEmit">
-							<p class="calc-emit__text">목표 탄소 배출량</p>
-							<p class="calc-emit__amount">
-								1억 4천 5백만<span>CO<sub>2</sub>eq</span>
-							</p>
-						</div>
-						<div class="calc-emitBtn">
-							<div class="calc-setDate">
-								<a href="#">
-									<button>날짜 선택</button>
-								</a>
-							</div>
-							<div class="calc-setGoal">
-								<a href="#">
-									<button>목표 선택</button>
-								</a>
-							</div>
-						</div>
+
+					<div class="calc-goalEmit">
+						<p class="calc-emit__text">
+							<i class="fa-solid fa-pen-to-square"></i>
+							목표 탄소 배출량
+						</p>
+						<p class="calc-emit__amount">
+							1억 4천 5백만<span>CO<sub>2</sub>eq</span>
+						</p>
 					</div>
-				</section>
+				</div>
 
-				<form action="#">
-					<section class="calc-inputArea">
-						<article class="calc-inputs">
-							<div id="calc-table">
-								<form>
-									<table class="calc-table">
-										<tr>
-											<td>운행일자</td>
-											<td>
-												<input type="text" placeholder="예: 2024/01/05" />
-											</td>
-										</tr>
-
-										<tr>
-											<td>운송수단</td>
-											<td>
-												<select>
-													<option>차량</option>
-													<option>철도</option>
-													<option>선박</option>
-													<option>항공기</option>
-												</select>
-											</td>
-										</tr>
-
-										<tr>
-											<td>사용연료</td>
-											<td>
-												<select>
-													<option>경유</option>
-													<option>중유</option>
-													<option>휘발유</option>
-													<option>LPG</option>
-												</select>
-											</td>
-										</tr>
-
-										<tr>
-											<td>연료량</td>
-											<td><input type="text" /></td>
-										</tr>
-
-										<tr class="table-tr">
-											<td colspan="2" class="table-td" align="center">
-												<input type="button" value="저장" class="table-btn" />
-											</td>
-										</tr>
-									</table>
-								</form>
-							</div>
-							<div class="calc-inputChart">
-								<p class="inputChart-title">1인당 온실가스 배출량</p>
-								<canvas></canvas>
-							</div>
-						</article>
-					</section>
-				</form>
-
-				<section class="calc-outputArea">
-					<article class="calc-outputs">
-						<div class="calc-outputChart1">
-							<p class="output-title">개인의 탄소 배출량</p>
-							<canvas></canvas>
-						</div>
-						<div class="calc-outputChart2">
-							<p class="output-title">기업의 탄소 배출량</p>
-							<canvas></canvas>
-						</div>
-					</article>
-				</section>
-			</div>
-			<!--  -->
+				<article class="calc-outputs">
+					<div class="calc-outputChart1">
+						<p class="output-title">
+							<i class="fa-solid fa-user"></i> 개인의 탄소 배출량
+						</p>
+						<canvas></canvas>
+					</div>
+					<div class="calc-outputChart2">
+						<p class="output-title">
+							<i class="fa-solid fa-building"></i> 기업의 탄소 배출량
+						</p>
+						<canvas></canvas>
+					</div>
+				</article>
+			</section>
 		</main>
-		<script src="/js/script.js" type="module" defer></script>
+		<!--  -->
+		<div class="screen-alert">화면 크기를 늘여주세요🙏</div>
+
+		<script src="../js/script.js" type="module" defer></script>
+
+		<script>
+			const toggleBtn = document.querySelector('.navbar__toggleBtn');
+			const SIDE_MENU = document.querySelector('.menu-wrapper');
+			const LOGIN_AREA = document.getElementById('login-area');
+
+			toggleBtn.addEventListener('click', () => {
+				console.log('click!');
+				SIDE_MENU.classList.toggle('active');
+				LOGIN_AREA.classList.toggle('active');
+			});
+		</script>
+
+		<script>
+			const transport = document.querySelector('.inputdown-transport');
+			const transportToggleBtn = document.querySelector('.transport-toggle');
+			const transportMenu = document.querySelector('.transport-menu');
+			const transportOptions = document.querySelectorAll('.transport-option');
+
+			transportToggleBtn.addEventListener('click', function () {
+				transportMenu.classList.toggle('show');
+			});
+			transportToggleBtn.addEventListener('blur', function () {
+				transportMenu.classList.remove('show');
+			});
+
+			transportOptions.forEach(function (item) {
+				item.addEventListener('click', function (e) {
+					const buttonLabel = e.currentTarget.textContent.trim();
+					transportToggleBtn.textContent = buttonLabel;
+					transportToggleBtn.classList.add('selected');
+				});
+			});
+
+			///////////////////////////////////////
+			const fuel = document.querySelector('.inputdown-fuel');
+			const fuelToggleBtn = document.querySelector('.fuel-toggle');
+			const fuelMenu = document.querySelector('.fuel-menu');
+			const fuelOptions = document.querySelectorAll('.fuel-option');
+
+			fuelToggleBtn.addEventListener('click', function () {
+				fuelMenu.classList.toggle('show');
+			});
+			fuelToggleBtn.addEventListener('blur', function () {
+				fuelMenu.classList.remove('show');
+			});
+
+			fuelOptions.forEach(function (item) {
+				item.addEventListener('click', function (e) {
+					const buttonLabel = e.currentTarget.textContent.trim();
+					fuelToggleBtn.textContent = buttonLabel;
+					fuelToggleBtn.classList.add('selected');
+				});
+			});
+			console.log(document.querySelector)
+			///////////////////////////////////////
+
+		</script>
 	</body>
 </html>
