@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.intgram.model.Co2VO"%>
+<%@ page import="com.intgram.model.MemberVO"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,19 +108,19 @@
 						<ul class="inputdown-menu transport-menu">
 							<li class="inputdown-item transport-item">
 								<button type="button" class="inputdown-option transport-option"
-									value="차량" data-value="차량">차량</button>
+									name = transportation value="차량" data-value="차량">차량</button>
 							</li>							
 							<li class="inputdown-item transport-item">
 								<button type="button" class="inputdown-option transport-option"
-									value="철도" data-value="철도">철도</button>
+									name = transportation value="철도" data-value="철도">철도</button>
 							</li>	
 							<li class="inputdown-item transport-item">
 								<button type="button" class="inputdown-option transport-option"
-									value="선박" data-value="선박">선박</button>
+									name = transportation value="선박" data-value="선박">선박</button>
 							</li>
 							<li class="inputdown-item transport-item">
 								<button type="button" class="inputdown-option transport-option"
-									value="항공기" data-value="항공기">항공기</button>
+									name = transportation value="항공기" data-value="항공기">항공기</button>
 							</li>
 						</ul>
 					</div>
@@ -171,13 +174,8 @@
 					<p class="calc-emit__text">
 						<i class="fa-solid fa-face-smile"></i> 현재 탄소 배출량
 					</p>
-					<p class="calc-emit__amount">
-					<%
-					float co2_emission = (float)session.getAttribute('member_data');
-					
-					
-					%>
-						${ member.mem_name} <span>CO<sub>2</sub>eq
+					<p class="calc-emit__amount">					
+						<span id='totalE'></span><span>CO<sub>2</sub>eq
 						</span>
 					</p>
 				</div>
@@ -228,8 +226,19 @@
 			});
 	</script>	
 	<script>
-	//sessionStorage.setItem("mineSession", member_data ); 
-	console.log(sessionStorage.getItem("member_data"))
+	<%
+		/* float total = 0;
+		List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
+		for(int i = 0; i < l_co2.size(); i++) {
+			total += l_co2.get(i).getCo2_emission();
+		} */
+//System.out.println(l_co2);
+		
+
+	%>
+	/*
+	document.querySelector('#totalE').innerHTML = temp */
+	//console.log(temp)
 		$('.transport-option').on('click', (e) => {
 		  console.log(e.target.value);
 		})

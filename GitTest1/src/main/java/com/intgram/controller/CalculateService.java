@@ -30,11 +30,12 @@ public class CalculateService extends HttpServlet {
     	Co2VO co2VO = new Co2VO();
 		
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		String transportion = "차량";
+		String transportion = request.getParameter("transportation");
 		String fuel_type = "휘발유";
 				
 		response.setContentType("text/html;charset=utf-8");
 		
+		System.out.println(transportion);
 		co2VO.setMem_id(mbVO.getMem_id());
 		System.out.println("아이디 = " + mbVO.getMem_id());
 		co2VO.setTransportation(transportion);
