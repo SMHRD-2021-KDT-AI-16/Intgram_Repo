@@ -14,15 +14,27 @@
     />
     <script src="../js/dashboard-apis.js" type="module" defer></script>
     <script src="../js/emitYear.js" defer></script>
+    <script src="../js/video.js"></script>
+		<script src="../js/video.min.js"></script>
+		<script src="../js/Youtube.js"></script>
+		<script src="../js/Youtube.min.js"></script>
+    <script src="../js/script.js" type="module" defer></script>		
+    <script src="../js/menu_min510.js" defer></script>
+		<script src="../js/mouseover.js" defer></script>
     <title>TEAM Intgram</title>
   </head>
   <body>
     <div class="contents">
       <header class="menu">
-        <div class="logo"><div>{ Intgram }</div></div>
+        <div class="logo">
+          <div>
+            <img src = "../img/logo.png" width = 300px height = 100px>
+          </div>
+        </div>
 
         <section class="menu-wrapper">
           <nav class="side-menu">
+            <div id="horizontal-underline"></div>
             <a class="menu-link" href="#">
               <i class="fa-solid fa-house"></i>
               <span>Home</span>
@@ -64,94 +76,77 @@
     </div>
 
     <main class="contents-container">
-      <!--  -->
-      <!--  -->
-      <section class="contents-area">
-        <article class="content-area">
-          <!--<div class="content-area__select">
-            <select id="emitYear" name="eYear">
-              <option value="2013">2013</option>
-              <option value="2014">2014</option>
-              <option value="2015">2015</option>
-              <option value="2016">2016</option>
-              <option value="2017">2017</option>
-              <option value="2018">2018</option>
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021" selected>2021</option>
-            </select>
-            <span>년 전국 기준</span>
-          </div>-->
-        </article>
-        <article class="statusBoard-area">
-			<div class="emit-list">
-				<div class="emit-list-title">
-					<p>2030년 목표 탄소배출량</p>
-				</div>
-				<div class="emit-list-item">
-					<div class="img">
-						<img src="../img/tot.png" alt="총계이미지" />
-						<p>총계</p>
-					</div>
-					<div class="txt" id="total">
-						<p id='total_Emission'>총 배출량 : 314,173,770 tonCO2eq</p>
-						<p id='total_Absorption'>산림흡수량 : 164,452,476 tonCO2eq</p>
-						<p id='total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
-					</div>
-				</div>
-			</div>
+        <section class="contents-area">          
+          <article class="statusBoard-area">
             <div class="emit-list">
-				<div class="emit-list-title">
-					<p>2022년 탄소배출량 총합</p>
-				</div>
-	            <div class="emit-list-item">					
-					<div class="img">
-	                	<img src="../img/tot.png" alt="총계이미지" />
-	                	<p>총계</p>
-	              	</div>
-		            <div class="txt" id="total">
-						<p>배출량 : <br />314,173,770 tonCO2eq</p>
-		                <p>흡수량 : <br />164,452,476 tonCO2eq</p>
-		            </div>
-		        </div>
-	        </div>
-	        <div class="emit-list">
-				<div class="emit-list-title">
-					<p>온실가스별 비중(%)</p>
-				</div>
-	            <div class="emit-list-item">					
-				   <div>
-	                 <canvas id="gasPieChart" width = '250' height="250"></canvas>
-	               </div>
-	            </div>
-	      	</div>
-        </article>
-      </section>
-      <section class="emitChart-Container">
-        <div class="emitChart-area">
-          <div class="emitChart-area__title">탄소배출량 현황</div>
-          <div class="emitChart-area__canvas">
-            <canvas id="myChart"></canvas>
-          </div>
-        </div>
-        <div class="emitChart-pie-area">
-		  <div class="emitChart-pie-area__title">배출원별 비중(%)</div>
-          <div class="emitChart-pie-area__canvas">
-            <canvas id="myChartPie"></canvas>
-          </div>
-		</div>
-        <div class="emitChart-map-area">
-          <div class="emitChart-map-area__title">지역별 탄소배출현황</div>
-          <div class="emitChart-map-area__canvas">
-            <iframe
-              id="korea_map"
-              src="map.html"
-              width="20"
-              height="30"
-            ></iframe>
-          </div>
-        </div>
-      </section>
+              <div class="emit-list-title">
+                <p>2030년 목표 탄소배출량</p>
+              </div>
+              <div class="emit-list-item">
+                <div class="img">
+                  <img src="../img/tot.png" alt="총계이미지" />
+                  <p>총계</p>
+                </div>
+                <div class="txt" id="total">
+                  <p id='total_Emission'>총 배출량 : 314,173,770 tonCO2eq</p>
+                  <p id='total_Absorption'>산림흡수량 : 164,452,476 tonCO2eq</p>
+                  <p id='total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
+                </div>
+              </div>
+            </div>
+            <div class="emit-list">
+              <div class="emit-list-title">
+                <p>2022년 탄소배출량 총합</p>
+              </div>
+              <div class="emit-list-item">					
+                <div class="img">
+                  <img src="../img/tot.png" alt="총계이미지" />
+                  <p>총계</p>
+                </div>
+                <div class="txt" id="total">
+                  <p>배출량 : <br />314,173,770 tonCO2eq</p>
+                  <p>흡수량 : <br />164,452,476 tonCO2eq</p>
+                </div>
+              </div>
+            </div>
+            <div class="emit-list">
+              <div class="emit-list-title">
+                <p>온실가스별 비중(%)</p>
+              </div>
+              <div class="emit-list-item">					
+                <div>
+                  <canvas id="gasPieChart" width = '250' height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+        <section class="contents-area">
+          <section class="emitChart-Container">
+            <div class="emitChart-area">
+              <div class="emitChart-area__title">탄소배출량 현황</div>
+              <div class="emitChart-area__canvas emit-list-item">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div class="emitChart-pie-area">
+              <div class="emitChart-pie-area__title">배출원별 비중(%)</div>
+              <div class="emitChart-pie-area__canvas emit-list-item">
+                <canvas id="myChartPie"></canvas>
+              </div>
+            </div>
+            <div class="emitChart-map-area">
+              <div class="emitChart-map-area__title">지역별 탄소배출현황</div>
+              <div class="emitChart-map-area__canvas emit-list-item">
+                <iframe id="korea_map" src="map.html" width="80px" height = "80px"></iframe>
+              </div>
+            </div>                      
+          </section>
+        </section>
+      
+      
+        
+      
     </main>
     <script>
       let total_Emission = 0;
@@ -172,7 +167,6 @@
         "<p id = 'total_NetEmission'>순 배출량 : " +
         parseInt(total_Emission - total_Absorption).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
         ' tonCO2eq</p>';
-    </script>
-    <script src="/js/script.js" type="module" defer></script>
+    </script>    
   </body>
 </html>

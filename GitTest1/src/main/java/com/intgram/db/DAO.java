@@ -1,8 +1,11 @@
 package com.intgram.db;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.intgram.model.Co2VO;
 import com.intgram.model.MemberVO;
 
 public class DAO {
@@ -37,6 +40,27 @@ public class DAO {
 		// 3. 연결객체 다시 반납하기
 		sqlsession.close();
 		// 4. 결과값 반환하기
+		return result;
+	}
+
+	public int insertC(Co2VO co2vo) {
+		// TODO Auto-generated method stub
+		SqlSession sqlsession = factory.openSession(true);
+		
+		System.out.println("abcd  " + (int)co2vo.getFuel_amount());
+		int result = sqlsession.insert("inserC", co2vo);
+		
+		sqlsession.close();
+
+		return result;
+	}
+
+	public List<Co2VO> getdata(MemberVO mvo) {
+		// TODO Auto-generated method stub
+		SqlSession sqlsession = factory.openSession(true);
+		List<Co2VO> result = sqlsession.selectList("getdata", mvo);
+		sqlsession.close();
+
 		return result;
 	}
 

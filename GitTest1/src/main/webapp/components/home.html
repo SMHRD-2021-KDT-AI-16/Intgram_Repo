@@ -4,41 +4,43 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="../css/home.css" />
-	<link rel="stylesheet" href="../css/style.css" />
+	<title>Document</title>
+	<link rel="stylesheet" href="../css/main.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="../js/dashboard-apis.js" type="module" defer></script>
 	<script src="../js/emitYear.js" defer></script>
-
-
-	<title>TEAM Intgram</title>
+	<script src="../js/script.js" type="module" defer></script>
+	<script src="../js/menu_min510.js" defer></script>
+	<script src="../js/mouseover.js" defer></script>
 </head>
 
 <body>
-	<div class="contents">
+	<div class="contents off">
 		<header class="menu">
 			<div class="logo">
-				<div>{ Intgram }</div>
+				<img src="../img/logo.png" class="logo_img" />
 			</div>
-
 			<section class="menu-wrapper">
 				<nav class="side-menu">
-					<a class="menu-link" href="#">
+					<div id="horizontal-underline"></div>
+					<a class="menu-link" href="../components/home.html">
 						<i class="fa-solid fa-house"></i>
 						<span>Home</span>
 					</a>
-					<a class="menu-link" href="../components/netzero.html">
+
+					<a class="menu-link dropdown-toggle" href="../components/netzero_carbon.html">
 						<i class="fa-solid fa-seedling"></i>
 						<span>Dashboard</span>
 					</a>
+
 					<a class="menu-link" href="../components/archive.html">
 						<i class="fa-solid fa-file-zipper"></i>
 						<span>Newsfeed</span>
 					</a>
 					<a class="menu-link" href="../components/calculation.html">
-						<i class="fa-solid fa-homeulator"></i>
+						<i class="fa-solid fa-calculator"></i>
 						<span>Calculation</span>
 					</a>
 				</nav>
@@ -57,357 +59,227 @@
 				</nav>
 			</section>
 
+			<a href="#" class="navbar__toggleBtn">
+				<i class="fa-solid fa-bars"></i>
+			</a>
+
 			<!-- 비동기 방식으로 로그인 화면 이동 -->
 			<section id="login-screen" style="display: none"></section>
 
 			<!-- 비동기 방식으로 회원가입 화면 이동 -->
 			<section id="join-screen" style="display: none"></section>
-
 		</header>
 	</div>
 
+	<main class="home-container">
+		<section class="home-area">
+			<div class="netzero_detail">
+				<h1 class="netzero-h1">WHAT IS NET ZERO?</h1>
+				<p>
+					대기 중 온실가스 농도 증가를 막기 위해 인간 활동에 의한 배출량을
+					감소시키고,<br />
+					흡수량을 증대하여 순배출량이 ‘0’이 되는 것을<br />
+					<strong>탄소중립</strong> 혹은
+					<strong>‘넷제로(Net-Zero)’</strong>라고 말합니다. <br />우리나라는
+					2050년을 목표로 탄소중립을 이루기 위해 노력하고 있습니다.
+				</p>
+			</div>
+			<img src="../imgs/zerolife2_img.png" alt="탄소중립정의" />
+		</section>
 
-	<main class="contents-container">
-		<!--  -->
-		<div id="home-area">
-			<section class="home-header">
+		<section class="home-area">
+			<div class="netzero_bg">
+				<h1 class="netzero-h1">탄소중립 추진배경</h1>
 
-				<div class="home-header-board">
-					<div class="home-nowEmit">
-						<div class="sub_div"><br>
-							<p id="title">WHAT IS NET ZERO?</p>
-							<p><br></p><br><br>
-							<p class="sub">대기 중 온실가스 농도 증가를 막기 위해 인간 활동에 의한 배출량을 감소시키고, 흡수량을 증대하여</p>
-							<p class="sub"> 순배출량이 ‘0’이 되는 것을 탄소중립 혹은 ‘넷제로(Net-Zero)’라고 말합니다.</p>
-							<p class="sub"> 우리나라는 2050년을 목표로 탄소중립을 이루기 위해 노력하고 있습니다.</p>
-							<!-- <img src="../imgs/netzero.png" width="400px" height="400px" class="netzero_img"> -->
-						</div>
-						<br><br><br><br>
-						<div id="list12">
-							<p class="sub_2"><strong class="sub">배출량 감소 ↓</strong> <span class="sub">화석연료 연소, 수송 등 인간
-									활동에
-									의한 인위적 배출량을 0에 가깝게 감소</span></p><br>
-							<p class="sub_2"><strong class="sub">흡수량 증가 ↑</strong> <span class="sub">숲 복원, 블루카본 기술,
-									탄소제거기술
-									활용 등으로 흡수</span></p>
-						</div>
-						<br><br><br><br><br><br><br><br>
+				<p>
+					국제사회는 인간이 배출한 온실가스에 따른 지구온난화에 대한 심각성을
+					인식하고, <br />기후 위기에 대응하기 위해 노력하고 있습니다.
+					<br />
+					기후변화협약(1992년)을 맺고 교토의정서(1997년)와 파리협정(2015년)
+					채택을 통해<br />
+					지구 평균기온 상승 억제를 논의해왔습니다.
+				</p>
+			</div>
 
-
-
-
-						<div class="sub_div">
-							<p id="title">탄소중립 추진배경</p>
-						</div><br><br>
-						<p><br></p>
-						<p class="sub">국제사회는 인간이 배출한 온실가스에 따른 지구온난화에 대한 심각성을 인식하고, </p>
-						<p class="sub">기후 위기에 대응하기 위해 노력하고 있습니다. </p>
-						<p class="sub">기후변화협약(1992년)을 맺고 교토의정서(1997년)와 파리협정(2015년) 채택을 통해</p>
-						<p class="sub">지구 평균기온 상승 억제를 논의해왔습니다.</p>
-						<br><br><br>
-						<div id="list13">
-							<p class="sub_3"><strong class="sub">1992년</strong> <span class="sub">유엔기후변화협약 UNFCCC</span>
-							<ul class="sub_4">
-								<li> - UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항 없음)</li>
-								<li> - 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량 감축을 위한 국가 정책 수립·시행</li>
-								<li> - 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한 보고서 제출</li>
-
-								<ul>
-									<br>
-									</p>
-									<p class="sub_3"><strong class="sub">1997년</strong> <span class="sub">교토의정서</span>
-									<ul class="sub_4">
-										<li> - UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항 없음)</li>
-										<li> - 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량 감축을 위한 국가 정책 수립·시행</li>
-										<li> - 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한 보고서 제출</li>
-										<ul>
-											<br>
-											</p>
-											<p class="sub_3"><strong class="sub">2015년</strong> <span
-													class="sub">파리협정</span>
-											<ul class="sub_4">
-												<li> - UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항 없음)</li>
-												<li> - 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량 감축을 위한 국가 정책 수립·시행</li>
-												<li> - 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한 보고서 제출<br></li>
-												<ul>
-													<br>
-													</p>
-													<p class="sub_3"><strong class="sub">2018년</strong> <span
-															class="sub">IPCC 1.5°C 특별보고서 채택</span>
-													<ul class="sub_4">
-														<li> - UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항 없음)</li>
-														<li> - 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량 감축을 위한 국가 정책 수립·시행</li>
-														<li> - 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한 보고서 제출<br></li>
-														<ul>
-															<br>
-															</p>
-						</div>
-						<br><br><br><br><br><br><br><br>
-
-
-
-						<div class="sub_div">
-							<p id="title">왜 지구 온도상승을 1.5℃ 이내로 억제하는 목표를 설정했나요?</p>
-						</div>
-						<br><br><br>
-
-						<style type="text/css">
-							.tg {
-								border-collapse: collapse;
-								border-spacing: 0;
-							}
-
-							.tg td {
-								border-color: black;
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								overflow: hidden;
-								padding: 0px 20px;
-								word-break: normal;
-							}
-
-							.tg th {
-								border-color: black;
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								font-weight: normal;
-								overflow: hidden;
-								padding: 0px 20px;
-								word-break: normal;
-							}
-
-							.tg .tg-5hme {
-								border: none;
-								font-size: 36px;
-								text-align: left;
-								vertical-align: middle
-							}
-
-							.tg .tg-eqm31 {
-								border: none;
-								font-size: 22px;
-								text-align: left;
-								vertical-align: top
-							}
-						</style>
-						<table class="tg">
-							<thead>
-								<tr>
-									<td class="tg-5hme" rowspan="4">2°C 상승</td>
-									<td class="tg-eqm31">- 해수면 상승</td>
-								</tr>
-								<tr>
-									<td class="tg-eqm31">- 생태계 파괴</td>
-								</tr>
-								<tr>
-									<td class="tg-eqm31">- 이상 기후</td>
-								</tr>
-								<tr>
-									<td class="tg-eqm31">- 건강 악화, 인구 감소</td>
-								</tr>
-							</thead>
-						</table>
-						<br><br>
-						<style type="text/css">
-							.tg {
-								border-collapse: collapse;
-								border-spacing: 0;
-							}
-
-							.tg td {
-								border-color: black;
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								overflow: hidden;
-								padding: 0px 0px;
-								word-break: normal;
-							}
-
-							.tg th {
-								border-color: black;
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								font-weight: normal;
-								overflow: hidden;
-								padding: 0px 0px;
-								word-break: normal;
-							}
-
-							.tg .tg-5hme {
-								border: none;
-								font-size: 36px;
-								text-align: left;
-								vertical-align: middle
-							}
-
-							.tg .tg-eqm3 {
-								border: none;
-								font-size: 22px;
-								text-align: left;
-								vertical-align: top
-							}
-						</style>
-						<table class="tg">
-							<thead>
-								<tr>
-									<td class="tg-5hme" rowspan="4">1.5°C 상승</td>
-									<td class="tg-eqm3">- 평균 온도 상승</td>
-								</tr>
-
-								<tr>
-									<td class="tg-eqm3">- 호우 및 가뭄 피해 증가</td>
-								</tr>
-								<tr>
-									<td class="tg-eqm3">- 해양 · 어획량 피해</td>
-								</tr>
-								<tr>
-									<td class="tg-eqm3">- 생태계 절반 이상 상실</td>
-								</tr>
-							</thead>
-						</table>
-
-						<br><br><br>
-
-
-						<p><br></p>
-						<p class="sub">산업화 이후 현재까지 기후변화가 지속되었음에도 그 영향이 급격히 나타나지 않은 이유는</p>
-						<p class="sub">지구시스템을 구성하는 다양한 요소가 기후변화 영향을 완충하였기 때문입니다.</p>
-						<p class="sub">하지만 기후변화로 인해 기존 지구시스템의 상호작용 방식이 급변하여 기후 위기가 시작됐고 ,</p>
-						<p class="sub">이에 기후저지선 (1.5℃)을 설정하게 됩니다. 기후저지선은 인류 생존 및 생태계 보전을 담보하기 위해</p>
-						<p class="sub">넘지 말아야 할 최후의 한계선을 뜻합니다 .</p>
-						<br><br><br>
-						<p class="sub">기후저지선은 2009년 코펜하겐 당사국총회 당시 일부 과학자와 기후변화 피해가 집중되는</p>
-						<p class="sub">군소도서 국가를 중심으로 2℃보다 더 낮은 기후저지선 설정이 필요하다는 주장이 제기되었으나</p>
-						<p class="sub">최종적으로 2℃ 기후저지선이 채택되었습니다. 하지만 다양한 과학적 근거를 통해</p>
-						<p class="sub">지구 평균기온이 2℃ 상승할 경우 ‘돌이킬 수 없는 ’기후변화가 나타날 수 있다는 사실이 받아들어져</p>
-						<p class="sub">2015년 파리협정 체결시 1.5℃가 기준선이 되었습니다.</p>
-						<br><br><br><br><br><br>
-
-
-
-						<div class="sub_div">
-							<p id="title">탄소중립은 왜 2050년이 목표인가요?</p>
-						</div>
-						<br><br><br><br><br>
-
-
-
-						<style type="text/css">
-							.tg2 {
-								border-collapse: collapse;
-								border-spacing: 0;
-							}
-
-							.tg2 td {
-								border: none;
-
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								overflow: hidden;
-								padding: 10px 5px;
-								word-break: normal;
-							}
-
-							.tg2 th {
-								border: none;
-
-								border-style: solid;
-								border-width: 1px;
-								font-family: Arial, sans-serif;
-								font-size: 14px;
-								font-weight: normal;
-								overflow: hidden;
-								padding: 10px 5px;
-								word-break: normal;
-							}
-
-							.tg2 .tg2-9wq8 {
-								border: none;
-
-								text-align: center;
-								vertical-align: middle
-							}
-
-							.tg2 .tg2-v4ld {
-								border: none;
-								font-weight: bolder;
-								font-size: 26px;
-								text-align: center;
-								vertical-align: middle
-							}
-
-							.tg2 .tg2-7jts {
-								border: none;
-
-								font-size: 22px;
-								text-align: center;
-								vertical-align: top
-							}
-						</style>
-						<table class="tg2">
-							<thead>
-								<tr>
-									<th class="tg2-9wq8" id="img1"><img src="../imgs/carbon1.png"></th>
-									<th class="tg2-9wq8" id="img2"><img src="../imgs/carbon2.jpg" width="280px"></th>
-									<th class="tg2-9wq8" id="img3"><img src="../imgs/carbon3.png"></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td class="tg2-v4ld"><br>파리협정<br><br><br></td>
-									<td class="tg2-v4ld"><br>지구온난화 1.5°C 특별보고서<br><br><br></td>
-									<td class="tg2-v4ld"><br>2050 탄소중립 선언<br><br><br></td>
-								</tr>
-								<tr>
-									<td class="tg2-7jts">2015년 12월 파리협정에서는 산업혁명 이전<br> (1850~1900년 평균) 대비 2°C보다 훨씬 아래로
-										<br>유지하고, 나아가 1.5°C 아래로 억제하기 위해 <br>노력해야한다는 목표를 설정하였습니다
-									</td>
-									<td class="tg2-7jts">IPCC는 2018년 발표한 1.5도 특별보고서를 통해<br>전 지구적으로 지구 평균온도 상승을 1.5°C
-										이내로<br>억제하기 위해서는 전 지구적으로 2030년까지<br>온실가스 배출량을 2010년 대비 45% 이상 감축해야
-										하고,<br>2050년에는 탄소중립을 달성해야 한다고 제시했습니다, <br>이에 국제사회에서는 2050년 탄소배출 중립 목표를 이루기
-										<br>위해 많은 노력을 기울이고 있습니다
-									</td>
-									<td class="tg2-7jts">우리나라는 국제사회의 노력에 동참하고<br>건강한 미래를 만들기 위해 2020년 10월 28일<br>'2050년
-										탄소중립 선언' 및 12월 10일 <br>'2050 탄소중립 비전'을 선포하였습니다.</td>
-								</tr>
-							</tbody>
-						</table>
-
-
-						<br><br><br><br><br><br><br><br>
-
-
-
-
-
-
-
-
-
+			<div class="netzero_conference">
+				<div class="conference_history">
+					<div class="conf_title">
+						<p>1992년</p>
 					</div>
-
+					<div class="conf_detail">
+						<p>유엔기후변화협약 UNFCCC</p>
+						<p>
+							- UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항
+							없음)
+						</p>
+						<p>
+							- 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량
+							감축을 위한 국가 정책 수립·시행
+						</p>
+						<p>
+							- 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한
+							보고서 제출
+						</p>
+					</div>
 				</div>
 
+				<div class="conference_history">
+					<div class="conf_title">
+						<p>1997년</p>
+					</div>
+					<div class="conf_detail">
+						<p>교토의정서</p>
+						<p>
+							- UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항
+							없음)
+						</p>
 
+						<p>
+							- 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량
+							감축을 위한 국가 정책 수립·시행
+						</p>
+						<p>
+							- 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한
+							보고서 제출
+						</p>
+					</div>
+				</div>
 
-			</section>
+				<div class="conference_history">
+					<div class="conf_title">
+						<p>2015년</p>
+					</div>
+					<div class="conf_detail">
+						<p>파리협정</p>
+						<p>
+							- UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항
+							없음)
+						</p>
+						<p>
+							- 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량
+							감축을 위한 국가 정책 수립·시행
+						</p>
+						<p>
+							- 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한
+							보고서 제출
+						</p>
+					</div>
+				</div>
 
+				<div class="conference_history">
+					<div class="conf_title">
+						<p>2018년</p>
+					</div>
+					<div class="conf_detail">
+						<p>IPCC 1.5°C 특별보고서 채택</p>
+						<p>
+							- UN주관의 기후변화에 대한 선언적 국제연합 기본협약 (강제사항
+							없음)
+						</p>
+						<p>
+							- 가입 당사국들은 각각 자국의 실정에 알맞은 온실가스 배출량
+							감축을 위한 국가 정책 수립·시행
+						</p>
+						<p>
+							- 온실가스 배출량 및 흡수량에 대한 국가통계와 정책이행에 관한
+							보고서 제출
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-		</div>
-		<!--  -->
+		<section class="home-area">
+			<div class="netzero_goal">
+				<h1 class="netzero-h1">
+					왜 지구 온도상승을 1.5℃ 이내로 억제하는 목표를 설정했나요?
+				</h1>
+
+				<div class="netzero_goals">
+					<div class="goals-img">
+						<img src="../imgs/zerolife2_bg3.png" alt="온도계" />
+					</div>
+					<div class="goals-text">
+						<div class="netzero_goal_temp">
+							<p>2°C 상승</p>
+							<p>
+								- 해수면 상승<br />
+								- 생태계 파괴<br />
+								- 이상 기후<br />
+								- 건강 악화, 인구 감소
+							</p>
+						</div>
+						<div class="netzero_goal_temp">
+							<p>1.5°C 상승</p>
+							<p>
+								- 평균 온도 상승<br />
+								- 호우 및 가뭄 피해 증가<br />
+								- 해양 · 어획량 피해<br />
+								- 생태계 절반 이상 상실
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="netzero_goal_detail">
+					<p>
+						<strong>기후저지선</strong>은 인류 생존 및 생태계 보전을 담보하기
+						위해<br />
+						넘지 말아야 할 최후의 한계선을 뜻합니다.
+					</p>
+
+					<p>
+						지구 평균기온이 2℃ 상승할 경우<br /><strong>‘돌이킬 수 없는’</strong>
+						기후변화가 나타날 수 있다는 사실이 받아들어져<br />
+						2015년 파리협정 체결시 1.5℃가 기준선이 되었습니다.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="home-area">
+			<h1 class="netzero-h1">
+				탄소중립은 왜 <span></span>2050년이 목표인가요?</h1>
+
+			<div class="netzero-2050">
+				<div class="netzero_paris">
+					<img src="../imgs/2015_Climate_Conference.png" alt="파리협정" />
+
+					<p>파리협정</p>
+					<p>
+						2015년 12월 파리협정에서는 산업혁명 이전 (1850~1900년 평균) 대비
+						2°C보다 훨씬 아래로 유지하고, 나아가 1.5°C 아래로 억제하기 위해
+						노력해야한다는 목표를 설정하였습니다
+					</p>
+				</div>
+
+				<div class="netzero_report">
+					<img src="../imgs/carbon2.jpg" alt="지구온난화 1.5°C 특별보고서" />
+					<p>지구온난화 1.5°C 특별보고서</p>
+
+					<p>
+						IPCC는 2018년 발표한 1.5도 특별보고서를 통해 지구
+						평균온도 상승을 1.5°C 이내로 억제하기 위해서는 전 지구적으로
+						2030년까지 온실가스 배출량을 2010년 대비 45% 이상 감축해야 하고,
+						2050년에는 탄소중립을 달성해야 한다고 제시했습니다, 이에
+						국제사회에서는 2050년 탄소배출 중립 목표를 이루기 위해 많은 노력을
+						기울이고 있습니다
+					</p>
+				</div>
+				<div class="netzero_korea">
+					<img src="../imgs/carbon3.png" alt="2050 탄소중립 선언" />
+					<p>2050 탄소중립 선언</p>
+					<p>
+						우리나라는 국제사회의 노력에 동참하고 건강한 미래를 만들기 위해
+						2020년 10월 28일 '2050년 탄소중립 선언' 및 12월 10일 '2050
+						탄소중립 비전'을 선포하였습니다.
+					</p>
+				</div>
+			</div>
+		</section>
 	</main>
-	<script src="/js/script.js" type="module" defer></script>
 
+	<div class="screen-alert">화면 크기를 늘여주세요🙏</div>
 </body>
 
 </html>

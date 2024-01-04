@@ -1,0 +1,98 @@
+
+
+.carbon-container {
+    height: 89vh; 
+    width: 99vw;
+    /* padding: 10px; */
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+    background-color: whitesmoke;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.carbon-part1,
+.carbon-part2,
+.carbon-part3 {
+    margin-top: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;    
+}
+
+.carbon-part1 {
+    width: 60em;
+}
+.carbon-part2 {
+    width: 25em;
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+.carbon-part3 {
+    width: 33em;
+}
+.carbon-part1-top {
+    display: flex;
+    height: 50%;
+    flex-direction: row;
+}
+.carbon-part1-top-left, 
+.carbon-part1-top-right {
+    display: flex;
+    flex-direction: column;
+    width:70%;
+    height:auto;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    justify-content: space-evenly;
+}
+.carbon-part1-top-left-head {
+    display: flex;
+    flex-direction: row;
+}
+.carbon-part1-top-left > .temp {
+    display: flex;
+    align-items: center;
+}
+.emit-list-item {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+    margin-top:10px;
+    margin-bottom:10px;
+
+    /* 그림자 효과 */
+    background: #ffffff;
+    box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
+    border-radius: 10px;
+  }
+
+.season2 {
+    padding-top: 50px;
+}
+h2.carbon-title {
+    font-family: '메이플스토리 Light';
+    font-size: 35px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: '메이플스토리 light';
+}
+
+h2.carbon-title {
+    font-size: 35px;
+}
