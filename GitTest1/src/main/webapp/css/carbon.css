@@ -10,7 +10,28 @@
 
     background-color: white;
 }
+.carbon-title{
+   margin-top: 15px;
+}
+#first_3{
+   margin-top: 90px;
+}
 
+ .emit-list-item_3 {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+    margin-top:10px;
+    margin-bottom:10px;
+    background: #ffffff;
+    box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
+    border-radius: 10px;
+  }
+
+  
 .carbon-part1,
 .carbon-part2,
 .carbon-part3 {
@@ -34,15 +55,20 @@
 }
 .carbon-part1-top {
     display: flex;
-    height: 50%;
+    height: 25%;
     flex-direction: row;
 }
+
+#titel_2 {
+	height: 13px;
+}
+
 .carbon-part1-top-left, 
 .carbon-part1-top-right {
-    display: flex;
+	display: flex;
     flex-direction: column;
     width:70%;
-    height:auto;
+    height:30%;
     justify-content: space-evenly;
     justify-content: flex-start;
 }
@@ -79,7 +105,12 @@ h2.carbon-title {
     font-size: 35px;
 }
 
-
+#gasPieChart {
+   margin-left: 40px;
+}
+#myPieChart {
+	margin-top: 40px;
+}
 * {
     margin: 0;
     padding: 0;
@@ -91,3 +122,10 @@ h2.carbon-title {
 h2.carbon-title {
     font-size: 35px;
 }
+
+#div_2 {
+   height: 140px;
+}
+
+
+  
