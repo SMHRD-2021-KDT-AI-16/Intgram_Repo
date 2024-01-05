@@ -59,11 +59,7 @@ public class LoginService extends HttpServlet {
 			session.setAttribute("member", result);
 			session.setAttribute("member_data", co2vo);			
 			//System.out.println((List<Co2VO>)session.getAttribute("member_data"));
-			List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
-			for(int i = 0; i < l_co2.size(); i++) {
-				System.out.println(l_co2.get(i).getCh4_emission());
-				System.out.println(l_co2.get(i).getTotal_emission());
-			}
+			
 		}
 		
 		// 7. main.jsp로 redirect 방식 이동

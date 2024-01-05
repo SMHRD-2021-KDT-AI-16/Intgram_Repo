@@ -8,10 +8,7 @@
     display: flex;
     justify-content: space-between;
 
-    background-color: whitesmoke;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+    background-color: white;
 }
 
 .carbon-part1,
@@ -46,10 +43,8 @@
     flex-direction: column;
     width:70%;
     height:auto;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
     justify-content: space-evenly;
+    justify-content: flex-start;
 }
 .carbon-part1-top-left-head {
     display: flex;

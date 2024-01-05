@@ -48,7 +48,7 @@ public class DAO {
 		SqlSession sqlsession = factory.openSession(true);
 		
 		System.out.println("abcd  " + (int)co2vo.getFuel_amount());
-		int result = sqlsession.insert("inserC", co2vo);
+		int result = sqlsession.insert("insertC", co2vo);
 		
 		sqlsession.close();
 

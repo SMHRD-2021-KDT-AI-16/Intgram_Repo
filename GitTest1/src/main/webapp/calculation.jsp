@@ -32,26 +32,36 @@
 	<div class="contents off">
 		<header class="menu">
 			<div class="logo">
-				<img src="img/logo.png" class="logo_img">
+				<img src="img/logo.png" width=300px height=300px>
 			</div>
 
 			<section class="menu-wrapper">
 					<nav class="side-menu">
 						<div id="horizontal-underline"></div>
-						<a class="menu-link" href="components/home.html">
+						<a class="menu-link" href="home.jsp">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_carbon.html">
+
+						<a
+							href="netzero_carbon.jsp"
+							class="menu-link"
+							id="dashboard"
+						>
 							<i class="fa-solid fa-seedling"></i>
-							<span>Carbon Dashboard</span>
+							<span>Carbon</span>
 						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_climate.html" >
-							<i class="fa-solid fa-seedling"></i>
-							<span>Climate Dashboard</span>
+						<a
+							href="netzero_climate.jsp"
+							class="menu-link"
+							id="dashboard"
+						>
+							<i class="fa-solid fa-temperature-three-quarters"></i>
+							<span>Climate</span>
 						</a>
-						<a class="menu-link" href="components/archive.html">
-							<i class="fa-solid fa-file-zipper"></i>
+
+						<a class="menu-link" href="archive.jsp">
+							<i class="fa-regular fa-folder-open"></i>
 							<span>Newsfeed</span>
 						</a>
 						<a class="menu-link" href="calculation.jsp">
@@ -100,63 +110,44 @@
 						<input type="text" placeholder="20240105" />
 					</div>
 
-					<h1>운송수단을 선택해주세요</h1>
-					<div class="inputdown inputdown-transport">
-						<button name = "transportation" type="button" class="inputdown-toggle transport-toggle">
-							운송수단 선택하기</button>
+					<div class="transport">
+                  <h1>운송수단을 선택해주세요</h1>
+                  <div class="inputdown inputdown-transport">
+                     <select class="inputdown-toggle transport-toggle">
+                        <option class="inputdown-option transport-option"
+                           name="transport" value="차량">차량</option>
+                        <option class="inputdown-option transport-option"
+                           name="transport" value="선박">선박</option>
+                        <option class="inputdown-option transport-option"
+                           name="transport" value="철도">철도</option>
+                        <option class="inputdown-option transport-option"
+                           name="transport" value="항공기">항공기</option>
+                     </select>
+                  </div>
+               </div>
 
-						<ul class="inputdown-menu transport-menu">
-							<li class="inputdown-item transport-item">
-								<button type="button" class="inputdown-option transport-option"
-									name = transportation value="차량" data-value="차량">차량</button>
-							</li>							
-							<li class="inputdown-item transport-item">
-								<button type="button" class="inputdown-option transport-option"
-									name = transportation value="철도" data-value="철도">철도</button>
-							</li>	
-							<li class="inputdown-item transport-item">
-								<button type="button" class="inputdown-option transport-option"
-									name = transportation value="선박" data-value="선박">선박</button>
-							</li>
-							<li class="inputdown-item transport-item">
-								<button type="button" class="inputdown-option transport-option"
-									name = transportation value="항공기" data-value="항공기">항공기</button>
-							</li>
-						</ul>
-					</div>
-
-					<h1>사용연료를 선택해주세요</h1>
-					<div class="inputdown inputdown-fuel">
-						<button name = "fuel_name" value = "" type="button" class="inputdown-toggle fuel-toggle">
-							사용연료 선택하기</button>
-
-						<ul class="inputdown-menu fuel-menu" >
-							<li class="inputdown-item fuel-item">
-								<button type="button" class="inputdown-option fuel-option"
-									data-value="경유">경유</button>
-							</li>
-							<li class="inputdown-item fuel-item">
-								<button type="button" class="inputdown-option fuel-option"
-									data-value="중유">중유</button>
-							</li>
-							<li class="inputdown-item fuel-item">
-								<button type="button" class="inputdown-option fuel-option"
-									data-value="휘발유">휘발유</button>
-							</li>
-							<li class="inputdown-item fuel-item">
-								<button type="button" class="inputdown-option fuel-option"
-									data-value="LPG">LPG</button>
-							</li>
-						</ul>
-					</div>
-
-					<div class="input-list">
-						<h1>연료량</h1>
+               <div class="fuel">
+                  <h1>사용연료를 선택해주세요</h1>
+                  <div class="inputdown inputdown-transport">
+                     <select class="inputdown-toggle transport-toggle">
+                        <option class="inputdown-option transport-option" name="fuel"
+                           value="경유">경유</option>
+                        <option class="inputdown-option transport-option" name="fuel"
+                           value="중유">중유</option>
+                        <option class="inputdown-option transport-option" name="fuel"
+                           value="휘발유">휘발유</option>
+                        <option class="inputdown-option transport-option" name="fuel"
+                           value="LPG">LPG</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="input-list">
+               		<h1>연료량</h1>
 						<input type="text" name="amount" />
-					</div>
-					<div class="inputSave" align="center">
-						<input type="submit" value="저장" class="inputSave-btn next-btn" />
-					</div>
+			   </div>
+			   <div class="inputSave" align="center">
+			      <input type="submit" value="저장" class="inputSave-btn next-btn" />
+			   </div>
 				</form>
 			</article>
 			<div class="calc-line"></div>
@@ -165,8 +156,13 @@
 		<section class="calc-outputArea">
 			<div class="calc-header-title">
 				<p>
-					<span>${member.mem_name}</span> <span>님의</span> <span>2023년 12월 탄소배출
+					<span>${member.mem_name}</span> <span>님의</span> <span id='year'>2023</span><span>년 탄소배출
 						현황</span> <span id='buttontest'></span>
+						<select name='year'>
+							<option>2023</option>
+							<option>2021</option>
+							<option>2020</option>
+						</select>
 				</p>
 			</div>
 			<div class="calc-header-board">
@@ -194,16 +190,16 @@
 			<article class="calc-outputs">
 				<div class="calc-outputChart1">
 					<p class="output-title">
-						<i class="fa-solid fa-user"></i> 개인의 탄소 배출량
+						<i class="fa-solid fa-user"></i> 월별 탄소 배출량
 					</p>
-					<canvas id="userCarbonChart">
+					<canvas id="userCarbonChart" width="500px" height="250px">
 					</canvas>
 				</div>
 				<div class="calc-outputChart2">
 					<p class="output-title">
 						<i class="fa-solid fa-building"></i> 기업의 탄소 배출량
 					</p>
-					<canvas>
+					<canvas id="allCarbonChart">
 					</canvas>
 				</div>
 			</article>
@@ -229,82 +225,74 @@
 			});
 	</script>	
 	<script>
+	
+	let year_test = 2023
 	<%
 		float total = 0;
+		int[] year = new int[3];
+		float[] month = new float[12];
+		String returnData = "";
 		if(session.getAttribute("member") != null) {
 			List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
+			
 			for(int i = 0; i < l_co2.size(); i++) {
+				String date = l_co2.get(i).getDriving_date();
+				System.out.println((i + 1 ) + " = " + date + " : " + l_co2.get(i).getTotal_emission());
 				
-				total += (l_co2.get(i)).getTotal_emission();
-			}
+				String[] temp = date.split("-");
+				for(int j = 0; j < 12; j++) {
+					if(Integer.parseInt(temp[1]) == (j + 1) && Integer.parseInt(temp[0]) == 2023) {
+						//System.out.println((j + 1) + " 월 " + temp[1]);
+						//System.out.println(l_co2.get(i).getTotal_emission());
+						month[j] += l_co2.get(i).getTotal_emission();
+						total += (l_co2.get(i)).getTotal_emission();
+					}
+				}	
+				for(int j = 0; j < 3; j++) {
+					if(Integer.parseInt(temp[0]) == 23) {
+						year[j] += l_co2.get(i).getTotal_emission();
+					}
+				}
+			}			
+		}
+		for(int i = 0; i < 12; i++) {
+			returnData += month[i] + "/";
 		}
 		//System.out.println(l_co2);
 
 	%>
 		var temp = 	'<%= total %>'
-		var temp2 = parseInt(temp)
-		
+		returnData = '<%= returnData %>'
+		var month_data = []
+		month_data = returnData.split("/")
+		for(let i = 0; i < 12; i++) {			
+			console.log(month_data[i])
+		}
 		document.querySelector('#totalE').innerHTML = temp
-		console.log(temp)
 		$('.transport-option').on('click', (e) => {
 		  console.log(e.target.value);
 		})
-		function transClick() {
-			document.querySelector('.inputdown-fuel').style.display = 'none';
-		}
-			const transport = document.querySelector('.inputdown-transport');
-			const transportToggleBtn = document.querySelector('.transport-toggle');
-			const transportMenu = document.querySelector('.transport-menu');
-			const transportOptions = document.querySelectorAll('.transport-option');
-
-			transportToggleBtn.addEventListener('click', function () {
-				transportMenu.classList.toggle('show');
-			});
-			transportToggleBtn.addEventListener('blur', function () {
-				transportMenu.classList.remove('show');
-			});
-
-			transportOptions.forEach(function (item) {
-				item.addEventListener('click', function (e) {
-					const buttonLabel = e.currentTarget.textContent.trim();
-					transportToggleBtn.textContent = buttonLabel;
-					transportToggleBtn.classList.add('selected');
-				});
-			});
-
+		
 			///////////////////////////////////////
-			const fuel = document.querySelector('.inputdown-fuel');
-			const fuelToggleBtn = document.querySelector('.fuel-toggle');
-			const fuelMenu = document.querySelector('.fuel-menu');
-			const fuelOptions = document.querySelectorAll('.fuel-option');
-
-			fuelToggleBtn.addEventListener('click', function () {
-				fuelMenu.classList.toggle('show');
+			let select_year = 2023
+			$("select[name=year]").change(function () {
+				select_year = $(this).val()
+				document.getElementById('year').innerHTML = select_year
 			});
-			fuelToggleBtn.addEventListener('blur', function () {
-				fuelMenu.classList.remove('show');
-			});
-
-			fuelOptions.forEach(function (item) {
-				item.addEventListener('click', function (e) {
-					const buttonLabel = e.currentTarget.textContent.trim();
-					fuelToggleBtn.textContent = buttonLabel;
-					fuelToggleBtn.classList.add('selected');
-				});
-			});
-
-			///////////////////////////////////////
-	 var userChart = document.getElementById('userCarbonChart').getContext('2d');
 			
-	var userCarbonChart = new Chart(userChart, {
+	 var userChart = document.getElementById('userCarbonChart').getContext('2d');
+	 var allChart = document.getElementById('allCarbonChart').getContext('2d');
+			
+	 var userCarbonChart = new Chart(userChart, {
         type: 'line',
         data: {
           labels: ['1월', '2월', '3월', '4월', '5월', '6월',
         	  '7월', '8월', '9월', '10월', '11월', '12월'],
           datasets: [
             {
+              labels: '총배출량',
               type: 'line',
-              data: [temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2,temp2],              
+              data: month_data,              
               borderWidth: 1,
             }
           ],
@@ -322,7 +310,8 @@
               }
             }
           }
-      });	 
+      });	
+	 
 	</script>
 </body>
 </html>

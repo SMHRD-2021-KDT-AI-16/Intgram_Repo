@@ -7,6 +7,7 @@
 	<style>
 		body {
 			background-color: white;
+			font-family: '메이플스토리 light';
 		}
 
 		path {
@@ -19,6 +20,7 @@
 
 		#ctprvn_test:hover popup {
 			display: block;
+			z-index: 100;
 		}
 
 		.ol-popup {
@@ -33,13 +35,52 @@
 			border: 1px solid #000;
 			bottom: 12px;
 			left: -50px;
-			min-width: 300px;
+			min-width: 200px;
 			width: max-content;
 		}
 
 		.svg_area {
 			width: 500px;
 			height: 600px;
+		}
+
+		.carbon-map-table>table>tbody>tr>td {
+			font-size: 25px;
+		}
+
+		.carbon_table {
+			border-width: 1px;
+			border-color: black;
+			border-style: solid;
+		}
+
+		.table_1 {
+			width: 50px;
+		}
+
+		.table_2 {
+			width: 80px;
+		}
+
+		.table_3 {
+			text-align: right;
+		}
+
+		.table_3 {
+			width: 120px;
+		}
+
+		.table_4 {
+			width: auto;
+		}
+
+		.table_left_data {
+			text-align: center;
+			width: 100px;
+		}
+
+		.table_right {
+			width: 200px;
 		}
 	</style>
 </head>
@@ -58,20 +99,21 @@
 			<option value="2017">2017</option>
 			<option value="2016">2016</option>
 			<option value="2015">2015</option>
-			<option value="2018">2014</option>
-			<option value="2017">2013</option>
-			<option value="2016">2012</option>
-			<option value="2015">2011</option>
-			<option value="2020">2010</option>
-			<option value="2019">2009</option>
-			<option value="2018">2008</option>
-			<option value="2017">2007</option>
-			<option value="2016">2006</option>
-			<option value="2015">2005</option>
-			<option value="2018">2004</option>
-			<option value="2017">2003</option>
-			<option value="2016">2002</option>
-			<option value="2015">2001</option>
+			<option value="2018">2018</option>
+			<option value="2017">2017</option>
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
+			<option value="2020">2020</option>
+			<option value="2019">2019</option>
+			<option value="2018">2018</option>
+			<option value="2017">2017</option>
+			<option value="2016">2016</option>
+			<option value="2015">2015</option>
+			<option value="2014">2014</option>
+			<option value="2013">2013</option>
+			<option value="2012">2012</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
 		</select>
 		<select name="type">
 			<option value="0">총 배출량</option>
@@ -130,6 +172,28 @@
 			</g>
 		</svg>
 	</div>
+	<div class="carbon-map-table">
+		<table class="carbon_table">
+			<tr>
+				<td class="table_1 table_year">년도</td>
+				<td class="table_2 table_year_data">2020</td>
+				<td class="table_3 table_total">총 배출량 : </td>
+				<td class="table_4 table_total_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area" colspan="2">지역</td>
+
+				<td class="table_3 table_abs">흡수량 : </td>
+				<td class="table_4 table_abs_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area_data" colspan="2"></td>
+
+				<td class="table_3 table_net">순 배출량 : </td>
+				<td class="table_4 table_net_data"></td>
+			</tr>
+		</table>
+	</div>
 	<div id='container' style='position: absolute; left: 472px; top: 250px; display: block;'>
 		<div id='popup' class='ol-popup' style="display: none;">
 			<div id='popup-content'>
@@ -149,6 +213,7 @@
 		$("select[name=year]").change(function () {
 			select_year = $(this).val()
 			drawMap(select_year, select_type)
+			document.querySelector('.table_left_data').innerHTML = select_year
 		});
 		$("select[name=type]").change(function () {
 			select_type = $(this).val()
@@ -169,12 +234,13 @@
 				.then((obj) => {
 					let total_Emission = 0
 					let total_Net = 0
-					console.log(obj)
 					for (let i = 0; i < 17; i++) {
 						let temp = obj[i * 7 + parseInt(select_type)][select_year]
 						//console.log(i * 7 + parseInt(select_type))
-						console.log('----------------')
-						console.log(parseInt(select_type))
+						// select_type : 0 = 총, 1 = 순, 5 = 흡
+						document.querySelector('.table_year_data').innerHTML = select_year
+						document.querySelector('.table_area_data').innerHTML = '전국'
+
 						if (temp > 59184) {
 							document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[0];
 						} else if (temp > 53558) {
@@ -249,8 +315,15 @@
 								'mouseover': function (e) {
 									document.getElementById(e.target.id).style.fill = '#46beff'
 									document.getElementById(obj[i * 7]['도시']).style.transition = '0s';
+									document.querySelector('.table_year_data').innerHTML = select_year
+									document.querySelector('.table_area_data').innerHTML = e.target.id
+
+									//document.querySelector('.table_abs_data').innerHTML = select_year
+									//document.querySelector('.table_net_data').innerHTML = e.target.id
 								},
 								'mouseout': function (e) {
+									document.querySelector('.table_year_data').innerHTML = select_year
+									document.querySelector('.table_area_data').innerHTML = '전국'
 									if (parseInt(select_type) == 5) {
 										if (obj[i * 7 + parseInt(select_type)][select_year] < -17100) {
 											document.getElementById(obj[i * 7]['도시']).style.fill = background_Color_Absorption[0]
@@ -330,31 +403,47 @@
 								}
 								document.getElementById(obj[i * 7]['도시']).style.transition = '1s';
 							}
+						})					
+
+						div.addEventListener('mousemove', function (e) {
+							//document.getElementById('container').style.left = e.clientX + 'px';
+							if (e.clientX <= 250) {
+								document.getElementById('container').style.left = (e.clientX + 80) + 'px';
+							} else {
+								document.getElementById('container').style.left = (e.clientX - 200) + 'px';
+							}
+							document.getElementById('container').style.top = (e.clientY + 50) + 'px';
+							document.getElementById('popup').style.display = 'block'
+
+							document.getElementById('city').innerHTML = "시도 : " + e.target.id
+							for (let i = 0; i < 17; i++) {
+								if (obj[i * 7]['도시'] === e.target.id) {
+									let temp_type
+									if (select_type == 0) temp_type = "총 배출량 : "
+									else if (select_type == 1) temp_type = "순 배출량 : "
+									else if (select_type == 5) temp_type = "흡수량 : "
+									document.getElementById('c_emission').innerHTML = temp_type + "<br><br>"
+										+ parseInt(obj[i * 7 + parseInt(select_type)][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " tonCO2eq"
+									document.querySelector('.table_total_data').innerHTML = parseInt(obj[i * 7][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " tonCO2eq"
+									document.querySelector('.table_abs_data').innerHTML = parseInt(obj[i * 7 + 5][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " tonCO2eq"
+									document.querySelector('.table_net_data').innerHTML = parseInt(obj[i * 7 + 1][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " tonCO2eq"
+									break;
+								}
+							}
+						})
+						div.addEventListener('mouseout', function (e) {
+							document.getElementById('popup').style.display = 'none'
+							document.querySelector('.table_total_data').innerHTML = " tonCO2eq"
+							document.querySelector('.table_abs_data').innerHTML = " tonCO2eq"
+							document.querySelector('.table_net_data').innerHTML = " tonCO2eq"
 						})
 					}
-
-					div.addEventListener('mousemove', function (e) {
-						document.getElementById('container').style.left = e.clientX + 'px';
-						document.getElementById('container').style.top = e.clientY + 'px';
-						document.getElementById('popup').style.display = 'block'
-
-						document.getElementById('city').innerHTML = "시도 : " + e.target.id
-						for (let i = 0; i < 17; i++) {
-							if (obj[i * 7]['도시'] === e.target.id) {
-								document.getElementById('c_emission').innerHTML = "총 배출량 : "
-									+ parseInt(obj[i * 7][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-									+ " tonCO2eq"
-								break;
-							}
-						}
-					})
-					div.addEventListener('mouseout', function (e) {
-						document.getElementById('popup').style.display = 'none'
-					})
 				})
-
 		}
-
 		var div = document.getElementById('ctprvn_test');
 	</script>
 </body>

@@ -21,16 +21,13 @@
 		<script src="js/mouseover.js" defer></script>
 
 		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
 			@font-face {
-				font-family: 'KOTRA_BOLD-Bold';
-				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.1/KOTRA_BOLD-Bold.woff')
+				font-family: 'GmarketSansMedium';
+				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
 					format('woff');
 				font-weight: normal;
 				font-style: normal;
-			}
-
-			.mainHome-text {
-				font-family: 'KOTRA_BOLD-Bold';
 			}
 
 			.cloud1,
@@ -211,38 +208,136 @@
 					transform: scale(1);
 				}
 			}
+
+			.mainHome-text {
+				font-family: 'GmarketSansMedium';
+				font-weight: 700;
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				height: 100vh;
+				position: relative;
+				top: 150px;
+			}
+
+			.mainHome-header {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.mainHome-header {
+				animation: stretch2 4s;
+			}
+
+			.mainHome-header > p:first-child {
+				font-family: 'GmarketSansMedium';
+				font-weight: 700;
+				margin-top: 30px;
+				font-size: 40px;
+			}
+
+			.mainHome-header > p:nth-child(2) {
+				margin-top: 30px;
+				font-size: 28px;
+				font-weight: 700;
+			}
+
+			.aLink-area {
+				margin-top: 40px;
+				font-size: 18px;
+				animation: stretch2 4s;
+			}
+
+			@keyframes stretch2 {
+				0% {
+					transform: scale(0);
+
+				}
+
+				to {
+					transform: scale(1);
+
+				}
+			}
+			@keyframes stretch3 {
+				0% {
+					transform: scale(0);
+					transform: translateY(50rem);		
+
+				}
+
+				to {
+					transform: scale(1);
+						transform: translateY(-10.5rem);
+				}
+			}
+
+			#underline {
+				position: absolute;
+				left: 0;
+				height: 4px;
+				width: 0;
+				border-radius: 3px;
+				transition: 0.2s;
+				background-color: #61c64e;
+				top: 0;
+			}
+
+			@media (min-width: 455px) and (max-width: 575px) {
+				div.mainHome-text {
+					font-size: 16px;
+				}
+			}
+
+			.home-main {
+				animation: stretch3 4s cubic-bezier(.41,.13,0,.88);
+			}
+
 		</style>
 
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	</head>
-<body>
+	<body>
 		<script>
 			AOS.init();
 		</script>
+
 		<div class="contents off">
 			<header class="menu">
 				<div class="logo">
-					<img src="img/logo.png" class="logo_img" />
+					<img src="img/logo.png" class="logo_img" width=300px height=300px/>
 				</div>
 
 				<section class="menu-wrapper">
 					<nav class="side-menu">
 						<div id="horizontal-underline"></div>
-						<a class="menu-link" href="components/home.html">
+						<a class="menu-link" href="home.jsp">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_carbon.html">
-						<i class="fa-solid fa-seedling"></i>
-							<span>Carbon Dashboard</span>
-						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_climate.html">
+
+						<a
+							href="netzero_carbon.jsp"
+							class="menu-link"
+							id="dashboard"
+						>
 							<i class="fa-solid fa-seedling"></i>
-							<span>Climate Dashboard</span>
+							<span>Carbon</span>
 						</a>
-						<a class="menu-link" href="components/archive.html">
-							<i class="fa-solid fa-file-zipper"></i>
+						<a
+							href="netzero_climate.jsp"
+							class="menu-link"
+							id="dashboard"
+						>
+							<i class="fa-solid fa-temperature-three-quarters"></i>
+							<span>Climate</span>
+						</a>
+
+						<a class="menu-link" href="archive.jsp">
+							<i class="fa-regular fa-folder-open"></i>
 							<span>Newsfeed</span>
 						</a>
 						<a class="menu-link" href="calculation.jsp">
@@ -258,7 +353,7 @@
 							<i class="fa-regular fa-circle-user"></i>
 							<span>Login</span>
 						</a>
-						<a class="login-menu-link" href="components/join.html">
+						<a class="login-menu-link" href="join.jsp">
 							<i class="fa-solid fa-arrow-right-to-bracket"></i>
 							<span>Register</span>
 						</a>
@@ -278,11 +373,19 @@
 		</div>
 
 		<main class="main-container">
+			<div class="mainHome-text">
+				<div class="mainHome-header">
+					<p class="header-title">탄소중립 실천을 위한 대시보드</p>
+					<p>CARBOARD</p>
+				</div>
+				<div class="aLink-area">
+					<div id="underline"></div>
+					<a href="home-text.jsp" class="more-link"
+						>탄소중립에 대해 알아보기</a
+					>
+				</div>
+			</div>
 			<div class="home-main">
-				<!-- <div class="mainHome-text">
-					<p >탄소중립 실천을 위한 대시보드 서비스</p>
-					
-				</div> -->
 				<div class="cloud-img">
 					<img src="imgs/cloud1.png" alt="" class="cloud1" />
 					<img src="imgs/cloud2.png" alt="" class="cloud2" />
@@ -309,5 +412,28 @@
 		</main>
 
 		<div class="screen-alert">화면 크기를 늘여주세요🙏</div>
+
+		<script>
+			let underlineBar = document.getElementById('underline');
+			let underlineMenu = document.querySelector('.more-link');
+
+			function underLineIndicator(e) {
+				underlineBar.style.width = e.offsetWidth + 'px';
+				underlineBar.style.left = e.offsetLeft + 'px';
+				underlineBar.style.top = e.offsetTop + e.offsetHeight + 'px';
+			}
+
+			function hideUnderLineBar() {
+				underlineBar.style.width = '0';
+			}
+
+			underlineMenu.addEventListener('mouseover', function (e) {
+				underLineIndicator(e.currentTarget);
+			});
+
+			underlineMenu.addEventListener('mouseleave', function () {
+				hideUnderLineBar();
+			});
+		</script>
 	</body>
 </html>

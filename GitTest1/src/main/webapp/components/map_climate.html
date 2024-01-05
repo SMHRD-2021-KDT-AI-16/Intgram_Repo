@@ -7,6 +7,7 @@
 	<style>
 		body {
 			background-color: white;
+			font-family: '메이플스토리 light';
 		}
 
 		path {
@@ -41,6 +42,38 @@
 		.svg_area {
 			width: 500px;
 			height: 600px;
+		}
+		
+		.climate-map-table>table>tbody>tr>td {
+			font-size: 25px;
+		}
+
+		.climate_table {
+			border-width: 1px;
+			border-color: black;
+			border-style: solid;
+		}
+		.table_1 {
+			width: 50px;
+		}
+		.table_2 {
+			width: 50px;
+		}
+		.table_3 {
+			text-align: right;
+		}
+		.table_3 {
+			width: 120px;
+		}
+		.table_4 {
+			width: auto;
+		}
+		.table_left_data {
+			text-align: center;
+			width: 100px;
+		}
+		.table_right {
+			width: 200px;
 		}
 	</style>
 </head>
@@ -125,6 +158,28 @@
 			</g>
 		</svg>
 	</div>
+	<div class="climate-map-table">
+		<table class="climate_table">
+			<tr>
+				<td class="table_1 table_year">년도</td>
+				<td class="table_2 table_year_data">2020</td>
+				<td class="table_3 table_high">최고기온 : </td>
+				<td class="table_4 table_high_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area"colspan="2">지역</td>
+				
+				<td class="table_3 table_avg">평균기온 : </td>
+				<td class="table_4 table_avg_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area_data"colspan="2"></td>
+				
+				<td class="table_3 table_low">최저기온 : </td>
+				<td class="table_4 table_low_data"></td>
+			</tr>
+		</table>
+	</div>
 	<div id='container' style='position: absolute; left: 472px; top: 250px; display: block;'>
 		<div id='popup' class='ol-popup' style="display: none;">
 			<div id='popup-content'>
@@ -170,8 +225,6 @@
 							//select_data.push(obj[i])
 						}
 					}
-					console.log("select_data")
-					console.log(select_data)
 					for (let i = 0; i < select_data.length; i++) {
 						if (select_data[i]['년'] == select_year && select_data[i]['계절'] == select_season) {
 							let temp = select_data[i][select_type]
@@ -302,21 +355,30 @@
 							}
 							document.getElementById('container').style.top = (e.clientY + 50) + 'px';
 							document.getElementById('popup').style.display = 'block'
-
 							document.getElementById('city').innerHTML = "시도 : " + e.target.id
 							for (let i = 0; i < select_data.length; i++) {
 								if (select_data[i]['지역'] === e.target.id) {
+									
 									document.getElementById('city_data').innerHTML = select_type + "기온 : "
 										+ parseFloat(select_data[i][select_type]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 										+ " ℃"
-									break;
+									document.querySelector('.table_high_data').innerHTML = 
+										+ parseFloat(select_data[i]['최고']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"
+									document.querySelector('.table_avg_data').innerHTML = 
+										+ parseFloat(select_data[i]['평균']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"
+									document.querySelector('.table_low_data').innerHTML = 
+										+ parseFloat(select_data[i]['최저']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"	
+									document.querySelector('.table_area_data').innerHTML = e.target.id								
+										break;
 								}
 							}
 						})
 						div.addEventListener('mouseout', function (e) {
 							document.getElementById('popup').style.display = 'none'
 						})
-
 					}
 				})
 		}
