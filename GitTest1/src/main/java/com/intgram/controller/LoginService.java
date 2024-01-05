@@ -67,7 +67,7 @@ public class LoginService extends HttpServlet {
 		}
 		
 		// 7. main.jsp로 redirect 방식 이동
-		response.sendRedirect("calculation.jsp");
+		response.sendRedirect("homecopy.jsp");
 	}
 
 }

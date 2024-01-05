@@ -35,19 +35,19 @@
 			<section class="menu-wrapper">
 					<nav class="side-menu">
 						<div id="horizontal-underline"></div>
-						<a class="menu-link" href="components/home.html">
+						<a class="menu-link" href="homecopy.jsp">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_carbon.html">
+						<a class="menu-link dropdown-toggle" href="netzero_carbon.jsp">
 							<i class="fa-solid fa-seedling"></i>
 							<span>Carbon Dashboard</span>
 						</a>
-						<a class="menu-link dropdown-toggle" href="components/netzero_climate.html" >
+						<a class="menu-link dropdown-toggle" href="netzero_climate.jsp" >
 							<i class="fa-solid fa-seedling"></i>
 							<span>Climate Dashboard</span>
 						</a>
-						<a class="menu-link" href="components/archive.html">
+						<a class="menu-link" href="archive.jsp">
 							<i class="fa-solid fa-file-zipper"></i>
 							<span>Newsfeed</span>
 						</a>
@@ -62,7 +62,7 @@
 				<nav class="login-menu">
 					
 					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
-						<span>${member.mem_name} </span>
+						<span>${member.mem_name}님 환영합니다</span>
 						<a href="LogoutService">로그아웃</a>
 					</c:if>
 					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
