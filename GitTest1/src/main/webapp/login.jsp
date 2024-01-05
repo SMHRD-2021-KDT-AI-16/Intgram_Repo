@@ -23,28 +23,39 @@
 		<div class="contents off">
 			<header class="menu">
 				<div class="logo">
-					<img src="img/logo.png" class="logo_img">
+					<img src="img/logo.png" class="logo_img" width=300px height=300px/>
 				</div>
 
 				<section class="menu-wrapper">
 					<nav class="side-menu">
-            <div id="horizontal-underline"></div>
-						<a class="menu-link" href="components/home.html">
+						<div id="horizontal-underline"></div>
+						<a class="menu-link" href="home.jsp">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
 
-						<a class="menu-link dropdown-toggle"
-							href="components/netzero_carbon.html">
+						<a
+							href="netzero_carbon.jsp"
+							class="menu-link"
+							id="dashboard"
+						>
 							<i class="fa-solid fa-seedling"></i>
-							<span>Dashboard</span>
+							<span>Carbon</span>
+						</a>
+						<a
+							href="components/netzero_climate.html"
+							class="menu-link"
+							id="dashboard"
+						>
+							<i class="fa-solid fa-temperature-three-quarters"></i>
+							<span>Climate</span>
 						</a>
 
-						<a class="menu-link" href="components/archive.html">
-							<i class="fa-solid fa-file-zipper"></i>
+						<a class="menu-link" href="archive.jsp">
+							<i class="fa-regular fa-folder-open"></i>
 							<span>Newsfeed</span>
 						</a>
-						<a class="menu-link" href="components/calculation.html">
+						<a class="menu-link" href="calculation.jsp">
 							<i class="fa-solid fa-calculator"></i>
 							<span>Calculation</span>
 						</a>
@@ -57,7 +68,7 @@
 							<i class="fa-regular fa-circle-user"></i>
 							<span>Login</span>
 						</a>
-						<a class="login-menu-link" href="components/join.html">
+						<a class="login-menu-link" href="cjoin.jsp">
 							<i class="fa-solid fa-arrow-right-to-bracket"></i>
 							<span>Register</span>
 						</a>

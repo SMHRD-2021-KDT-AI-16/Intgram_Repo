@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,282 +21,283 @@
 		<script src="js/menu_min510.js" defer></script>
 		<script src="js/mouseover.js" defer></script>
 
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
-			@font-face {
-				font-family: 'GmarketSansMedium';
-				src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-					format('woff');
-				font-weight: normal;
-				font-style: normal;
-			}
+		
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
+         @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+               format('woff');
+            font-weight: normal;
+            font-style: normal;
+         }
 
-			.cloud1,
-			.cloud2,
-			.cloud3 {
-				animation-duration: 2s;
-				animation-timing-function: ease-out;
-				animation-direction: alternate;
-				animation-iteration-count: infinite;
-				animation-fill-mode: none;
-				animation-play-state: running;
-			}
-			.cloud1 {
-				position: absolute;
-				top: 20%;
-				left: 10vw;
-				max-width: 14vw;
-				transform: translateX(-1vw);
-				animation-name: moving;
-				animation-delay: 0.5s;
-			}
+         .cloud1,
+         .cloud2,
+         .cloud3 {
+            animation-duration: 2s;
+            animation-timing-function: ease-out;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+            animation-fill-mode: none;
+            animation-play-state: running;
+         }
+         .cloud1 {
+            position: absolute;
+            top: 20%;
+            left: 10vw;
+            max-width: 14vw;
+            transform: translateX(-1vw);
+            animation-name: moving;
+            animation-delay: 0.5s;
+         }
 
-			.cloud2 {
-				position: absolute;
-				right: 29vw;
-				width: 5%;
-				animation-name: stretch;
-				animation-delay: 0s;
-			}
+         .cloud2 {
+            position: absolute;
+            right: 29vw;
+            width: 5%;
+            animation-name: stretch;
+            animation-delay: 0s;
+         }
 
-			.cloud3 {
-				position: absolute;
-				top: 24%;
-				right: 7vw;
-				width: 13%;
-				transition: all 0.5s ease-in-out 0.5s;
-				animation-name: moving;
-				animation-delay: 0.8s;
-			}
+         .cloud3 {
+            position: absolute;
+            top: 24%;
+            right: 7vw;
+            width: 13%;
+            transition: all 0.5s ease-in-out 0.5s;
+            animation-name: moving;
+            animation-delay: 0.8s;
+         }
 
-			.tree1,
-			.tree2,
-			.tree3,
-			.tree4,
-			.tree5,
-			.tree6,
-			.tree7,
-			.tree8,
-			.tree9,
-			.tree10,
-			.tree11,
-			.tree12 {
-				position: absolute;
-			}
+         .tree1,
+         .tree2,
+         .tree3,
+         .tree4,
+         .tree5,
+         .tree6,
+         .tree7,
+         .tree8,
+         .tree9,
+         .tree10,
+         .tree11,
+         .tree12 {
+            position: absolute;
+         }
 
-			.tree1 {
-				bottom: 20vh;
-				left: 4vw;
-				z-index: 3;
-			}
+         .tree1 {
+            bottom: 20vh;
+            left: 4vw;
+            z-index: 3;
+         }
 
-			.tree2 {
-				bottom: 8vh;
-				left: 9vw;
-				z-index: 3;
-			}
+         .tree2 {
+            bottom: 8vh;
+            left: 9vw;
+            z-index: 3;
+         }
 
-			.tree3 {
-				bottom: 8vh;
-				left: 21vw;
-				z-index: 3;
-			}
+         .tree3 {
+            bottom: 8vh;
+            left: 21vw;
+            z-index: 3;
+         }
 
-			.tree4 {
-				bottom: 5vh;
-				left: 27vw;
-				z-index: 3;
-			}
-			.tree5 {
-				left: 22vw;
-				bottom: 5vh;
-				z-index: 3;
-			}
-			.tree6 {
-				right: 37vw;
-				bottom: 17vh;
-				z-index: 3;
-			}
-			.tree7 {
-				right: 31vw;
-				bottom: 14vh;
-				z-index: 3;
-			}
-			.tree8 {
-				right: 23vw;
-				bottom: 14vh;
-				z-index: 3;
-			}
-			.tree9 {
-				right: 21vw;
-				bottom: 9vh;
-				z-index: 3;
-			}
-			.tree10 {
-				right: 9vw;
-				bottom: 9vh;
-				z-index: 3;
-			}
-			.tree11 {
-				right: 4vw;
-				bottom: 17vh;
-				z-index: 3;
-			}
-			.tree12 {
-				right: 2vw;
-				bottom: 17vh;
-				z-index: 3;
-			}
+         .tree4 {
+            bottom: 5vh;
+            left: 27vw;
+            z-index: 3;
+         }
+         .tree5 {
+            left: 22vw;
+            bottom: 5vh;
+            z-index: 3;
+         }
+         .tree6 {
+            right: 37vw;
+            bottom: 17vh;
+            z-index: 3;
+         }
+         .tree7 {
+            right: 31vw;
+            bottom: 14vh;
+            z-index: 3;
+         }
+         .tree8 {
+            right: 23vw;
+            bottom: 14vh;
+            z-index: 3;
+         }
+         .tree9 {
+            right: 21vw;
+            bottom: 9vh;
+            z-index: 3;
+         }
+         .tree10 {
+            right: 9vw;
+            bottom: 9vh;
+            z-index: 3;
+         }
+         .tree11 {
+            right: 4vw;
+            bottom: 17vh;
+            z-index: 3;
+         }
+         .tree12 {
+            right: 2vw;
+            bottom: 17vh;
+            z-index: 3;
+         }
 
-			.earth-img {
-				background-image: url('imgs/earth.png');
-				height: 25vh;
-				background-size: cover;
-				background-position: top;
-				max-height: 25vh;
-				overflow: hidden;
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-				background-repeat: no-repeat;
-			}
-			.earth {
-				width: 1920px;
-				z-index: 4;
-			}
+         .earth-img {
+            background-image: url('../imgs/earth.png');
+            height: 25vh;
+            background-size: cover;
+            background-position: top;
+            max-height: 25vh;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-repeat: no-repeat;
+         }
+         .earth {
+            width: 1920px;
+            z-index: 4;
+         }
 
-			/*keyframes*/
-			@keyframes moving {
-				0% {
-					transform: translateX(-0.5rem);
-				}
+         /*keyframes*/
+         @keyframes moving {
+            0% {
+               transform: translateX(-0.5rem);
+            }
 
-				to {
-					transform: translateX(0.5rem);
-				}
-			}
+            to {
+               transform: translateX(0.5rem);
+            }
+         }
 
-			@keyframes moving-y {
-				0% {
-					transform: translateY(-0.5rem);
-				}
+         @keyframes moving-y {
+            0% {
+               transform: translateY(-0.5rem);
+            }
 
-				to {
-					transform: translateY(0.5rem);
-				}
-			}
+            to {
+               transform: translateY(0.5rem);
+            }
+         }
 
-			@keyframes stretch {
-				0% {
-					transform: scale(0.9);
-				}
+         @keyframes stretch {
+            0% {
+               transform: scale(0.9);
+            }
 
-				to {
-					transform: scale(1);
-				}
-			}
+            to {
+               transform: scale(1);
+            }
+         }
 
-			@keyframes move-stretch {
-				0% {
-					transform: translateX(-0.5rem) scale(0.9);
-				}
+         @keyframes move-stretch {
+            0% {
+               transform: translateX(-0.5rem) scale(0.9);
+            }
 
-				50% {
-					transform: translateX(0.5rem) scale(0.9);
-				}
+            50% {
+               transform: translateX(0.5rem) scale(0.9);
+            }
 
-				to {
-					transform: scale(1);
-				}
-			}
+            to {
+               transform: scale(1);
+            }
+         }
 
-			.mainHome-text {
-				font-family: 'GmarketSansMedium';
-				font-weight: 700;
-				display: flex;
-				align-items: center;
-				flex-direction: column;
-				height: 100vh;
-				position: relative;
-				top: 150px;
-			}
+         .mainHome-text {
+            font-family: 'GmarketSansMedium';
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            top: 150px;
+         }
 
-			.mainHome-header {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
+         .mainHome-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
 
-			.mainHome-header {
-				animation: stretch2 4s;
-			}
+         .mainHome-header {
+            animation: stretch2 4s;
+         }
 
-			.mainHome-header > p:first-child {
-				font-family: 'GmarketSansMedium';
-				font-weight: 700;
-				margin-top: 30px;
-				font-size: 40px;
-			}
+         .mainHome-header > p:first-child {
+            font-family: 'GmarketSansMedium';
+            font-weight: 700;
+            margin-top: 30px;
+            font-size: 40px;
+         }
 
-			.mainHome-header > p:nth-child(2) {
-				margin-top: 30px;
-				font-size: 28px;
-				font-weight: 700;
-			}
+         .mainHome-header > p:nth-child(2) {
+            margin-top: 30px;
+            font-size: 28px;
+            font-weight: 700;
+         }
 
-			.aLink-area {
-				margin-top: 40px;
-				font-size: 18px;
-				animation: stretch2 4s;
-			}
+         .aLink-area {
+            margin-top: 40px;
+            font-size: 18px;
+            animation: stretch2 4s;
+         }
 
-			@keyframes stretch2 {
-				0% {
-					transform: scale(0);
+         @keyframes stretch2 {
+            0% {
+               transform: scale(0);
 
-				}
+            }
 
-				to {
-					transform: scale(1);
+            to {
+               transform: scale(1);
 
-				}
-			}
-			@keyframes stretch3 {
-				0% {
-					transform: scale(0);
-					transform: translateY(50rem);		
+            }
+         }
+         @keyframes stretch3 {
+            0% {
+               transform: scale(0);
+               transform: translateY(50rem);      
 
-				}
+            }
 
-				to {
-					transform: scale(1);
-						transform: translateY(-10.5rem);
-				}
-			}
+            to {
+               transform: scale(1);
+                  transform: translateY(-10.5rem);
+            }
+         }
 
-			#underline {
-				position: absolute;
-				left: 0;
-				height: 4px;
-				width: 0;
-				border-radius: 3px;
-				transition: 0.2s;
-				background-color: #61c64e;
-				top: 0;
-			}
+         #underline {
+            position: absolute;
+            left: 0;
+            height: 4px;
+            width: 0;
+            border-radius: 3px;
+            transition: 0.2s;
+            background-color: #61c64e;
+            top: 0;
+         }
 
-			@media (min-width: 455px) and (max-width: 575px) {
-				div.mainHome-text {
-					font-size: 16px;
-				}
-			}
+         @media (min-width: 455px) and (max-width: 575px) {
+            div.mainHome-text {
+               font-size: 16px;
+            }
+         }
 
-			.home-main {
-				animation: stretch3 4s cubic-bezier(.41,.13,0,.88);
-			}
+         .home-main {
+            animation: stretch3 4s cubic-bezier(.41,.13,0,.88);
+         }
 
-		</style>
+      </style>
 
 		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -305,7 +307,7 @@
 			AOS.init();
 		</script>
 
-		<div class="contents off">
+		<div class="contents">
 			<header class="menu">
 				<div class="logo">
 					<img src="img/logo.png" class="logo_img" width=300px height=300px/>
@@ -328,7 +330,7 @@
 							<span>Carbon</span>
 						</a>
 						<a
-							href="netzero_climate.jsp"
+							href="components/netzero_climate.html"
 							class="menu-link"
 							id="dashboard"
 						>
@@ -348,17 +350,22 @@
 				</section>
 
 				<section id="login-area" class="contents-header__login">
-					<nav class="login-menu">
-						<a class="login-menu-link" href="login.jsp">
-							<i class="fa-regular fa-circle-user"></i>
-							<span>Login</span>
-						</a>
-						<a class="login-menu-link" href="join.jsp">
-							<i class="fa-solid fa-arrow-right-to-bracket"></i>
-							<span>Register</span>
-						</a>
-					</nav>
-				</section>
+				<nav class="login-menu">
+					
+					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+						<span>${member.mem_name} </span>
+						<a href="LogoutService">로그아웃</a>
+					</c:if>
+					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+						<a class="login-menu-link" href="login.jsp"> 
+					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
+					    </a>
+					    <a class="login-menu-link" href="join.jsp"> 
+					       <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Register</span>
+					    </a>
+					</c:if>
+				</nav>
+			</section>
 
 				<a href="#" class="navbar__toggleBtn">
 					<i class="fa-solid fa-bars"></i>

@@ -1,21 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/style.css?20231228" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/climate.css" />
+  <link rel="stylesheet" href="css/style.css?20231228" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/climate.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="../js/dashboard-apis.js" type="module" defer></script>
-  <script src="../js/emitYear.js" defer></script>
-  <script src="../js/script.js" type="module" defer></script>
-  <script src="../js/menu_min510.js" defer></script>
-  <script src="../js/mouseover.js" defer></script>
-  <script src="../js/jquery-3.7.1.min.js"></script>
+  <script src="js/dashboard-apis.js" type="module" defer></script>
+  <script src="js/emitYear.js" defer></script>
+  <script src="js/script.js" type="module" defer></script>
+  <script src="js/menu_min510.js" defer></script>
+  <script src="js/mouseover.js" defer></script>
+  <script src="js/jquery-3.7.1.min.js"></script>
   <title>TEAM Intgram</title>
   <style>
     .climate-map-area {
@@ -25,44 +27,25 @@
     .rap2 {
       display: none;
     }
-
-    #season_color {
-      margin-left: 50px;
-    }
-
-    .select-season {
-      height: 25px;
-      position: relative;
-      top: 15px;
-      margin-left: 15px
-    }
-
-    .summer-text {
-      margin-left: 100px;
-      font-size: 24px;
-    }
   </style>
 </head>
-
 <body>
   <div class="contents">
     <header class="menu">
       <div class="logo">
-        <div>
-          <img src="../img/logo.png" width=300px height=300px>
-        </div>
-      </div>
+					<img src="img/logo.png" class="logo_img" width=300px height=300px/>
+				</div>
 
-      <section class="menu-wrapper">
+				<section class="menu-wrapper">
 					<nav class="side-menu">
 						<div id="horizontal-underline"></div>
-						<a class="menu-link" href="../home.jsp">
+						<a class="menu-link" href="home.jsp">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
 
 						<a
-							href="../netzero_carbon.jsp"
+							href="netzero_carbon.jsp"
 							class="menu-link"
 							id="dashboard"
 						>
@@ -70,7 +53,7 @@
 							<span>Carbon</span>
 						</a>
 						<a
-							href="netzero_climate.html"
+							href="components/netzero_climate.html"
 							class="menu-link"
 							id="dashboard"
 						>
@@ -78,11 +61,11 @@
 							<span>Climate</span>
 						</a>
 
-						<a class="menu-link" href="../archive.jsp">
+						<a class="menu-link" href="archive.jsp">
 							<i class="fa-regular fa-folder-open"></i>
 							<span>Newsfeed</span>
 						</a>
-						<a class="menu-link" href="../calculation.jsp">
+						<a class="menu-link" href="calculation.jsp">
 							<i class="fa-solid fa-calculator"></i>
 							<span>Calculation</span>
 						</a>
@@ -90,17 +73,22 @@
 				</section>
 
       <section id="login-area" class="contents-header__login">
-        <nav class="login-menu">
-          <a class="login-menu-link" href="../login.jsp">
-            <i class="fa-regular fa-circle-user"></i>
-            <span>Login</span>
-          </a>
-          <a class="login-menu-link" href="../join.jsp">
-            <i class="fa-solid fa-arrow-right-to-bracket"></i>
-            <span>Register</span>
-          </a>
-        </nav>
-      </section>
+				<nav class="login-menu">
+					
+					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+						<span>${member.mem_name} </span>
+						<a href="LogoutService">로그아웃</a>
+					</c:if>
+					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+						<a class="login-menu-link" href="login.jsp"> 
+					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
+					    </a>
+					    <a class="login-menu-link" href="join.jsp"> 
+					       <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Register</span>
+					    </a>
+					</c:if>
+				</nav>
+			</section>
 
       <a href="#" class="navbar__toggleBtn">
         <i class="fa-solid fa-bars"></i>
@@ -162,7 +150,7 @@
           </ul>
         </div>
       </div>
-      <div class="summer-text">
+      <div>
         여름은 20일 길어지고 겨울은 22일 짧아짐
       </div>
       <div class="climate-part1-menu">
@@ -186,12 +174,12 @@
       <div class="map">
         <h2 class="climate-title">지역별 온도 변화</h3>
           <div class="climate-map-area">
-            <iframe src="map_climate.html" width="500px" height="750px" frameborder='0' scrolling="no"></iframe>
+            <iframe src="components/map_climate.html" width="500px" height="750px" frameborder='0' scrolling="no"></iframe>
           </div>
       </div>
     </section>
   </div>
-  <script src="../js/temperature.js" defer></script>
+  <script src="js/temperature.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
     // 계절별 온도
@@ -202,7 +190,7 @@
 			drawSCC(select_season)
 		});
     function drawSCC(select_season) {
-    fetch("../json/season_temperature.json")
+    fetch("json/season_temperature.json")
       .then((res) => {
         return res.json()
       })
@@ -314,7 +302,7 @@
     // yearTropicalChart
 
     var ytc = document.getElementById('yearTropicalChart').getContext('2d');
-    fetch("../json/year_tropical.json")
+    fetch("json/year_tropical.json")
       .then((res) => {
         return res.json()
       })
@@ -355,51 +343,55 @@
         })
       })
     // 열대야 달력
-    fetch("../json/temperature_data.json")
+    fetch("json/temperature_data.json")
       .then((res) => {
         return res.json()
       })
-      .then((obj) => {        
-        const makeCalendar = (date) => {
-          const currentYear = new Date(date).getFullYear();
-          const currentMonth = new Date(date).getMonth() + 1;
-
-          const firstDay = new Date(date.setDate(1)).getDay();
-          const lastDay = new Date(currentYear, currentMonth, 0).getDate();
-
-          const limitDay = firstDay + lastDay;
-          const nextDay = Math.ceil(limitDay / 7) * 7;
-
-          let htmlDummy = '';
-          let date_Temper = []
-          for (let i = 0; i < obj.length; i++) {
-            let ymd = obj[i]['날짜'].split("-")
-            if (parseInt(ymd[0]) == currentYear && parseInt(ymd[1]) == currentMonth) {
-              date_Temper.push(obj[i]['최고기온(℃)'])
-            }
-          }
-          for (let i = 0; i < firstDay; i++) {
-            htmlDummy += `<div class="noColor"></div>`;
-          }
-
-          for (let i = 1; i <= lastDay; i++) {
-            htmlDummy += `<div class='date'>${i}`;
-            if (date_Temper[i - 1] >= 33)
-              htmlDummy += `<span class='heatwave'>${date_Temper[i - 1]}(℃)</span></div>`;
-            else
-              htmlDummy += `</div>`
-          }
-
-          for (let i = limitDay; i < nextDay; i++) {
-            htmlDummy += `<div class="noColor"></div>`;
-          }
-
-          document.querySelector(`.dateBoard`).innerHTML = htmlDummy;
-          document.querySelector(`.dateTitle`).innerText = `${currentYear}년 ${currentMonth}월`;
+      .then((obj) => {    
+    	  console.log('1111111111111111111111')
+    	  console.log(obj)
+          const makeCalendar = (date) => {
+	          const currentYear = new Date(date).getFullYear();
+	          const currentMonth = new Date(date).getMonth() + 1;
+	
+	          const firstDay = new Date(date.setDate(1)).getDay();
+	          const lastDay = new Date(currentYear, currentMonth, 0).getDate();
+	
+	          const limitDay = firstDay + lastDay;
+	          const nextDay = Math.ceil(limitDay / 7) * 7;
+	
+	          let htmlDummy = '';
+	          let date_Temper = []
+	          for (let i = 0; i < obj.length; i++) {
+	            let ymd = obj[i]['날짜'].split("-")
+	            if (parseInt(ymd[0]) == currentYear && parseInt(ymd[1]) == currentMonth) {
+	              date_Temper.push(obj[i]['최고기온(℃)'])
+	            }
+	          }
+	          for (let i = 0; i < firstDay; i++) {
+	            htmlDummy += `<div class="noColor"></div>`;
+	          }
+	
+	          for (let i = 1; i <= lastDay; i++) {
+	            htmlDummy += `<div class='date'>${i}`;
+	            if (date_Temper[i - 1] >= 33)
+	              htmlDummy += `<span class='heatwave'>${date_Temper[i - 1]}(℃)</span></div>`;
+	            else
+	              htmlDummy += `</div>`
+	          }
+	
+	          for (let i = limitDay; i < nextDay; i++) {
+	            htmlDummy += `<div class="noColor"></div>`;
+	          }
+	          
+	          document.querySelector(`.dateBoard`).innerHTML = htmlDummy;
+	          document.querySelector(`.dateTitle`).innerText = `${currentYear}년 ${currentMonth}월`;
+	    
         }
         const date = new Date();
         makeCalendar(date);
-
+        console.log('aekjfkaejfkeajf')
+        console.log(htmlDummy)
         // 이전달 이동
         document.querySelector(`.prevDay`).onclick = () => {
           let temp
@@ -444,7 +436,7 @@
     
     let dtc_year = []
     // 국내 해수면 온도
-    fetch("../json/seasurface_temp.json")
+    fetch("json/seasurface_temp.json")
       .then((res) => {
         return res.json()
       })
@@ -607,5 +599,4 @@
   </script>
 
 </body>
-
 </html>
