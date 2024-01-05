@@ -1,6 +1,7 @@
 package com.intgram.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,11 +31,13 @@ public class CalculateService extends HttpServlet {
     	Co2VO co2VO = new Co2VO();
 		
 		int amount = Integer.parseInt(request.getParameter("amount"));
-		String transportion = "차량";
+		//String transportion = 
+		String transportion = request.getParameter("transportation");
 		String fuel_type = "휘발유";
 				
 		response.setContentType("text/html;charset=utf-8");
 		
+		System.out.println(transportion);
 		co2VO.setMem_id(mbVO.getMem_id());
 		System.out.println("아이디 = " + mbVO.getMem_id());
 		co2VO.setTransportation(transportion);
@@ -43,9 +46,14 @@ public class CalculateService extends HttpServlet {
 		
 		// 3. DAO 생성
 		DAO dao = new DAO();
-		
+		MemberVO mbvo = (MemberVO)session.getAttribute("member");
 		// 4. DAO 이용
 		int row = dao.insertC(co2VO);
+		if(row > 0) {
+			List<Co2VO> co2vo = dao.getdata(mbvo);
+			session.setAttribute("member_data", co2vo);
+		}
+		
 		
 		System.out.println("여기까지는됐니");
 	

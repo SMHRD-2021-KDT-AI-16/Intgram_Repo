@@ -5,43 +5,85 @@
 	<meta charset="utf-8" />
 	<title>지도 시작하기</title>
 	<style>
-		body {
-			background-color: white;
-		}
+	
+      body {
+         background-color: white;
+         font-family: '메이플스토리 light';
+      }
 
-		path {
-			stroke: black;
-		}
+      path {
+         stroke: black;
+      }
 
-		g#ctprvn_test>path:hover {
-			stroke-width: 3px;
-		}
+      g#ctprvn_test>path:hover {
+         stroke-width: 3px;
+      }
 
-		#ctprvn_test:hover popup {
-			display: block;
-			z-index: 100;
-		}
+      #ctprvn_test:hover popup {
+         display: block;
+         z-index: 100;
+      }
 
-		.ol-popup {
-			display: none;
-			position: absolute;
-			background-color: #000;
-			opacity: 80%;
-			color: #fff;
-			box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-			padding: 15px;
-			border-radius: 10px;
-			border: 1px solid #000;
-			bottom: 12px;
-			left: -50px;
-			min-width: 200px;
-			width: max-content;
-		}
+      .ol-popup {
+         display: none;
+         position: absolute;
+         background-color: #000;
+         opacity: 80%;
+         color: #fff;
+         box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+         padding: 15px;
+         border-radius: 10px;
+         border: 1px solid #000;
+         bottom: 12px;
+         left: -50px;
+         min-width: 200px;
+         width: max-content;
+      }
 
-		.svg_area {
-			width: 500px;
-			height: 600px;
-		}
+      .svg_area {
+         width: 500px;
+         height: 600px;
+      }
+
+
+      
+      .climate-map-table>table>tbody>tr>td {
+         font-size: 20px;
+      }
+
+      /* .table_1 {
+         width: 50px;
+   
+      } */
+      .table_2 {
+         width: 120px;
+      }
+      .table_3 {
+         text-align: right;
+      }
+      /* .table_3 {
+         width: 120px;
+         
+      } */
+      /* .table_4 {
+         width: auto;
+      }
+      .table_left_data {
+         text-align: center;
+         width: 100px;
+      }
+      .table_right {
+         width: 200px;
+      } */
+
+      .climate-map-table {
+
+         display: flex;
+         
+         align-items: center;
+         margin-top: 30px;
+         margin-left: 100px;
+      }
 	</style>
 </head>
 
@@ -125,6 +167,28 @@
 			</g>
 		</svg>
 	</div>
+	<div class="climate-map-table">
+		<table class="climate_table">
+			<tr>
+				<td class="table_1 table_year">년도</td>
+				<td class="table_2 table_year_data">2020</td>
+				<td class="table_3 table_high">최고기온 : </td>
+				<td class="table_4 table_high_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area"colspan="2">지역</td>
+				
+				<td class="table_3 table_avg">평균기온 : </td>
+				<td class="table_4 table_avg_data"></td>
+			</tr>
+			<tr>
+				<td class="table_1 table_area_data"colspan="2"></td>
+				
+				<td class="table_3 table_low">최저기온 : </td>
+				<td class="table_4 table_low_data"></td>
+			</tr>
+		</table>
+	</div>
 	<div id='container' style='position: absolute; left: 472px; top: 250px; display: block;'>
 		<div id='popup' class='ol-popup' style="display: none;">
 			<div id='popup-content'>
@@ -170,8 +234,6 @@
 							//select_data.push(obj[i])
 						}
 					}
-					console.log("select_data")
-					console.log(select_data)
 					for (let i = 0; i < select_data.length; i++) {
 						if (select_data[i]['년'] == select_year && select_data[i]['계절'] == select_season) {
 							let temp = select_data[i][select_type]
@@ -302,21 +364,30 @@
 							}
 							document.getElementById('container').style.top = (e.clientY + 50) + 'px';
 							document.getElementById('popup').style.display = 'block'
-
 							document.getElementById('city').innerHTML = "시도 : " + e.target.id
 							for (let i = 0; i < select_data.length; i++) {
 								if (select_data[i]['지역'] === e.target.id) {
+									
 									document.getElementById('city_data').innerHTML = select_type + "기온 : "
 										+ parseFloat(select_data[i][select_type]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 										+ " ℃"
-									break;
+									document.querySelector('.table_high_data').innerHTML = 
+										+ parseFloat(select_data[i]['최고']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"
+									document.querySelector('.table_avg_data').innerHTML = 
+										+ parseFloat(select_data[i]['평균']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"
+									document.querySelector('.table_low_data').innerHTML = 
+										+ parseFloat(select_data[i]['최저']).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+										+ " ℃"	
+									document.querySelector('.table_area_data').innerHTML = e.target.id								
+										break;
 								}
 							}
 						})
 						div.addEventListener('mouseout', function (e) {
 							document.getElementById('popup').style.display = 'none'
 						})
-
 					}
 				})
 		}

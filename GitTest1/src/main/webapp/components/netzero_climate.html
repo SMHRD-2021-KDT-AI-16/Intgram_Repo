@@ -15,11 +15,15 @@
   <script src="../js/script.js" type="module" defer></script>
   <script src="../js/menu_min510.js" defer></script>
   <script src="../js/mouseover.js" defer></script>
+  <script src="../js/jquery-3.7.1.min.js"></script>
   <title>TEAM Intgram</title>
   <style>
     .climate-map-area {
       width: 90%;
       height: 80%;
+    }
+    .rap2 {
+      display: none;
     }
   </style>
 </head>
@@ -29,29 +33,30 @@
     <header class="menu">
       <div class="logo">
         <div>
-          <img src="../img/logo.png" width=300px height=100px>
+          <img src="../img/logo.png" width=300px height=300px>
         </div>
       </div>
 
       <section class="menu-wrapper">
         <nav class="side-menu">
-		  <div id="horizontal-underline"></div>
-		  <a href="#" class="navbar__toggleBtn">
-			<i class="fa-solid fa-bars"></i>
-		  </a>
+          <div id="horizontal-underline"></div>
           <a class="menu-link" href="../components/home.html">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
           </a>
           <a class="menu-link" href="../components/netzero_carbon.html">
             <i class="fa-solid fa-seedling"></i>
-            <span>Dashboard</span>
+            <span>Carbon</span>
+          </a>
+          <a class="menu-link" href="../components/netzero_climate.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Climate</span>
           </a>
           <a class="menu-link" href="../components/archive.html">
             <i class="fa-solid fa-file-zipper"></i>
             <span>Newsfeed</span>
           </a>
-          <a class="menu-link" href="../components/calculation.html">
+          <a class="menu-link" href="../calculation.jsp">
             <i class="fa-solid fa-calculator"></i>
             <span>Calculation</span>
           </a>
@@ -86,11 +91,11 @@
     <section class="climate-part1">
       <div class="climate-part1-menu">
         <div class="climate-part1-menu-title">
-          <h2 class="climate-title">전국 열대 일수</h2>
+          <h2 class="climate-title">전국 폭염 일수</h2>
         </div>
         <div class="climate-part1-menu-button">
           <button onclick="calendar()">캘린더</button>
-          <button onclick="linechart()">분포도</button>
+          <button onclick="linechart()">그래프</button>
         </div>
       </div>
       <div class='rap'>
@@ -110,17 +115,43 @@
         </div>
         <div class="grid dateBoard"></div>
       </div>
-      <h2 class="climate-title">폭염 일수에 따른 질병</h2>
-      <canvas id="diseaseTropicalChart" height="300%"></canvas>
+      <div class='rap2'>
+        <canvas id="yearTropicalChart" width="630px" height="400px"></canvas>
+      </div>
+
+      <h2 class="climate-title">국내 해역별 연평균 해수면 온도</h2>
+      <canvas id="seasurfaceTempChart" height="300%"></canvas>
     </section>
     
     <section class="climate-part2">
-      <div class="season">
-        <h2 class="climate-title">사계절 길이 변화</h2>
-        <canvas id="seasonlengthChart"></canvas>
+      <h2 class="climate-title">사계절 길이 변화</h2>
+      <div class="season">        
+        <div>          
+          <canvas id="seasonlengthChart"></canvas>
+        </div>
+        <div id="season_color">
+          <ul>
+            <li id="current">최근 30년 여름 길이 : 65일</li>
+            <li id="past">과거 30년 여름 길이 : 65일</li>
+          </ul>
+        </div>
       </div>
-      <div class="season season2">
-        <h2 class="climate-title">계절별 온도 변화</h2>
+      <div>
+        여름은 20일 길어지고 겨울은 22일 짧아짐
+      </div>
+      <div class="climate-part1-menu">
+        <div class="season2">
+          <div class="climate-part1-menu">
+          <h2 class="climate-title">계절별 온도 변화</h2>
+          <select name="season">
+            <option value="봄">봄</option>
+            <option value="여름">여름</option>
+            <option value="가을">가을</option>
+            <option value="겨울">겨울</option>
+            <option value="전체">전체</option>
+            <option value="평균">평균</option>
+          </select>    
+        </div>   
         <canvas id="seasonclimateChart" width="700px" height="400px"></canvas>
       </div>
     </section>
@@ -129,9 +160,7 @@
       <div class="map">
         <h2 class="climate-title">지역별 온도 변화</h3>
           <div class="climate-map-area">
-            <iframe src="map_climate.html" width="500px" height="700px" frameborder='0' scrolling="no"></iframe>
-          </div>
-          <div class="climate-map-table">
+            <iframe src="map_climate.html" width="500px" height="750px" frameborder='0' scrolling="no"></iframe>
           </div>
       </div>
     </section>
@@ -140,19 +169,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
     // 계절별 온도
+    let select_season = '겨울'
+    drawSCC(select_season)
+    $("select[name=season]").change(function () {
+			select_season = $(this).val()
+			drawSCC(select_season)
+		});
+    function drawSCC(select_season) {
     fetch("../json/season_temperature.json")
       .then((res) => {
         return res.json()
       })
       .then((obj) => {
         let min_year = 2010
-        let max_year = 2022
-        let season = '겨울'
+        let max_year = 2023
+        let season = select_season
         let ys = []
         let ys_min = []
         let ys_max = []
         let ys_avg = []
-        for (let i = 0; i < obj.length; i++) {
+        let temp_ys_min = 0
+        console.log(obj)
+        for (let i = 0; i < obj.length; i++) {          
           let temp = obj[i]['년계절'].split(" ")
           if (season == '전체') {
             if ((temp[0] <= max_year && temp[0] >= min_year)) {
@@ -161,9 +199,33 @@
               ys_max.push(obj[i]['평균최고기온(℃)'])
               ys_avg.push(obj[i]['평균기온(℃)'])
             }
-          } else {
+          } else if(season == '평균') {
+            if(i % 4 == 0) {
+              if ((temp[0] <= max_year && temp[0] >= min_year)) {
+                ys.push(temp[0])
+                ys_min.push( (obj[i]['평균최저기온(℃)'] + obj[i + 1]['평균최저기온(℃)'] 
+                + obj[i + 2]['평균최저기온(℃)'] + obj[i + 3]['평균최저기온(℃)']) / 4 )
+                ys_max.push( (obj[i]['평균최고기온(℃)'] + obj[i + 1]['평균최고기온(℃)'] 
+                + obj[i + 2]['평균최고기온(℃)'] + obj[i + 3]['평균최고기온(℃)']) / 4 )
+                ys_avg.push( (obj[i]['평균기온(℃)'] + obj[i + 1]['평균기온(℃)'] 
+                + obj[i + 2]['평균기온(℃)'] + obj[i + 3]['평균기온(℃)']) / 4 )
+              }
+            }
+
+
+            // if ((temp[0] <= max_year && temp[0] >= min_year)) {
+            //   ys.push(temp[0])
+            //  // console.log(ys)
+              
+            //   for(let j = 0; j < 4; j++) {
+            //     temp_ys_min += obj[i]['평균최저기온(℃)']
+            //   }
+            //   ys_min.push(temp_ys_min / 4)
+            // }
+            
+          }else {
             if ((temp[0] <= max_year && temp[0] >= min_year) && temp[1] == season) {
-              ys.push(obj[i]['년계절'])
+              ys.push(obj[i]['년계절'])              
               ys_min.push(obj[i]['평균최저기온(℃)'])
               ys_max.push(obj[i]['평균최고기온(℃)'])
               ys_avg.push(obj[i]['평균기온(℃)'])
@@ -205,6 +267,13 @@
               }
             },
             responsive: false,
+            scales: {
+              yAxes:[{
+                ticks: {
+                  //min : 15
+                }
+              }]
+            },
             plugins: {
               legend: {
                 position: 'top'
@@ -214,8 +283,52 @@
         })
 
       })
-    // 열대야 달력
+    }
+    // 열대야 그래프
+    // yearTropicalChart
 
+    var ytc = document.getElementById('yearTropicalChart').getContext('2d');
+    fetch("../json/year_tropical.json")
+      .then((res) => {
+        return res.json()
+      })
+      .then((obj) => {  
+        console.log(obj['년'])
+        let get_year = []
+        let get_days = []
+
+        for(let i = 0; i < obj.length; i++) {
+          get_year.push(obj[i]['년'])
+          get_days.push(obj[i]['폭염일수'])
+        }
+        let yearTropicalChart = new Chart(ytc, {
+          type: 'bar',
+          data: {
+            labels: get_year, 
+            datasets: [{
+              label: '폭염일수',
+              data: get_days,
+              backgroundColor: 'red'
+            }]
+          },
+          options: {
+            responsive: false,
+            scales: {
+              yAxes:[{
+                ticks: {
+                  max : 70
+                }
+              }]
+            },
+            plugins: {
+              legend: {
+                position: 'right'
+              }
+            }
+          }
+        })
+      })
+    // 열대야 달력
     fetch("../json/temperature_data.json")
       .then((res) => {
         return res.json()
@@ -304,26 +417,51 @@
       )
     
     let dtc_year = []
-    // 폭염일수에 따른 질병
-    fetch("../json/heatwave_days.json")
+    // 국내 해수면 온도
+    fetch("../json/seasurface_temp.json")
       .then((res) => {
         return res.json()
       })
       .then((obj) => {        
-        let dtc_days = []
-        for(let i = 10; i < obj.length; i++) {
-          dtc_year.push(obj[i]['연도'])
-          dtc_days.push(obj[i]['지속일수'])
+        console.log(obj)
+        let getYear = []
+        let getEast = []
+        let getWest = []
+        let getSouth = []
+
+        // for(let i = 10; i < obj.length; i++) {
+        //   dtc_year.push(obj[i]['연도'])
+        //   dtc_days.push(obj[i]['지속일수'])
+        // }
+        for(let i = 0; i < obj.length; i++) {
+          getYear.push(obj[i]['연도'])
+          getEast.push(obj[i]['동해'])
+          getWest.push(obj[i]['서해'])
+          getSouth.push(obj[i]['남해'])
         }
         
-        let diseaseTropicalChart = new Chart(dtc, {
+        let seasurfaceTempChart = new Chart(sst, {
           type: 'line',
           data: {
-            labels: dtc_year,
+            labels: getYear,
             datasets: [{
-              label: '지속일수',
-              data: dtc_days,
-              borderColor: '#0052C4',
+              label: '서해',
+              data: getWest,
+              borderColor: '#a0d667',
+              borderWidth: 2,
+              tension: 0.2,
+              fill: false
+            } , {
+              label: '동해',
+              data: getEast,
+              borderColor: '#0070c0',
+              borderWidth: 2,
+              tension: 0.2,
+              fill: false
+            }, {
+              label: '남해',
+              data: getSouth,
+              borderColor: '#c0504d',
               borderWidth: 2,
               tension: 0.2,
               fill: false
@@ -333,7 +471,7 @@
           options: {
             elements: {
               point: {
-                radius: 2
+                radius: 0
               }
             },
             responsive: false,
@@ -347,22 +485,53 @@
       })
     function calendar() {
       document.querySelector('.rap').style.display = 'block'
+      document.querySelector('.rap2').style.display = 'none'
     }
     function linechart() {
       document.querySelector('.rap').style.display = 'none'
+      document.querySelector('.rap2').style.display = 'block'
     }
     let a = 0
+    let cnt = 0
+    let season_bgColor = [ '#f9a73f', '#6aafac', '#e96551', '#596f84']
     function update_slc() {
+      
+      a += 1 * Math.PI / 24
+      cnt++
+      if(cnt >= 48) cnt = 0
       seasonlengthChart.options.rotation = a
-      a += 0.05
       seasonlengthChart.update();
+
+      if(cnt >= 36) {
+        //85, 98, 73, 109
+        document.getElementById('current').innerHTML = "최근 30년 봄 길이 : 91일"
+        document.getElementById('past').innerHTML = "과거 30년 봄 길이 : 85일"
+        document.querySelector('#season_color').style.backgroundColor = season_bgColor[0]
+      }
+      else if(cnt >= 20) {
+        document.getElementById('current').innerHTML = "최근 30년 여름 길이 : 118일"
+        document.getElementById('past').innerHTML = "과거 30년 여름 길이 : 98일"
+        document.querySelector('#season_color').style.backgroundColor = season_bgColor[1]
+      }
+      else if(cnt >= 12) {
+        document.getElementById('current').innerHTML = "최근 30년 가을 길이 : 69일"
+        document.getElementById('past').innerHTML = "과거 30년 가을 길이 : 73일"
+        document.querySelector('#season_color').style.backgroundColor = season_bgColor[2]
+      }
+      else {
+        document.getElementById('current').innerHTML = "최근 30년 겨울 길이 : 87일"
+        document.getElementById('past').innerHTML = "과거 30년 겨울 길이 : 109일"
+        document.querySelector('#season_color').style.backgroundColor = season_bgColor[3]
+      }
+      document.querySelector('#season_color').style.transition = '2s';
     }
 
     var scc = document.getElementById('seasonclimateChart').getContext('2d');
+
     setInterval(() => {
       update_slc()
-    }, 300)
-    var dtc = document.getElementById('diseaseTropicalChart').getContext('2d');
+    }, 250)
+    var sst = document.getElementById('seasurfaceTempChart').getContext('2d');
     var slc = document.getElementById('seasonlengthChart').getContext('2d');
 
     let seasonlengthChart = new Chart(slc, {
@@ -370,7 +539,8 @@
       data: {
         labels: ['봄', '여름', '가을', '겨울'],
         datasets: [{
-          data: [91, 118, 69, 87],
+          //data: [91, 118, 69, 87],
+          data: [90, 120, 60, 90],
           backgroundColor: [
             '#f9a73f',
             '#6aafac',
@@ -394,6 +564,8 @@
         }]
       },
       options: {
+		
+        events: ["mouseout", "click", "touchstart", "touchmove", "touchend"],
         responsive: false,
         legend: {
           position: 'left',

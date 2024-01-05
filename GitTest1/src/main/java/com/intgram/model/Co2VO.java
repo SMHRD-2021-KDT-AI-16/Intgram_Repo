@@ -24,6 +24,8 @@ public class Co2VO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
+	
+	
 	public String getTransportation() {
 		return transportation;
 	}

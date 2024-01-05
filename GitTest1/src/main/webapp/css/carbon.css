@@ -8,10 +8,35 @@
     display: flex;
     justify-content: space-between;
 
-    background-color: whitesmoke;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+    background-color: white;
+}
+.carbon-title{
+	margin-top: 15px;
+}
+
+
+.goal_text {
+	font-size: 18px;
+}
+
+.carbon-map-table {
+	width: 250px;
+	height: 50px;
+}
+
+.carbon-part1-bottom{
+	height: 15%;
+}
+
+#div_2 {
+	height: 140px;
+}
+#first_3{
+	margin-top: 90px;
+}
+
+.emit-list-item{
+	margin-top: 20px;
 }
 
 .carbon-part1,
@@ -21,6 +46,18 @@
     background-color: white;
     display: flex;
     flex-direction: column;    
+}
+
+#gasPieChart {
+	margin-left: 40px;
+}
+
+#myPieChart {
+	margin-top: 80px;
+}
+
+.emit-list-item {
+	margin-top: 30px;
 }
 
 .carbon-part1 {
@@ -37,7 +74,7 @@
 }
 .carbon-part1-top {
     display: flex;
-    height: 50%;
+    height: 25%;
     flex-direction: row;
 }
 .carbon-part1-top-left, 
@@ -45,11 +82,9 @@
     display: flex;
     flex-direction: column;
     width:70%;
-    height:auto;
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
+    height:230px;
     justify-content: space-evenly;
+    justify-content: flex-start;
 }
 .carbon-part1-top-left-head {
     display: flex;
@@ -71,6 +106,20 @@
     margin-bottom:10px;
 
     /* 그림자 효과 */
+    background: #ffffff;
+    box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
+    border-radius: 10px;
+  }
+  
+  .emit-list-item_3 {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin: 10px;
+    margin-top:10px;
+    margin-bottom:10px;
     background: #ffffff;
     box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
     border-radius: 10px;

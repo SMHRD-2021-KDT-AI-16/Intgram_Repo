@@ -28,7 +28,7 @@
     <header class="menu">
       <div class="logo">
         <div>
-          <img src="../img/logo.png" width=300px height=100px>
+          <img src="../img/logo.png" width=300px height=300px>
         </div>
       </div>
 
@@ -41,7 +41,11 @@
           </a>
           <a class="menu-link" href="../components/netzero_carbon.html">
             <i class="fa-solid fa-seedling"></i>
-            <span>Dashboard</span>
+            <span>Carbon</span>
+          </a>
+          <a class="menu-link" href="../components/netzero_climate.html">
+            <i class="fa-solid fa-seedling"></i>
+            <span>Climate</span>
           </a>
           <a class="menu-link" href="../components/archive.html">
             <i class="fa-solid fa-file-zipper"></i>
@@ -80,7 +84,7 @@
       <div class="carbon-part1-top">
         <div class="carbon-part1-top-left">
           <div class="carbon-part1-top-left-head">
-            <h2 class="carbon-title">2023년 총 탄소 배출량</h2>
+            <h2 class="carbon-title"><span id="part1_year"></span>년 총 탄소 배출량</h2>
             <select name="year">
               <option value="2020">2020</option>
               <option value="2019">2019</option>
@@ -107,26 +111,38 @@
                 <p id='total_NetEmission'>순 배출량 : 164,452,476 tonCO2eq</p>
               </div>
             </div>
+          </div>          
+        </div>
+        <div class="carbon-part1-top-right">
+          <div class="carbon-part1-top-left-head">
+            <h2 class="carbon-title">2030년 목표 탄소 배출량</h2>            
           </div>
-          <h2 class="carbon-title">2030년 목표 탄소 배출량</h2>
-          <div>
-            <div class="emit-list-item">
+          <div class="temp">
+            <div class="emit-list-item"  id="div_2">
               <div class="img">
                 <img src="../img/tot.png" alt="총계이미지" />
                 <p>총계</p>
               </div>
               <div class="txt" id="total">
-                <p id='total_Emission'>목표 배출량 : 314,173,770 tonCO2eq</p>
+                <p id='total_Emission'>목표 배출량 : 314,173 tonCO2eq</p>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="carbon-part1-top-right">
-          <h2 class="carbon-title">여기에는 멀 넣을까</h2>
+          </div>          
         </div>
       </div>
+      
+      
+      
       <div class="carbon-part1-bottom">
-        <h2 class="carbon-title">연도별 탄소배출 현황</h2>
+			 <h2 class="carbon-title">목표까지 남은 탄소감축량</h2>  
+ 		<div class="emit-list-item_3"> 
+			<h2>319,727,000 tonCO2eq</h2> <span>만큼 탄소를 감축해야 합니다</span>
+		</div> 
+      </div>
+        
+        
+      <div class="carbon-part1-bottom">
+        <h2 class="carbon-title" id="first_3">연도별 탄소배출 현황</h2>
         <canvas id="yearCarbonChart" height="130px"></canvas>
       </div>
     </section>
@@ -144,10 +160,8 @@
       <div class="map">
         <h2 class="carbon-title">지역별 탄소 배출 변화</h3>
           <div class="carbon-map-area">
-            <iframe src="map.html" width="500px" height="700px" frameborder='0' scrolling="no"></iframe>
-          </div>
-          <div class="carbon-map-table">
-          </div>
+            <iframe src="map.html" width="500px" height="750px" frameborder='0' scrolling="no"></iframe>
+          </div>          
       </div>
     </section>
   </div>
@@ -229,12 +243,15 @@
     $("select[name=year]").change(function () {
       select_year = $(this).val()
       drawChart(select_year)
+      
     });
     function drawChart(select_year) {
       $.ajax({
         url: 'https://api.odcloud.kr/api/15049589/v1/uddi:779e44b1-25d9-48a8-bb63-8a90148adf9a?page=1&perPage=144&serviceKey=2dzr5Pgj1lthBgwtsb98tVqVqURheXyse3jsH2m7Zyp0JJxEXsduX39%2BqWsmKP8YJR30bUA2aHmq%2F3%2FL18m5CA%3D%3D',
         success: function (result) {
           console.log("result");
+          console.log(result);
+
           let temp = result
           let select_data = []
 
@@ -251,6 +268,7 @@
           }
           /*   0 - 총배출량    1 - 순배출량    2 - 에너지
               37 - 산업공정   65 - 농업      102 - LULUCF    129 - 폐기물  */
+          document.getElementById('part1_year').innerHTML = select_year
           document.getElementById('total_Emission').innerHTML =
             "<p id = 'total_Emission'>총 배출량 : " +
             parseInt(select_data[0][select_year]).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
@@ -272,7 +290,7 @@
               datasets: [
                 {
                   type: 'line',
-                  label: result.data[1]['분야 및 연도'],
+                  label: result.data[0]['분야 및 연도'],
                   data: Object.values(result.data[0]),
                   backgroundColor: ['rgba(0, 0, 0, 1)'],
                   borderColor: 'rgba(0, 0, 0, 1)',
@@ -308,6 +326,7 @@
             },
             options: {
               scales: {
+                
                 x: {
                   ticks: {
                     fontColor: 'black',
@@ -321,6 +340,7 @@
                 y: {
                   beginAtZero: true,
                   ticks: {
+                    max:70000,
                     fontColor: 'black',
                     color: 'black'
                   },
