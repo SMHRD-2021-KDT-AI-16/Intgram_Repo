@@ -77,7 +77,7 @@
 							<span>Carbon</span>
 						</a>
 						<a
-							href="netzero_climate.jsp"
+							href="components/netzero_climate.html"
 							class="menu-link"
 							id="dashboard"
 						>

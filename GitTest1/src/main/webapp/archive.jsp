@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,9 +33,7 @@
 		<div class="contents">
 			<header class="menu">
 				<div class="logo">
-					<div>
-					<img src="img/logo.png" class="logo_img" width=300px height=100px>
-					</div>
+					<img src="img/logo.png" class="logo_img" width=300px height=300px/>
 				</div>
 
 				<section class="menu-wrapper">
@@ -54,7 +53,7 @@
 							<span>Carbon</span>
 						</a>
 						<a
-							href="netzero_climate.jsp"
+							href="components/netzero_climate.html"
 							class="menu-link"
 							id="dashboard"
 						>
@@ -74,17 +73,22 @@
 				</section>
 
 				<section id="login-area" class="contents-header__login">
-					<nav class="login-menu">
-						<a class="login-menu-link" href="components/login.html">
-							<i class="fa-regular fa-circle-user"></i>
-							<span>Login</span>
-						</a>
-						<a class="login-menu-link" href="components/join.html">
-							<i class="fa-solid fa-arrow-right-to-bracket"></i>
-							<span>Register</span>
-						</a>
-					</nav>
-				</section>
+				<nav class="login-menu">
+					
+					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+						<span>${member.mem_name} </span>
+						<a href="LogoutService">로그아웃</a>
+					</c:if>
+					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+						<a class="login-menu-link" href="login.jsp"> 
+					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
+					    </a>
+					    <a class="login-menu-link" href="join.jsp"> 
+					       <i class="fa-solid fa-arrow-right-to-bracket"></i> <span>Register</span>
+					    </a>
+					</c:if>
+				</nav>
+			</section>
 
 				<a href="#" class="navbar__toggleBtn">
 					<i class="fa-solid fa-bars"></i>
