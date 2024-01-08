@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 1. 문법 정리 (어떤 태그 사용할건지 정의) : mapper 태그 사용하겠. -->
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<!-- 2. mapper : 안쪽에  sql구문을 작성할 수 있는 공간
-		namespace는 중복이 되지 않게만 선언!!!
-		>> DAO랑 이름을 일치시켜주는 습관을 들이면 편함.
 
- -->
 <mapper namespace="com.intgram.db.DAO">
-  
-  <!-- 
-  		1) id : sql구문을 구별할 수 있는 중복되지 않는 식별자
-  		2) parameterType : DAO에서 받아오는 매개변수의 자료형(full name)
-  					 >> java안에 있는 기본자료형이라면 굳이 안써도 됨!
-  		3) resultType : sql구문을 실행하고 나서 반환하게 될 결과값의 자료형(full name)
-  					 >> java안에 있는 기본자료형이라면 굳이 안써도 됨!
-   -->
-  <insert id="join" parameterType="com.intgram.model.MemberVO">
-  	 INSERT INTO TBL_MEMBER(MEM_ID, MEM_PW, MEM_NAME,COM_ID, MEM_POSITION, MEM_JOINDATE)
-  	VALUES (#{id},#{pw},#{mem_name},#{com_num},#{position}, SYSDATE)
-  </insert>
-  
-  <select id="login" 
-  		  parameterType="com.intgram.model.MemberVO"
-  	 	  resultType="com.intgram.model.MemberVO"
-  		  >
-  	SELECT * FROM TBL_MEMBER
-  	WHERE MEM_ID= #{mem_id} 
-  	AND MEM_PW= #{mem_pw}
-  </select>
-  
-  <select id="getdata" parameterType="com.intgram.model.MemberVO" resultType="com.intgram.model.Co2VO" >
-  		select * from TBL_MEMBER_CO2
+
+
+	<insert id="join" parameterType="com.intgram.model.MemberVO">
+		INSERT INTO TBL_MEMBER(MEM_ID, MEM_PW, MEM_NAME,COM_ID, MEM_POSITION,
+		MEM_JOINDATE)
+		VALUES (#{id},#{pw},#{mem_name},#{com_num},#{position}, SYSDATE)
+	</insert>
+
+	<select id="login" parameterType="com.intgram.model.MemberVO"
+		resultType="com.intgram.model.MemberVO">
+		SELECT * FROM TBL_MEMBER
+		WHERE MEM_ID= #{mem_id}
+		AND MEM_PW= #{mem_pw}
+	</select>
+
+	<select id="getdata" parameterType="com.intgram.model.MemberVO"
+		resultType="com.intgram.model.Co2VO">
+		select * from TBL_MEMBER_CO2
 		where MEM_ID = #{mem_id}
-  </select>
-  
-  <insert id="insertC" parameterType="com.intgram.model.Co2VO">
-		insert into TBL_MEMBER_CO2(MEM_ID, TRANSPORTATION, MEM_FUEL_NAME, FUEL_AMOUNT)
+	</select>
+
+	<insert id="insertC" parameterType="com.intgram.model.Co2VO">
+		insert into
+		TBL_MEMBER_CO2(MEM_ID, TRANSPORTATION, MEM_FUEL_NAME, FUEL_AMOUNT)
 		values(#{mem_id}, #{transportation}, #{mem_fuel_name}, #{fuel_amount})
 	</insert>
-  
+
 </mapper>

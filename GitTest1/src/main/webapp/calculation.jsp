@@ -74,7 +74,7 @@
 
 			<section id="login-area" class="contents-header__login">
 				<nav class="login-menu">
-					
+
 					<c:if test="${member != null }"> 
 						<span>${member.mem_name} </span>
 						<a href="LogoutService">로그아웃</a>
@@ -195,9 +195,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 	<script>
+<<<<<<< HEAD
 			const toggleBtn = document.querySelector('.navbar__toggleBtn');
 			const SIDE_MENU = document.querySelector('.menu-wrapper');
 			const LOGIN_AREA = document.getElementById('login-area');
+=======
+   //
+         const toggleBtn = document.querySelector('.navbar__toggleBtn');
+         const SIDE_MENU = document.querySelector('.menu-wrapper');
+         const LOGIN_AREA = document.getElementById('login-area');
+>>>>>>> branch 'master' of https://github.com/SMHRD-2021-KDT-AI-16/Intgram_Repo.git
 
 			toggleBtn.addEventListener('click', () => {
 				SIDE_MENU.classList.toggle('active');
