@@ -15,6 +15,7 @@
   - Java 8
   - Python
   - Apache Tomcat 9.0
+  - Oracle Database
 #### `Front-end`
   -HTML
   -CSS
