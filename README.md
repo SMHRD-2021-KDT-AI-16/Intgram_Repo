@@ -14,14 +14,14 @@
 
 ## 2. 사용 기술
 #### `Back-end`
-  -java 
-  -python
-  -Apache Tomcat 9.0
-  -Oracle DateBase
+  - java 
+  - python
+  - Apache Tomcat 9.0
+  - Oracle DateBase
 #### `Front-end`
-  -HTML
-  -CSS
-  -JS
+  - HTML
+  - CSS
+  - JS
 
 </br>
 
