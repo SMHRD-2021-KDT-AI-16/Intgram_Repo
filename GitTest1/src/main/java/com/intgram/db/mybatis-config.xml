@@ -1,52 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 1. 어떤 문법을 사용할건지 정의 : schema
-		schema란? xml파일 안에서 사용하게 될 정보들(태그들)의 집합
-		dtd란? document type definition
-		>> mybatis를 config(모양)를 만들어줄 수 있는 것들을 정의하는 집합을 로드함.
- -->
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
-  <!-- 2. configuration : mybatis 연결 설정을 정의하는 태그 -->
-  <!-- mapper파일에서 사용가능한 자료형의 별칭으로 부여하는 방법 -->
-
-
 <configuration>
 	<properties resource="com/intgram/db/db.properties"></properties>
-  <!-- 3. environments : 연결할 db들에 대한 정보를 기술하는 태그 -->
-  <typeAliases>
-  <typeAlias  type="com.intgram.model.MemberVO" alias="mvo"/>
-  <!-- <typeAlias  type="com.intgram.model.MessageVO" alias="mevo"/> -->
-  </typeAliases >
-  <environments default="development">
-  	<!-- 4. environment : db "1개" 에 대한 정보 -->
-    <environment id="development">
-      <!-- 5. transactionManager : commit, rollback을 누가 할건지 정해주기
-      		type
-			1) "JDBC" >> mybatis 자체적으로 commit, rollback 결정
-			2) "MANAGED" >> container 에서 commit, rollback 결정
-       -->
-      <transactionManager type="JDBC"/>
-      <!--  6. dataSource == Connection 생성
-      		   >> property쪽에 연결해야되는 계정 정보들을 기술
-      		   dataSource의 type attribute
-      		   - POOLED : DBCP(DataBase Connection Pool)
-      		   			: Connection객체 미리 생성하고 요청이 들어올때마다 빌려주기
-      		   - UNPOOLED : 요청이 들어올때마다 Connection 객체 생성
-       -->
-      <dataSource type="POOLED">
-        <property name="driver" value="${driver}"/>
-        <property name="url" value="${url}"/>
-        <property name="username" value="${username}"/>
-        <property name="password" value="${password}"/>
-      </dataSource>
-    </environment>
-  </environments>
-  <!-- //////////////////////////////////////////////////////////////////////////////////// -->
-  <!-- 7. mappers : mapper 태그를 여러개 넣을 수 있다. -->
-  <mappers>
-  	<!-- 8. mapper : SQL구문을 가지고 있는 파일의 경로를 잡아주는 태그 >>수정하러와야함! -->
-    <mapper resource="com/intgram/db/MemberMapper.xml"/>
-   <!--  <mapper resource="com/intgram/db/MessageMapper.xml"/> -->
-  </mappers>
+	<typeAliases>
+		<typeAlias type="com.intgram.model.MemberVO" alias="mvo" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/intgram/db/MemberMapper.xml" />
+	</mappers>
 </configuration>
