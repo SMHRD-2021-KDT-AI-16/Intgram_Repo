@@ -167,11 +167,9 @@
 					for (let i = 0; i < obj.length; i++) {
 						if (obj[i]['년'] == select_year && obj[i]['계절'] == select_season) {
 							select_data.push(obj[i])
-							//select_data.push(obj[i])
 						}
 					}
-					console.log("select_data")
-					console.log(select_data)
+	
 					for (let i = 0; i < select_data.length; i++) {
 						if (select_data[i]['년'] == select_year && select_data[i]['계절'] == select_season) {
 							let temp = select_data[i][select_type]
