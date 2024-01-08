@@ -12,15 +12,13 @@
         return res.json()
       })
       .then((obj) => {
-        console.log("obj = ")
-        console.log(obj)
+  
         let dtc_year = []
         let dtc_days = []
         for(let i = 10; i < obj.length; i++) {
           dtc_year.push(obj[i]['연도'])
           dtc_days.push(obj[i]['지속일수'])
         }
-        console.log(dtc_days)
         let diseaseTropicalChart = new Chart(dtc, {
           type: 'line',
           data: {

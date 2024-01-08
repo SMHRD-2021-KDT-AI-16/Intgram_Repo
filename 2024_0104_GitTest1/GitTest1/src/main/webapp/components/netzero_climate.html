@@ -74,10 +74,8 @@
       <a href="#" class="navbar__toggleBtn">
         <i class="fa-solid fa-bars"></i>
       </a>
-      <!-- 비동기 방식으로 로그인 화면 이동 -->
       <section id="login-screen" style="display: none"></section>
 
-      <!-- 비동기 방식으로 회원가입 화면 이동 -->
       <section id="join-screen" style="display: none"></section>
     </header>
   </div>
@@ -261,18 +259,15 @@
         const date = new Date();
         makeCalendar(date);
 
-        // 이전달 이동
         document.querySelector(`.prevDay`).onclick = () => {
           let temp
           if(date.getMonth() == 6 || date.getMonth() == 7 || date.getMonth() == 8 ) {
             makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));          
-          } else { //else if(date.getMonth() )
-            //console.log('test!')
+          } else { 
             while(true) {
               temp = date.getMonth()
               if(temp != 7) {
                 date.setMonth(date.getMonth() - 1)
-                //console.log(cnt)
               } else {
                 makeCalendar(new Date(date.setMonth(date.getMonth())));   
                 break;
@@ -280,19 +275,15 @@
             }
           }
         }
-        // 다음달 이동
         document.querySelector(`.nextDay`).onclick = () => {
-          //makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
           let temp
           if(date.getMonth() == 4 || date.getMonth() == 5 || date.getMonth() == 6 ) {
             makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));          
           } else { //else if(date.getMonth() )
-            //console.log('test!')
             while(true) {
               temp = date.getMonth()
               if(temp != 5) {
                 date.setMonth(date.getMonth() + 1)
-                //console.log(cnt)
               } else {
                 makeCalendar(new Date(date.setMonth(date.getMonth())));   
                 break;
@@ -304,7 +295,6 @@
       )
     
     let dtc_year = []
-    // 폭염일수에 따른 질병
     fetch("../json/heatwave_days.json")
       .then((res) => {
         return res.json()
