@@ -19,28 +19,25 @@
         <script src="../js/mouseover.js" defer></script>
 	</head>
 	<body>
-		<div class="contents off">
+		<div class="contents">
 			<header class="menu">
 				<div class="logo">
-					<img src="../img/logo.png" class="logo_img">
+					<div>
+					<img src="../img/logo.png" class="logo_img" width=300px height=100px>
+					</div>
 				</div>
 
 				<section class="menu-wrapper">
 					<nav class="side-menu">
-            <div id="horizontal-underline"></div>
+            			<div id="horizontal-underline"></div>
 						<a class="menu-link" href="../components/home.html">
 							<i class="fa-solid fa-house"></i>
 							<span>Home</span>
 						</a>
-
-						<a
-							class="menu-link dropdown-toggle"
-							href="../components/netzero_carbon.html"
-						>
+						<a class="menu-link dropdown-toggle" href="../components/netzero_carbon.html">
 							<i class="fa-solid fa-seedling"></i>
 							<span>Dashboard</span>
 						</a>
-
 						<a class="menu-link" href="../components/archive.html">
 							<i class="fa-solid fa-file-zipper"></i>
 							<span>Newsfeed</span>
@@ -54,7 +51,7 @@
 
 				<section id="login-area" class="contents-header__login">
 					<nav class="login-menu">
-						<a class="login-menu-link" href="../login.jsp">
+						<a class="login-menu-link" href="../components/login.html">
 							<i class="fa-regular fa-circle-user"></i>
 							<span>Login</span>
 						</a>
@@ -69,16 +66,13 @@
 					<i class="fa-solid fa-bars"></i>
 				</a>
 
-				<!-- 비동기 방식으로 로그인 화면 이동 -->
 				<section id="login-screen" style="display: none"></section>
 
-				<!-- 비동기 방식으로 회원가입 화면 이동 -->
 				<section id="join-screen" style="display: none"></section>
 			</header>
 		</div>
-
+		
 		<main class="calc-container off">
-			<!--  -->
 
 			<section class="calc-header">
 				<article>
@@ -252,7 +246,6 @@
 			const LOGIN_AREA = document.getElementById('login-area');
 
 			toggleBtn.addEventListener('click', () => {
-				console.log('click!');
 				SIDE_MENU.classList.toggle('active');
 				LOGIN_AREA.classList.toggle('active');
 			});
@@ -299,8 +292,6 @@
 					fuelToggleBtn.classList.add('selected');
 				});
 			});
-			console.log(document.querySelector)
-			///////////////////////////////////////
 
 		</script>
 	</body>
