@@ -1,29 +1,24 @@
 # :pushpin: goQuality
->고퀄리티 개발 컨텐츠 공유 서비스  
+>대시보드 기반의 탄소중립 실천 서비
 > 데모사이트 링크
 
 </br>
 
 ## 1. 제작 기간 & 참여 인원
-- 2019년 2월 18일 ~ 4월 5일
-- 개인 프로젝트
+- 2023년 11월 18일 ~ 2024년 1월 5
+- 핵심 프로젝트
 
 </br>
 
 ## 2. 사용 기술
 #### `Back-end`
   - Java 8
-  - Spring Boot 2.3
-  - Gradle
-  - Spring Data JPA
-  - QueryDSL
-  - H2
-  - MySQL 5.7
-  - Spring Security
-  - Jsoup
+  - Python
+  - Apache Tomcat 9.0
 #### `Front-end`
-  - Vue.js 3.0
-  - Element UI
+  -HTML
+  -CSS
+  -JS
 
 </br>
 
