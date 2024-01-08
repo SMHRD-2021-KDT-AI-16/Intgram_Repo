@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="com.intgram.model.Co2VO"%>
 <%@ page import="com.intgram.model.MemberVO"%>
@@ -9,7 +8,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- <link rel="stylesheet" href="../css/style.css" /> -->
 <link rel="stylesheet" href="css/main.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -24,6 +22,9 @@
 <style>
 	.inputdown-transport {
 		z-index = 100;
+	}
+	.calc-outputChart2 {
+		margin-left: 50px;
 	}
 </style>
 
@@ -74,11 +75,11 @@
 			<section id="login-area" class="contents-header__login">
 				<nav class="login-menu">
 					
-					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+					<c:if test="${member != null }"> 
 						<span>${member.mem_name} </span>
 						<a href="LogoutService">로그아웃</a>
 					</c:if>
-					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+					<c:if test="${member == null }"> 
 						<a class="login-menu-link" href="login.jsp"> 
 					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
 					    </a>
@@ -93,10 +94,7 @@
 				class="fa-solid fa-bars"></i>
 			</a>
 
-			<!-- 비동기 방식으로 로그인 화면 이동 -->
 			<section id="login-screen" style="display: none"></section>
-
-			<!-- 비동기 방식으로 회원가입 화면 이동 -->
 			<section id="join-screen" style="display: none"></section>
 		</header>
 	</div>
@@ -181,12 +179,15 @@
 					</canvas>
 				</div>
 				<div class="calc-outputChart2">
-					
+					<p class="output-title">
+						<i class="fa-solid fa-user"></i> 2024년 월별 탄소 배출량
+					</p>
+					<canvas id="userCarbonChart2" width="500px" height="250px">
+					</canvas>
 				</div>
 			</article>
 		</section>
 	</main>
-	<!--  -->
 	<div class="screen-alert">화면 크기를 늘여주세요🙏</div>
 
 	<script src="../js/script.js" type="module" defer></script>
@@ -194,13 +195,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 	<script>
-	//
 			const toggleBtn = document.querySelector('.navbar__toggleBtn');
 			const SIDE_MENU = document.querySelector('.menu-wrapper');
 			const LOGIN_AREA = document.getElementById('login-area');
 
 			toggleBtn.addEventListener('click', () => {
-				console.log('click!');
 				SIDE_MENU.classList.toggle('active');
 				LOGIN_AREA.classList.toggle('active');
 			});
@@ -216,11 +215,19 @@
 		float[] month_Co2 = new float[12];
 		float[] month_Ch4 = new float[12];
 		float[] month_N2o = new float[12];
+		float[] month_Total_2 = new float[12];
+		float[] month_Co2_2 = new float[12];
+		float[] month_Ch4_2 = new float[12];
+		float[] month_N2o_2 = new float[12];
 		
 		String returnData_Total = "";
 		String returnData_Co2 = "";
 		String returnData_Ch4 = "";
 		String returnData_N2o = "";
+		String returnData_Total_2 = "";
+		String returnData_Co2_2 = "";
+		String returnData_Ch4_2 = "";
+		String returnData_N2o_2 = "";
 		
 		if(session.getAttribute("member") != null) {
 			List<Co2VO> l_co2 = (List<Co2VO>)session.getAttribute("member_data");
@@ -231,12 +238,17 @@
 				String[] temp = date.split("-");
 				for(int j = 0; j < 12; j++) {
 					if(Integer.parseInt(temp[1]) == (j + 1) && Integer.parseInt(temp[0]) == 2023) {
-						//System.out.println((j + 1) + " 월 " + temp[1]);
-						//System.out.println(l_co2.get(i).getTotal_emission());
 						month_Total[j] += l_co2.get(i).getTotal_emission();
 						month_Co2[j] += l_co2.get(i).getCo2_emission();
 						month_Ch4[j] += l_co2.get(i).getCh4_emission();
 						month_N2o[j] += l_co2.get(i).getN2o_emission();
+						total += (l_co2.get(i)).getTotal_emission();
+					}
+					if(Integer.parseInt(temp[1]) == (j + 1) && Integer.parseInt(temp[0]) == 2024) {
+						month_Total_2[j] += l_co2.get(i).getTotal_emission();
+						month_Co2_2[j] += l_co2.get(i).getCo2_emission();
+						month_Ch4_2[j] += l_co2.get(i).getCh4_emission();
+						month_N2o_2[j] += l_co2.get(i).getN2o_emission();
 						total += (l_co2.get(i)).getTotal_emission();
 					}
 				}	
@@ -252,8 +264,11 @@
 			returnData_Co2 += month_Co2[i] + "/";
 			returnData_Ch4 += month_Ch4[i] + "/";
 			returnData_N2o += month_N2o[i] + "/";
+			returnData_Total_2 += month_Total_2[i] + "/";
+			returnData_Co2_2 += month_Co2_2[i] + "/";
+			returnData_Ch4_2 += month_Ch4_2[i] + "/";
+			returnData_N2o_2 += month_N2o_2[i] + "/";
 		}
-		//System.out.println(l_co2);
 
 	%>
 		var temp = 	'<%= total %>'
@@ -261,24 +276,33 @@
 		var returnData_Co2 = '<%= returnData_Co2 %>'
 		var returnData_Ch4 = '<%= returnData_Ch4 %>'
 		var returnData_N2o = '<%= returnData_N2o %>'
+		var returnData_Total_2 = '<%= returnData_Total_2 %>'
+		var returnData_Co2_2 = '<%= returnData_Co2_2 %>'
+		var returnData_Ch4_2 = '<%= returnData_Ch4_2 %>'
+		var returnData_N2o_2 = '<%= returnData_N2o_2 %>'
 		
 		var month_total = []
 		var month_co2 = []
 		var month_ch4 = []
 		var month_n2o = []
+		var month_total_2 = []
+		var month_co2_2 = []
+		var month_ch4_2 = []
+		var month_n2o_2 = []
 		
 		month_total = returnData_Total.split("/")
 		month_co2 = returnData_Co2.split("/")
 		month_ch4 = returnData_Ch4.split("/")
 		month_n2o = returnData_N2o.split("/")
+		month_total_2 = returnData_Total_2.split("/")
+		month_co2_2 = returnData_Co2_2.split("/")
+		month_ch4_2 = returnData_Ch4_2.split("/")
+		month_n2o_2 = returnData_N2o_2.split("/")
 
 
 		document.querySelector('#totalE').innerHTML = temp
 		$('.transport-option').on('click', (e) => {
-		  console.log(e.target.value);
 		})
-		
-			///////////////////////////////////////
 			let select_year = 2023
 			$("select[name=year]").change(function () {
 				select_year = $(this).val()
@@ -286,7 +310,7 @@
 			});
 			
 	 var userChart = document.getElementById('userCarbonChart').getContext('2d');
-	// var allChart = document.getElementById('allCarbonChart').getContext('2d');
+	 var userChart2 = document.getElementById('userCarbonChart2').getContext('2d');
 			
 	 var userCarbonChart = new Chart(userChart, {
         type: 'line',
@@ -339,6 +363,58 @@
             }
           }
       });	
+	 
+	 var userCarbonChart2 = new Chart(userChart2, {
+	        type: 'line',
+	        data: {
+	          labels: ['1월', '2월', '3월', '4월', '5월', '6월',
+	        	  '7월', '8월', '9월', '10월', '11월', '12월'],
+	          datasets: [
+	            {
+	              label: '총배출량',
+	              type: 'line',
+	              data: month_total_2,     
+	              borderColor: 'black', 
+	              borderWidth: 1,              
+	              fill: false
+	            }, {
+	              label: 'C2O',
+	              type: 'line',
+	              data: month_co2_2,              
+	              borderWidth: 2,
+	              borderColor: '#32CD32',
+	              fill: false
+	            }, {
+	              label: 'CH4',
+	              type: 'line',
+	              data: month_ch4_2,              
+	              borderWidth: 2,
+	              borderColor: '#0052C4',
+	              fill: false
+	            }, {
+	              label: 'N2O',
+	              type: 'line',
+	              data: month_n2o_2,              
+	              borderWidth: 2,
+	              borderColor: '#FB0019',
+	              fill: false
+	            }
+	          ],
+	        },
+	        options: {
+	            elements: {
+	              point: {
+	                radius: 2
+	              }
+	            },
+	            responsive: false,
+	            plugins: {
+	              legend: {
+	                position: 'top'
+	              }
+	            }
+	          }
+	      });
 	 
 	</script>
 </body>

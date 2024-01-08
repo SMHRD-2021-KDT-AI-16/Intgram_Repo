@@ -34,9 +34,20 @@ public class CalculateService extends HttpServlet {
 		//String transportion = 
 		String transportation = request.getParameter("transport");
 		String fuel_type = request.getParameter("fuel");
+		System.out.println(transportation);
+		System.out.println(fuel_type);
+		if(transportation.equals("철도")) {
+			fuel_type = "경유";
+		} else if(transportation.equals("차량") && fuel_type.equals("중유")) {
+			fuel_type = "경유";
+		} else if(transportation.equals("항공기")) {
+			fuel_type = "항공용 휘발유";
+		}
+		System.out.println(transportation);
+		System.out.println(fuel_type);
+		
 		response.setContentType("text/html;charset=utf-8");
 		
-		System.out.println(transportation);
 		co2VO.setMem_id(mbVO.getMem_id());
 		System.out.println("아이디 = " + mbVO.getMem_id());
 		co2VO.setTransportation(transportation);

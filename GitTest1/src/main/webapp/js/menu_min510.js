@@ -8,8 +8,3 @@ toggleBtn.addEventListener('click', () => {
   LOGIN_AREA.classList.toggle('active');
 });
 
-
-///////////
-
-
-

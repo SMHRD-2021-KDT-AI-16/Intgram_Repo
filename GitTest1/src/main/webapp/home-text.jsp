@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,10 +112,7 @@
 					<i class="fa-solid fa-bars"></i>
 				</a>
 
-				<!-- 비동기 방식으로 로그인 화면 이동 -->
 				<section id="login-screen" style="display: none"></section>
-
-				<!-- 비동기 방식으로 회원가입 화면 이동 -->
 				<section id="join-screen" style="display: none"></section>
 			</header>
 		</div>

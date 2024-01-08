@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		    <!-- <link rel="stylesheet" href="css/style.css" /> -->
     	<link rel="stylesheet" href="css/main.css" />
 		<link rel="stylesheet" href="css/mediaquery.css">
 		<link
@@ -16,7 +14,6 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		/>
-		<!-- 비디오 재생 -->
 		<link rel="stylesheet" href="css/video-js.css" />
 		<script src="js/video.js" defer></script>
 		<script src="js/Youtube.js" defer></script>
@@ -24,8 +21,7 @@
 
 		<script src="js/script.js" type="module" defer></script>
 		<script src="js/menu_min510.js" defer></script>
-   		<script src="js/mouseover.js" defer></script>
-    
+   		<script src="js/mouseover.js" defer></script>    
 
 		<title>TEAM Intgram</title>
 	</head>
@@ -75,11 +71,11 @@
 				<section id="login-area" class="contents-header__login">
 				<nav class="login-menu">
 					
-					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+					<c:if test="${member != null }"> 
 						<span>${member.mem_name} </span>
 						<a href="LogoutService">로그아웃</a>
 					</c:if>
-					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+					<c:if test="${member == null }"> 
 						<a class="login-menu-link" href="login.jsp"> 
 					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
 					    </a>
@@ -94,26 +90,18 @@
 					<i class="fa-solid fa-bars"></i>
 				</a>
 
-				<!-- 비동기 방식으로 로그인 화면 이동 -->
 				<section id="login-screen" style="display: none"></section>
-
-				<!-- 비동기 방식으로 회원가입 화면 이동 -->
 				<section id="join-screen" style="display: none"></section>
 			</header>
 		</div>
 		<main class="news-feed off">
-			<!--  -->
 			<aside id="news-area" class="news-area">
 				<p class="news-list__title">News</p>
 				<div class="news-list" id="newsListContainer">
-					<!-- 여기에 동적으로 생성될 HTML이 들어갑니다. -->
 				</div>
-
 				<ul class="pagination" id="paginationContainer">
-					<!-- 여기에 페이지 번호가 동적으로 생성됩니다. -->
 				</ul>
 			</aside>
-			<!--  -->
 			<aside id="video-area" class="video-area">
 				<p class="video-list__title">Videos</p>
 				<div class="video-list">
@@ -189,13 +177,10 @@
 		<div class="screen-alert">화면 크기를 늘여주세요🙏</div>
 <script>
 	
-
-// JSON 파일 경로
 var jsonFilePath = 'json/news.json';
 var itemsPerPage = 5;
 var currentPage = 1;
 
-// 동적으로 HTML 생성
 function createNewsElement(newsData) {
   var container = document.getElementById('newsListContainer');
 
@@ -222,13 +207,11 @@ function createNewsElement(newsData) {
   container.appendChild(newsListItem);
 }
 
-// 페이지 번호 클릭 이벤트 핸들러
 function handlePageClick(pageNumber, data) {
   currentPage = pageNumber;
   updateNewsList(data);
 }
 
-// 페이지 번호 생성
 function createPagination(data) {
   var totalItems = data.newsList.length;
   var totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -245,7 +228,6 @@ function createPagination(data) {
   }
 }
 
-// 뉴스 리스트 업데이트
 function updateNewsList(data) {
   var startIdx = (currentPage - 1) * itemsPerPage;
   var endIdx = startIdx + itemsPerPage;
@@ -254,39 +236,31 @@ function updateNewsList(data) {
   var container = document.getElementById('newsListContainer');
   container.innerHTML = '';
 
-  // 선택된 페이지에 따라 뉴스 아이템 생성
   slicedData.forEach(createNewsElement);
 }
 
-// JSON 파일 불러오기
 fetch(jsonFilePath)
   .then((response) => response.json())
   .then((data) => {
-    // 초기 페이지 번호 설정
     currentPage = 1;
 
-    // JSON 데이터를 사용하여 동적으로 HTML 생성
     updateNewsList(data);
 
-    // 페이지 번호 생성
     createPagination(data);
   })
   .catch((error) => console.error('데이터를 불러오지 못했습니다:', error));
 
-// 비디오피드
-// 새로운 비디오 플레이어를 생성하는 함수
 function createYouTubePlayer(containerId, videoId) {
   var container = document.getElementById(containerId);
   var newVideoItem = document.createElement('li');
   newVideoItem.className = 'video-list-item';
 
   var newPlayerDiv = document.createElement('div');
-  newPlayerDiv.id = 'player-' + videoId; // 각 플레이어에 고유한 ID 지정
+  newPlayerDiv.id = 'player-' + videoId; 
   newVideoItem.appendChild(newPlayerDiv);
 
   container.appendChild(newVideoItem);
 
-  // 새로운 div에 대한 YouTube 플레이어 생성
   new YT.Player(newPlayerDiv, {
     videoId: videoId,
     playerVars: {
@@ -302,19 +276,16 @@ function createYouTubePlayer(containerId, videoId) {
   });
 }
 
-// YouTube API 스크립트를 동적으로 로드
 var tag = document.createElement('script');
 tag.src = 'https://www.youtube.com/iframe_api';
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// YouTube API 스크립트가 로드된 후에 호출되는 콜백 함수
 function onYouTubeIframeAPIReady() {
-  // 초기 비디오를 생성합니다.
   createYouTubePlayer('videoContainer', 'An6LvWQuj_8');
   createYouTubePlayer('videoContainer', 'An6LvWQuj_8');
 }
 
 </script>
-	</body>
+</body>
 </html>

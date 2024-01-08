@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -75,11 +74,11 @@
       <section id="login-area" class="contents-header__login">
 				<nav class="login-menu">
 					
-					<c:if test="${member != null }"> <!-- 로그인 했을 때 -->
+					<c:if test="${member != null }"> 
 						<span>${member.mem_name} </span>
 						<a href="LogoutService">로그아웃</a>
 					</c:if>
-					<c:if test="${member == null }"> <!-- 로그아웃일 때 -->
+					<c:if test="${member == null }"> 
 						<a class="login-menu-link" href="login.jsp"> 
 					      <i class="fa-regular fa-circle-user"></i> <span>Login</span>
 					    </a>
@@ -93,10 +92,8 @@
       <a href="#" class="navbar__toggleBtn">
         <i class="fa-solid fa-bars"></i>
       </a>
-      <!-- 비동기 방식으로 로그인 화면 이동 -->
       <section id="login-screen" style="display: none"></section>
 
-      <!-- 비동기 방식으로 회원가입 화면 이동 -->
       <section id="join-screen" style="display: none"></section>
     </header>
   </div>
@@ -182,7 +179,6 @@
   <script src="js/temperature.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
-    // 계절별 온도
     let select_season = '겨울'
     drawSCC(select_season)
     $("select[name=season]").change(function () {
@@ -203,7 +199,7 @@
         let ys_max = []
         let ys_avg = []
         let temp_ys_min = 0
-        console.log(obj)
+        
         for (let i = 0; i < obj.length; i++) {          
           let temp = obj[i]['년계절'].split(" ")
           if (season == '전체') {
@@ -225,18 +221,6 @@
                 + obj[i + 2]['평균기온(℃)'] + obj[i + 3]['평균기온(℃)']) / 4 )
               }
             }
-
-
-            // if ((temp[0] <= max_year && temp[0] >= min_year)) {
-            //   ys.push(temp[0])
-            //  // console.log(ys)
-              
-            //   for(let j = 0; j < 4; j++) {
-            //     temp_ys_min += obj[i]['평균최저기온(℃)']
-            //   }
-            //   ys_min.push(temp_ys_min / 4)
-            // }
-            
           }else {
             if ((temp[0] <= max_year && temp[0] >= min_year) && temp[1] == season) {
               ys.push(obj[i]['년계절'])              
@@ -281,13 +265,6 @@
               }
             },
             responsive: false,
-            scales: {
-              yAxes:[{
-                ticks: {
-                  //min : 15
-                }
-              }]
-            },
             plugins: {
               legend: {
                 position: 'top'
@@ -298,8 +275,6 @@
 
       })
     }
-    // 열대야 그래프
-    // yearTropicalChart
 
     var ytc = document.getElementById('yearTropicalChart').getContext('2d');
     fetch("json/year_tropical.json")
@@ -307,7 +282,6 @@
         return res.json()
       })
       .then((obj) => {  
-        console.log(obj['년'])
         let get_year = []
         let get_days = []
 
@@ -342,14 +316,11 @@
           }
         })
       })
-    // 열대야 달력
     fetch("json/temperature_data.json")
       .then((res) => {
         return res.json()
       })
       .then((obj) => {    
-    	  console.log('1111111111111111111111')
-    	  console.log(obj)
           const makeCalendar = (date) => {
 	          const currentYear = new Date(date).getFullYear();
 	          const currentMonth = new Date(date).getMonth() + 1;
@@ -390,20 +361,15 @@
         }
         const date = new Date();
         makeCalendar(date);
-        console.log('aekjfkaejfkeajf')
-        console.log(htmlDummy)
-        // 이전달 이동
         document.querySelector(`.prevDay`).onclick = () => {
           let temp
           if(date.getMonth() == 6 || date.getMonth() == 7 || date.getMonth() == 8 ) {
             makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));          
-          } else { //else if(date.getMonth() )
-            //console.log('test!')
+          } else { 
             while(true) {
               temp = date.getMonth()
               if(temp != 7) {
                 date.setMonth(date.getMonth() - 1)
-                //console.log(cnt)
               } else {
                 makeCalendar(new Date(date.setMonth(date.getMonth())));   
                 break;
@@ -411,19 +377,15 @@
             }
           }
         }
-        // 다음달 이동
         document.querySelector(`.nextDay`).onclick = () => {
-          //makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
           let temp
           if(date.getMonth() == 4 || date.getMonth() == 5 || date.getMonth() == 6 ) {
             makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));          
-          } else { //else if(date.getMonth() )
-            //console.log('test!')
+          } else { 
             while(true) {
               temp = date.getMonth()
               if(temp != 5) {
                 date.setMonth(date.getMonth() + 1)
-                //console.log(cnt)
               } else {
                 makeCalendar(new Date(date.setMonth(date.getMonth())));   
                 break;
@@ -435,22 +397,16 @@
       )
     
     let dtc_year = []
-    // 국내 해수면 온도
     fetch("json/seasurface_temp.json")
       .then((res) => {
         return res.json()
       })
-      .then((obj) => {        
-        console.log(obj)
+      .then((obj) => {   
         let getYear = []
         let getEast = []
         let getWest = []
         let getSouth = []
-
-        // for(let i = 10; i < obj.length; i++) {
-        //   dtc_year.push(obj[i]['연도'])
-        //   dtc_days.push(obj[i]['지속일수'])
-        // }
+        
         for(let i = 0; i < obj.length; i++) {
           getYear.push(obj[i]['연도'])
           getEast.push(obj[i]['동해'])
@@ -521,7 +477,6 @@
       seasonlengthChart.update();
 
       if(cnt >= 36) {
-        //85, 98, 73, 109
         document.getElementById('current').innerHTML = "최근 30년 봄 길이 : 91일"
         document.getElementById('past').innerHTML = "과거 30년 봄 길이 : 85일"
         document.querySelector('#season_color').style.backgroundColor = season_bgColor[0]
@@ -557,7 +512,6 @@
       data: {
         labels: ['봄', '여름', '가을', '겨울'],
         datasets: [{
-          //data: [91, 118, 69, 87],
           data: [90, 120, 60, 90],
           backgroundColor: [
             '#f9a73f',
@@ -597,6 +551,5 @@
       }
     })
   </script>
-
 </body>
 </html>

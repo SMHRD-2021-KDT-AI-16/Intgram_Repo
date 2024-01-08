@@ -4,10 +4,6 @@ import '../js/dashboard-apis.js';
 
 console.log('script.js');
 
-// 반응형 메뉴 아이콘 클릭
-
-// calculation menu dropdown
-
 const transport = document.querySelector('.inputdown-transport');
 const transportToggleBtn = document.querySelector('.transport-toggle');
 const transportMenu = document.querySelector('.transport-menu');
@@ -31,7 +27,6 @@ transportOptions.forEach(function (item) {
   });
 });
 
-///////////////////////////////////////
 const fuel = document.querySelector('.inputdown-fuel');
 const fuelToggleBtn = document.querySelector('.fuel-toggle');
 const fuelMenu = document.querySelector('.fuel-menu');
@@ -51,5 +46,3 @@ fuelOptions.forEach(function (item) {
     fuelToggleBtn.classList.add('selected');
   });
 });
-
-////////////////////
