@@ -14,7 +14,7 @@
 
 ## 2. 사용 기술
 #### `Back-end`
-  - -java 
+  -java 
   -python
   -Apache Tomcat 9.0
   -Oracle DateBase
