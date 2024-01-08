@@ -59,95 +59,47 @@
 </br>
 
 ## 5. 핵심 트러블 슈팅
-### 5.1. 컨텐츠 필터와 페이징 처리 문제
-- 저는 이 서비스가 페이스북이나 인스타그램 처럼 가볍게, 자주 사용되길 바라는 마음으로 개발했습니다.  
-때문에 페이징 처리도 무한 스크롤을 적용했습니다.
-
-- 하지만 [무한스크롤, 페이징 혹은 “더보기” 버튼? 어떤 걸 써야할까](https://cyberx.tistory.com/82) 라는 글을 읽고 무한 스크롤의 단점들을 알게 되었고,  
-다양한 기준(카테고리, 사용자, 등록일, 인기도)의 게시물 필터 기능을 넣어서 이를 보완하고자 했습니다.
-
-- 그런데 게시물이 필터링 된 상태에서 무한 스크롤이 동작하면,  
-필터링 된 게시물들만 DB에 요청해야 하기 때문에 아래의 **기존 코드** 처럼 각 필터별로 다른 Query를 날려야 했습니다.
-
-<details>
-<summary><b>기존 코드</b></summary>
-<div markdown="1">
-
-~~~java
-/**
- * 게시물 Top10 (기준: 댓글 수 + 좋아요 수)
- * @return 인기순 상위 10개 게시물
- */
-public Page<PostResponseDto> listTopTen() {
-
-    PageRequest pageRequest = PageRequest.of(0, 10, Sort.Direction.DESC, "rankPoint", "likeCnt");
-    return postRepository.findAll(pageRequest).map(PostResponseDto::new);
-}
-
-/**
- * 게시물 필터 (Tag Name)
- * @param tagName 게시물 박스에서 클릭한 태그 이름
- * @param pageable 페이징 처리를 위한 객체
- * @return 해당 태그가 포함된 게시물 목록
- */
-public Page<PostResponseDto> listFilteredByTagName(String tagName, Pageable pageable) {
-
-    return postRepository.findAllByTagName(tagName, pageable).map(PostResponseDto::new);
-}
-
-// ... 게시물 필터 (Member) 생략 
-
-/**
- * 게시물 필터 (Date)
- * @param createdDate 게시물 박스에서 클릭한 날짜
- * @return 해당 날짜에 등록된 게시물 목록
- */
-public List<PostResponseDto> listFilteredByDate(String createdDate) {
-
-    // 등록일 00시부터 24시까지
-    LocalDateTime start = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MIN);
-    LocalDateTime end = LocalDateTime.of(LocalDate.parse(createdDate), LocalTime.MAX);
-
-    return postRepository
-                    .findAllByCreatedAtBetween(start, end)
-                    .stream()
-                    .map(PostResponseDto::new)
-                    .collect(Collectors.toList());
-    }
-~~~
-
-</div>
-</details>
-
-- 이 때 카테고리(tag)로 게시물을 필터링 하는 경우,  
-각 게시물은 최대 3개까지의 카테고리(tag)를 가질 수 있어 해당 카테고리를 포함하는 모든 게시물을 질의해야 했기 때문에  
-- 아래 **개선된 코드**와 같이 QueryDSL을 사용하여 다소 복잡한 Query를 작성하면서도 페이징 처리를 할 수 있었습니다.
+### 5.1. 탄소배출량 계산 문
+- 로그인, 회원가입 기능처럼 JSP를 활용하고자 하였으나 데이터베이스 안의 데이터를 자바로 꺼내와서 계산 후 다시 DB에 넣는 로직이 비효율적이고 유지, 보수에 불리하다고 생각하였습니다.
+- 다른 효율적인 방법을 찾던 중  DB멘토링을 통해 트리거라는 것을 배웠습니다.  데이터베이스 이벤트에 반응하여 실행되는 프로그램 단위인 오라클 트리거를 활용해 DB에 연료의 종류와 연료량이 입력되기 전에 트리거가 실행되어 DB내에서 탄소배출량을 산정하여 DB에 바로 저장할 수 있도록 하였습니다. 
 
 <details>
 <summary><b>개선된 코드</b></summary>
 <div markdown="1">
 
-~~~java
-/**
- * 게시물 필터 (Tag Name)
- */
-@Override
-public Page<Post> findAllByTagName(String tagName, Pageable pageable) {
+~~~SQL
+CREATE OR REPLACE TRIGGER TRG_CARBON_CAL
+BEFORE INSERT ON TBL_MEMBER_CO2
+REFERENCING NEW AS NEW FOR EACH ROW
+DECLARE 
+    
+    V_NET  NUMBER(12,4); -- TBL_CO2_REF.NET_CALORIFIC_VAL%TYPE; 
+    V_CO2  NUMBER(12,4);
+    V_CH4  NUMBER(12,4);
+    V_N2O  NUMBER(12,4);
+    
+    RESULT_CO2 NUMBER(12,4);
+    RESULT_CH4 NUMBER(12,4);
+    RESULT_N2O NUMBER(12,4);
+    
 
-    QueryResults<Post> results = queryFactory
-            .selectFrom(post)
-            .innerJoin(postTag)
-                .on(post.idx.eq(postTag.post.idx))
-            .innerJoin(tag)
-                .on(tag.idx.eq(postTag.tag.idx))
-            .where(tag.name.eq(tagName))
-            .orderBy(post.idx.desc())
-                .limit(pageable.getPageSize())
-                .offset(pageable.getOffset())
-            .fetchResults();
+BEGIN
+    SELECT NET_CALORIFIC_VAL, CO2_E_FACTOR, CH4_E_FACTOR, N2O_E_FACTOR
+    INTO V_NET, V_CO2, V_CH4, V_N2O
+    FROM TBL_CO2_REF
+    WHERE FUEL_NAME = :NEW.MEM_FUEL_NAME AND TRANSPORTATION = :NEW.TRANSPORTATION;
+    
+    RESULT_CO2 := :NEW.FUEL_AMOUNT * V_NET * V_CO2 * 0.000001;
+    RESULT_CH4 := :NEW.FUEL_AMOUNT * V_NET * V_CH4 * 0.000021;
+    RESULT_N2O := :NEW.FUEL_AMOUNT * V_NET * V_N2O * 0.000310;
+    
+    :NEW.CO2_EMISSION := RESULT_CO2 * 0.001;
+    :NEW.CH4_EMISSION := RESULT_CH4 * 0.001;
+    :NEW.N2O_EMISSION := RESULT_N2O * 0.001;
+    :NEW.TOTAL_EMISSION := :NEW.CO2_EMISSION + :NEW.CH4_EMISSION + :NEW.N2O_EMISSION;
 
-    return new PageImpl<>(results.getResults(), pageable, results.getTotal());
-}
+   
+END;
 ~~~
 
 </div>
