@@ -67,10 +67,8 @@
         </nav>
       </section>
 
-      <!-- 비동기 방식으로 로그인 화면 이동 -->
       <section id="login-screen" style="display: none"></section>
 
-      <!-- 비동기 방식으로 회원가입 화면 이동 -->
       <section id="join-screen" style="display: none"></section>
     </header>
   </div>
@@ -160,8 +158,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <script>
-    //import 'https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js';
-    //import 'https://code.jquery.com/jquery-3.7.1.min.js';
+
 
     let background_Color = ['rgb(79, 132, 254, 1)',
       'rgb(118, 159, 254, 1)',
@@ -169,7 +166,6 @@
       'rgb(196, 214, 255, 1)',
       'rgb(235, 241, 255, 1)']
 
-    // 온실가스 비중
 
     let r = 0
     function update_ctx() {
@@ -192,7 +188,6 @@
         return res.json()
       })
       .then((obj) => {
-        console.log(obj)
         for (let i = 0; i < obj.length; i++) {
           if (obj[i]['year'] == 2020) {
             ch4_data.push(obj[i]['CH4'])
@@ -234,7 +229,6 @@
       $.ajax({
         url: 'https://api.odcloud.kr/api/15049589/v1/uddi:779e44b1-25d9-48a8-bb63-8a90148adf9a?page=1&perPage=144&serviceKey=2dzr5Pgj1lthBgwtsb98tVqVqURheXyse3jsH2m7Zyp0JJxEXsduX39%2BqWsmKP8YJR30bUA2aHmq%2F3%2FL18m5CA%3D%3D',
         success: function (result) {
-          console.log("result");
           let temp = result
           let select_data = []
 
@@ -371,7 +365,6 @@
           });
         },
         error: function () {
-          console.log('통신실패');
         },
       });
     }

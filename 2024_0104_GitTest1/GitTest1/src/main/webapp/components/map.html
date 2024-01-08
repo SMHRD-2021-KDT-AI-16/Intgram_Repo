@@ -169,12 +169,9 @@
 				.then((obj) => {
 					let total_Emission = 0
 					let total_Net = 0
-					console.log(obj)
 					for (let i = 0; i < 17; i++) {
 						let temp = obj[i * 7 + parseInt(select_type)][select_year]
-						//console.log(i * 7 + parseInt(select_type))
-						console.log('----------------')
-						console.log(parseInt(select_type))
+	
 						if (temp > 59184) {
 							document.getElementById(obj[i * 7]['도시']).style.fill = background_Color[0];
 						} else if (temp > 53558) {
